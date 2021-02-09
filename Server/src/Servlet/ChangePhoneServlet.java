@@ -50,7 +50,7 @@ public class ChangePhoneServlet extends HttpServlet {
                 resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 out.println(servletResponse);
                 return;
-            }
+            }//TODO MAYBE SOMTHING ELSE
 
             resp.setStatus(HttpServletResponse.SC_OK);
             String phoneNum = (String) ServletUtils.readJsonObj(req.getReader(),String.class);
