@@ -7,11 +7,13 @@ const futureAssignmentButtonEl = document.querySelector('#futureAssignment')
 const historyAssignmentButtonEl = document.querySelector('#historyAssignment')
 const logoutButtonEl = document.querySelector('#logout')
 const inputEl = document.querySelector('#managerMenuInput')
+const pageContentEl = document.querySelector('#pageContent')
 
 // changeEmailButtonEl.addEventListener('click',changeEmailFunc); TODO
 changeNameButtonEl.addEventListener('click', changeNameFunc);
-changePasswordButtonEl.addEventListener('click', changePasswordFunc);
+changePasswordButtonEl.addEventListener('click', showChangePasswordContent);
 changePhoneNumberButtonEl.addEventListener('click', changePhoneFunc);
+
 
 async function changeNameFunc(event){
     const name = inputEl.value;
@@ -40,21 +42,45 @@ async function changeNameFunc(event){
 }
 
 async function changePasswordFunc(event){
-    const name = inputEl.value;
-    if (name.length < 3){
+
+    const newPasswordInputEl = document.querySelector("#newPasswordInput");
+    if(newPasswordInputEl == null){
+        return;
+    }
+    const newPassword = newPasswordInputEl.value;
+    if (newPassword == null || newPassword.length < 3){
         alert("password should be at least 3 characters")
         event.preventDefault();
     }
 
-    if (/[^A-Za-z0-9]/.test(name)){
+    if (/[^A-Za-z0-9]/.test(newPassword)){
         alert("The password should contains letters and digits only")
-        inputEl.value = ''
+        newPasswordInputEl.value = ''
         event.preventDefault();
     }
-    else{
-        alert("good!!")
-        inputEl.value = ''
+
+    let keepTheChanges = confirm("are you sure you want to change the password?");
+    if(keepTheChanges == true){
+
+        //TODO: reach  serlvet
+        //TODO: back to main page
     }
+
+
+
+}
+
+function showChangePasswordContent(){
+    clearPageContent();
+    let htmlToInsert = '<label class="lbl"> Enter your new password </label><br>\n' +
+        '<input class= "password-field" type="password" id="newPasswordInput"  autofocus/>' +
+        '<br/>'+ // represent a new line
+        '<button type="button" onclick="changePasswordFunc()">Save The Changes</button>'
+    pageContentEl.innerHTML = htmlToInsert;
+}
+
+function clearPageContent(){
+    pageContentEl.innerHTML = ''
 }
 
 async function changePhoneFunc(event){
