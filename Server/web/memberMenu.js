@@ -1,40 +1,63 @@
 const changeNameButtonEl = document.querySelector('#changeName')
 const changePasswordButtonEl = document.querySelector('#changePassword')
-const changePhoneNumberButtonEl = document.querySelector('#changePhoneNumber')
+const changePhoneNumberButtonEl = document.querySelector('#changePhone')
 const changeEmailButtonEl = document.querySelector('#changeEmail')
 const futureAssignmentButtonEl = document.querySelector('#futureAssignment')
 const historyAssignmentButtonEl = document.querySelector('#historyAssignment')
-const inputEl = document.querySelector('#managerMenuInput')
 const pageContentEl = document.querySelector('#pageContent')
+const logoutButtonEl = document.querySelector('#logoutButton')
 
-// changeEmailButtonEl.addEventListener('click',changeEmailFunc); TODO
-changeNameButtonEl.addEventListener('click', changeNameFunc);
+changeEmailButtonEl.addEventListener('click',showEmailNameContent);
+changeNameButtonEl.addEventListener('click', showChangeNameContent);
 changePasswordButtonEl.addEventListener('click', showChangePasswordContent);
-changePhoneNumberButtonEl.addEventListener('click', changePhoneFunc);
+changePhoneNumberButtonEl.addEventListener('click', showChangePhoneContent);
+
+async function changeEmailFunc(event){
+    const nameEmailEl = document.querySelector("#newEmailInput");
+    const email = nameEmailEl.value;
+    if(!validatorEmail(email)){
+        alert("You have entered an invalid email address!");
+        event.preventDefault();
+    }
+
+    let keepTheChanges = confirm("are you sure you want to change the email?");
+    if(keepTheChanges === true){
+        const response = await fetch('changeEmail', {
+            method: 'put',
+            headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
+            body: JSON.stringify(email)
+        });
+        const result = await response.text();
+        if(result === 'error') // TODO THE EMAIL IS EXIST
+            logoutButtonEl.addEventListener('Click')
+        window.location.replace(result)
+    }
+}
 
 
 async function changeNameFunc(event){
-    const name = inputEl.value;
-    if(name.length === 0){
-        alert("The Name should not be empty")
+    const nameInputEl = document.querySelector("#newNameInput");
+    const name = nameInputEl.value;
+    if(name.length < 3){
+        alert("The Name should be at least 3 letters")
         event.preventDefault();
     }
     if (/[^a-zA-Z]/.test(name)){
         alert("The Name should contains letters only")
-        inputEl.value = ''
+        nameInputEl.value = ''
         event.preventDefault();
     }
-    else{
-        alert("good!!")
-        inputEl.value = ''
 
-        const response = await fetch('MemberMenuServlet', {
-            method: 'post',
+    let keepTheChanges = confirm("are you sure you want to change the name?");
+    if(keepTheChanges === true){
+        const response = await fetch('changeName', {
+            method: 'put',
             headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
             body: JSON.stringify(name)
         });
         const result = await response.text();
-        console.log(result + "in java script");
+        if(result === 'error')
+            logoutButtonEl.addEventListener('Click')
         window.location.replace(result)
     }
 }
@@ -45,40 +68,56 @@ async function changePasswordFunc(event){
         return;
     }
     const newPassword = newPasswordInputEl.value;
-    if (newPassword == null || newPassword.length < 3){
+    if (newPassword === null || newPassword.length < 3){
         alert("password should be at least 3 characters")
         event.preventDefault();
     }
 
     if (/[^A-Za-z0-9]/.test(newPassword)){
         alert("The password should contains letters and digits only")
-        newPasswordInputEl.value = ''
+        newPasswordInputEl.value = '';
         event.preventDefault();
     }
 
     let keepTheChanges = confirm("are you sure you want to change the password?");
-    if(keepTheChanges == true){
+    if(keepTheChanges === true){
+        const response = await fetch('changePassword', {
+            method: 'put',
+            headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
+            body: JSON.stringify(newPassword)
+        });
 
-        //TODO: reach  serlvet
-        //TODO: back to main page
+        const result = await response.text();
+        // TODO להגיד למשתמש שהסיסמא שונתה בהצלחה
+        window.location.replace(result)
     }
 }
 
 async function changePhoneFunc(event){
-    const name = inputEl.value;
-    if (name.length < 3){
+    const phoneInputEl = document.querySelector("#newPhoneInput");
+    const phone = phoneInputEl.value
+    if (phone === null || phone.length < 3){
         alert("phone number should be at least 3 digits")
         event.preventDefault();
     }
 
-    if (/[^0-9]/.test(name)){
+    if (!(/^[0-9]+$/.test(phone))){
         alert("The phone number should contains digits only")
-        inputEl.value = ''
+        phoneInputEl.value = ''
         event.preventDefault();
     }
-    else{
-        alert("good!!")
-        inputEl.value = ''
+
+    let keepTheChanges = confirm("are you sure you want to change the phone number?");
+    if(keepTheChanges === true){
+        const response = await fetch('changePhone', {
+            method: 'put',
+            headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
+            body: JSON.stringify(phone)
+        });
+
+        const result = await response.text();
+
+        window.location.replace(result)
     }
 }
 
@@ -91,11 +130,13 @@ function showChangePasswordContent(){
     let htmlToInsert = '<label class="lbl"> Enter your new password </label><br>\n' +
         '<input class= "password-field" type="password" id="newPasswordInput"  autofocus/>' +
         '<br/>'+ // represent a new line
-        '<button type="button" onclick="changePasswordFunc()">Save The Changes</button>'
+        '<button type="button" onclick="changePasswordFunc()">Save The Changes</button>' +
+        '<h1 id = "answer"><h1>'
+
     pageContentEl.innerHTML = htmlToInsert;
 }
 
-function showChangePasswordContent(){
+function showChangePhoneContent(){
     clearPageContent();
     let htmlToInsert = '<label class="lbl"> Enter your new phone number </label><br>\n' +
         '<input class= "inpt" type="text" id="newPhoneInput"  autofocus/>' +
@@ -104,3 +145,20 @@ function showChangePasswordContent(){
     pageContentEl.innerHTML = htmlToInsert;
 }
 
+function showChangeNameContent(){
+    clearPageContent();
+    let htmlToInsert = '<label class="lbl"> Enter your new name </label><br>\n' +
+        '<input class= "inpt" type="text" id="newNameInput"  autofocus/>' +
+        '<br/>'+
+        '<button type="button" onclick="changeNameFunc()"> Save The Changes</button>'
+    pageContentEl.innerHTML = htmlToInsert;
+}
+
+function showEmailNameContent(){
+    clearPageContent();
+    let htmlToInsert = '<label class="lbl"> Enter your new email </label><br>\n' +
+        '<input class= "inpt" type="text" id="newEmailInput"  autofocus/>' +
+        '<br/>'+
+        '<button type="button" onclick="changeEmailFunc()"> Save The Changes</button>'
+    pageContentEl.innerHTML = htmlToInsert;
+}
