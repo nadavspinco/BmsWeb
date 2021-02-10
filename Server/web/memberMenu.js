@@ -1,11 +1,9 @@
-const homeButtonEl = document.querySelector('#home')
 const changeNameButtonEl = document.querySelector('#changeName')
 const changePasswordButtonEl = document.querySelector('#changePassword')
 const changePhoneNumberButtonEl = document.querySelector('#changePhoneNumber')
 const changeEmailButtonEl = document.querySelector('#changeEmail')
 const futureAssignmentButtonEl = document.querySelector('#futureAssignment')
 const historyAssignmentButtonEl = document.querySelector('#historyAssignment')
-const logoutButtonEl = document.querySelector('#logout')
 const inputEl = document.querySelector('#managerMenuInput')
 const pageContentEl = document.querySelector('#pageContent')
 
@@ -42,7 +40,6 @@ async function changeNameFunc(event){
 }
 
 async function changePasswordFunc(event){
-
     const newPasswordInputEl = document.querySelector("#newPasswordInput");
     if(newPasswordInputEl == null){
         return;
@@ -65,22 +62,6 @@ async function changePasswordFunc(event){
         //TODO: reach  serlvet
         //TODO: back to main page
     }
-
-
-
-}
-
-function showChangePasswordContent(){
-    clearPageContent();
-    let htmlToInsert = '<label class="lbl"> Enter your new password </label><br>\n' +
-        '<input class= "password-field" type="password" id="newPasswordInput"  autofocus/>' +
-        '<br/>'+ // represent a new line
-        '<button type="button" onclick="changePasswordFunc()">Save The Changes</button>'
-    pageContentEl.innerHTML = htmlToInsert;
-}
-
-function clearPageContent(){
-    pageContentEl.innerHTML = ''
 }
 
 async function changePhoneFunc(event){
@@ -101,4 +82,25 @@ async function changePhoneFunc(event){
     }
 }
 
+function clearPageContent(){
+    pageContentEl.innerHTML = ''
+}
+
+function showChangePasswordContent(){
+    clearPageContent();
+    let htmlToInsert = '<label class="lbl"> Enter your new password </label><br>\n' +
+        '<input class= "password-field" type="password" id="newPasswordInput"  autofocus/>' +
+        '<br/>'+ // represent a new line
+        '<button type="button" onclick="changePasswordFunc()">Save The Changes</button>'
+    pageContentEl.innerHTML = htmlToInsert;
+}
+
+function showChangePasswordContent(){
+    clearPageContent();
+    let htmlToInsert = '<label class="lbl"> Enter your new phone number </label><br>\n' +
+        '<input class= "inpt" type="text" id="newPhoneInput"  autofocus/>' +
+        '<br/>'+ // represent a new line
+        '<button type="button" onclick="changePhoneFunc()"> Save The Changes</button>'
+    pageContentEl.innerHTML = htmlToInsert;
+}
 

@@ -43,14 +43,12 @@ public class LoginServlet extends HttpServlet {
     private void processLoginRequest(HttpServletRequest request, HttpServletResponse response){
         try(PrintWriter out = response.getWriter()) {
             SystemManagement systemManagement = ServletUtils.getSystemManagment(getServletContext());
-           System.out.println(systemManagement);
             BufferedReader reader = request.getReader();
             String gsonString = reader.lines().collect(Collectors.joining());
             LoginArgs loginArgs = gson.fromJson(gsonString, LoginArgs.class);
             String email = loginArgs.email;
             String password = loginArgs.pass;
             Member loggedInMember = systemManagement.loginMember(email, password);
-
 
             if (loggedInMember != null){
                 response.setStatus(HttpServletResponse.SC_OK);
