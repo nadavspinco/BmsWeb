@@ -28,7 +28,6 @@ async function memberDetailsIn(event) {
         });
 
         const result = await response.text();
-        console.log(result + "in java script");
         window.location.replace(result)
     }
 }
