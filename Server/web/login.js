@@ -4,7 +4,10 @@ const passwordInputEl = document.querySelector('#passwordInputId')
 
 LoginButtonEl.addEventListener ('click', memberDetailsIn);
 
+console.log("here in js")
+
 async function memberDetailsIn(event) {
+    console.log("here in js")
     const email = emailInputEl.value;
     const pass = passwordInputEl.value;
     if (!ValidInputArgs(email, pass)) {
@@ -30,7 +33,7 @@ async function memberDetailsIn(event) {
     }
 }
 
-function validitorEmail(email){
+function validatorEmail(email){
     var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if(email.match(mailformat)){
         emailInputEl.focus();
@@ -55,7 +58,7 @@ function ValidInputArgs(email, password) {
         return false;
     }
 
-    if (!validitorEmail(email)){
+    if (!validatorEmail(email)){
         alert("You have entered an invalid email address!");
         return false;
     }

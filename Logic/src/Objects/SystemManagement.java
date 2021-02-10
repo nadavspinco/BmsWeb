@@ -206,7 +206,9 @@ public class SystemManagement implements EngineInterface {
 
     public void addDummyData(){
         addMember("eitan","0504081994","e@walla.com",
-                "1234",26,"nothing",LevelEnum.WorldClass,true,"a2");
+                "123",26,"nothing",LevelEnum.WorldClass,true,"a2");
+        addMember("spinco","05011111994","n@walla.com",
+                "123",26,"nothing",LevelEnum.WorldClass,false,"a3");
     }
 
     public boolean isRegistrationAllowedForMember(Registration registration, Member member) {
