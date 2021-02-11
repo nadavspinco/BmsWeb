@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Member Menu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity=
+            "sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</head>
+<body name="Manager Menu">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid" id="ManagerMenu">
+        <a class="navbar-brand" href="/WebApp/managerMenu.html">Manager Menu</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="detailsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Manage Personality Details
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" id="changeName" href="#">Change Name</a></li>
+                        <li><a class="dropdown-item" id="changeEmail" href="#">Change email</a></li>
+                        <li><a class="dropdown-item" id="changePassword" href="#">Change Password</a></li>
+                        <li><a class="dropdown-item" id="changePhone" href="#">Change Phone Number</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="ManageRowersDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Manage Rowers List
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" id="addRower" href="#">Add Rower</a></li>
+                        <li><a class="dropdown-item" id="deleteRower" href="#">Remove Rower</a></li>
+                        <li><a class="dropdown-item" id="editRower" href="#">Edit Rower</a></li>
+                        <li><a class="dropdown-item" id="showAllRower" href="#">Show All Rowers</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="ManageBoatsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Manage Boats List
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" id="addBoat" href="#">Add Boat</a></li>
+                        <li><a class="dropdown-item" id="deleteBoat" href="#">Remove Boat</a></li>
+                        <li><a class="dropdown-item" id="editBoat" href="#">Edit Boat</a></li>
+                        <li><a class="dropdown-item" id="showAllBoat" href="#">Show All Boats</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="ManageRegistrationWindowsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Manage Registration Windows
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" id="addRegistrationWindow" href="#">Add Registration Window</a></li>
+                        <li><a class="dropdown-item" id="deleteRegistrationWindow" href="#">Remove Registration Window</a></li>
+                        <li><a class="dropdown-item" id="editRegistrationWindow" href="#">Edit Registration Window</a></li>
+                        <li><a class="dropdown-item" id="showAllRegistrationWindow" href="#">Show All Registration Window</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="ManageRegistrationsRequestsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Manage Registration Requests
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" id="addRegistrationRequest" href="#">Add Registration Request</a></li>
+                        <li><a class="dropdown-item" id="deleteRegistrationRequest" href="#">Remove Registration Request</a></li>
+                        <li><a class="dropdown-item" id="editRegistrationRequest" href="#">Edit Registration Request</a></li>
+                        <li><a class="dropdown-item" id="showAllRegistrationRequest" href="#">Show All Registration Request</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="ManageAssignmentDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Manage Assignment List
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" id="unionAssignment" href="#">Union Assignment and request</a></li>
+                        <li><a class="dropdown-item" id="assignBoat" href="#">Assign Boat To Registration</a></li>
+                        <li><a class="dropdown-item" id="removeAssignment" href="#">Remove Assignment</a></li>
+                        <li><a class="dropdown-item" id="RemoveRowerFromAssignment" href="#">Remove Rower From Assignment</a></li>
+                        <li><a class="dropdown-item" id="ShowAssigmentByDate" href="#">Show Assigment By Date</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="registrationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Manage Registration Request
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" id="addRegistration" href="#">Add new Registration</a></li>
+                        <li><a class="dropdown-item" id="editRegistration" href="#">Edit Registration</a></li>
+                        <li><a class="dropdown-item" id="deleteRegistration" href="#">Delete Registration</a></li>
+                        <li><a class="dropdown-item" id="showRegistration" href="#">Show Registration request</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item" id="logoutButton">
+                    <a class="nav-link" href="/WebApp">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="pageContentManager"></div>
+<script src="ManageRowers.js"></script>
+
+</body>
+</html>
