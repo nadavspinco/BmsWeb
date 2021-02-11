@@ -33,33 +33,31 @@ public class ChangePhoneServlet extends HttpServlet {
         try (PrintWriter out = resp.getWriter()) {
             SystemManagement systemManagement = ServletUtils.getSystemManagment(getServletContext());
             HttpSession session = req.getSession();
-            if (session == null)
-                return;
-
-            String memberID = SessionUtils.getUserId(req);
-            ChangePhoneServletResponse servletResponse = new ChangePhoneServletResponse();
-            if (memberID == null || memberID.isEmpty()) {
-                servletResponse.errorDetails = "need to login";
-                resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                out.println(servletResponse);
-                out.print(Constants.Start_Page);
+            if (session == null) {
+                out.print(Constants.Error);// TODO MAKE TO REDIRECT TO HOME PAGE
                 return;
             }
-            Member member = systemManagement.getMemberByID(memberID);
 
-            if (member == null){
-                servletResponse.errorDetails = "member is deleted";
-                String jsonString = gson.toJson(servletResponse);
+            String memberID = SessionUtils.getUserId(req);
+            if (memberID == null || memberID.isEmpty()) {
                 resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                out.print(servletResponse.errorDetails);
+                out.print(Constants.Error);// TODO MAKE TO REDIRECT TO HOME PAGE
                 return;
-            }//TODO MAYBE SOMTHING ELSE
+            }
+
+            Member member = systemManagement.getMemberByID(memberID);
+            if (member == null){
+                resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                out.print(Constants.Error); // TODO MAKE TO REDIRECT TO HOME PAGE
+                return;
+            }
 
             resp.setStatus(HttpServletResponse.SC_OK);
             BufferedReader reader = req.getReader();
             String gsonString = reader.lines().collect(Collectors.joining());
             String phoneNum = gson.fromJson(gsonString, String.class);
             systemManagement.changePhoneNumber(member, phoneNum);
+            System.out.println(member.getPhoneNumber()); // TODO DELETE
             String redirectUrlPage = Constants.Member_Page;
             out.print(redirectUrlPage);
         }
@@ -67,7 +65,4 @@ public class ChangePhoneServlet extends HttpServlet {
             e.getStackTrace();
         }
     }
-        static class ChangePhoneServletResponse {
-           private String errorDetails;
-        }
 }

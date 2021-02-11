@@ -30,20 +30,22 @@ public class ChangeNameServlet extends HttpServlet {
         try (PrintWriter out = resp.getWriter()) {
             SystemManagement systemManagement = ServletUtils.getSystemManagment(getServletContext());
             HttpSession session = req.getSession();
-            if (session == null)
+            if (session == null) {
+                out.print(Constants.Error);// TODO MAKE TO REDIRECT TO HOME PAGE
                 return;
+            }
 
             String memberID = SessionUtils.getUserId(req);
             if (memberID == null || memberID.isEmpty()) {
                 resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                out.print(Constants.Error);
+                out.print(Constants.Error);// TODO MAKE TO REDIRECT TO HOME PAGE
                 return;
             }
-            Member member = systemManagement.getMemberByID(memberID);
 
+            Member member = systemManagement.getMemberByID(memberID);
             if (member == null){
                 resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                out.print(Constants.Start_Page);
+                out.print(Constants.Error); // TODO MAKE TO REDIRECT TO HOME PAGE
                 return;
             }
 
@@ -52,7 +54,7 @@ public class ChangeNameServlet extends HttpServlet {
             String gsonString = reader.lines().collect(Collectors.joining());
             String newName = gson.fromJson(gsonString, String.class);
             systemManagement.changeName(member, newName);
-            System.out.println(member.getNameMember());
+            System.out.println(member.getNameMember());     // TODO DELETE
             String redirectUrlPage = Constants.Member_Page;
             out.print(redirectUrlPage);
         }
