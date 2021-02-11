@@ -31,20 +31,22 @@ public class ChangeEmailServlet extends HttpServlet {
         try (PrintWriter out = resp.getWriter()) {
             SystemManagement systemManagement = ServletUtils.getSystemManagment(getServletContext());
             HttpSession session = req.getSession();
-            if (session == null)
+            if (session == null) {
+                out.print(Constants.Error);// TODO MAKE TO REDIRECT TO HOME PAGE
                 return;
+            }
 
             String memberID = SessionUtils.getUserId(req);
             if (memberID == null || memberID.isEmpty()) {
                 resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                out.print(Constants.Error);
+                out.print(Constants.Error);// TODO MAKE TO REDIRECT TO HOME PAGE
                 return;
             }
 
             Member member = systemManagement.getMemberByID(memberID);
             if (member == null){
                 resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                out.print(Constants.Start_Page);
+                out.print(Constants.Error); // TODO MAKE TO REDIRECT TO HOME PAGE
                 return;
             }
             resp.setStatus(HttpServletResponse.SC_OK);
@@ -54,9 +56,10 @@ public class ChangeEmailServlet extends HttpServlet {
 
             //check if email is already exist in the system
             if(systemManagement.isEmailAlreadyExist(newEmail)){
-                out.print(Constants.Error);
+                out.print(Constants.Existed_Email);
                 return;
             }
+
             systemManagement.changeEmail(member, newEmail);
             System.out.println(member.getEmail()); // TODO DELETE
             String redirectUrlPage = Constants.Member_Page;
@@ -65,8 +68,5 @@ public class ChangeEmailServlet extends HttpServlet {
         catch (IOException | EmailAlreadyExistException e) {
             e.getStackTrace();
         }
-    }
-    static class ChangeNameServletResponse {
-        private String errorDetails;
     }
 }

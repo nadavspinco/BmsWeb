@@ -2,10 +2,7 @@ const changeNameButtonEl = document.querySelector('#changeName')
 const changePasswordButtonEl = document.querySelector('#changePassword')
 const changePhoneNumberButtonEl = document.querySelector('#changePhone')
 const changeEmailButtonEl = document.querySelector('#changeEmail')
-const futureAssignmentButtonEl = document.querySelector('#futureAssignment')
-const historyAssignmentButtonEl = document.querySelector('#historyAssignment')
 const pageContentEl = document.querySelector('#pageContent')
-const logoutButtonEl = document.querySelector('#logoutButton')
 
 changeEmailButtonEl.addEventListener('click',showEmailNameContent);
 changeNameButtonEl.addEventListener('click', showChangeNameContent);
@@ -16,6 +13,7 @@ async function changeEmailFunc(event){
     const nameEmailEl = document.querySelector("#newEmailInput");
     const email = nameEmailEl.value;
     if(!validatorEmail(email)){
+        nameEmailEl.value = ''
         alert("You have entered an invalid email address!");
         event.preventDefault();
     }
@@ -27,9 +25,15 @@ async function changeEmailFunc(event){
             headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
             body: JSON.stringify(email)
         });
-        const result = await response.text();
-        if(result === 'error') // TODO THE EMAIL IS EXIST
-            logoutButtonEl.addEventListener('Click')
+
+        let result = await response.text();
+        if(result === 'error') {
+            alert("The Email is already existed in the system")
+            result = ''
+            window.location.href = '/path';
+        }
+        else
+            alert("The email changed successfully")
         window.location.replace(result)
     }
 }
@@ -40,6 +44,7 @@ async function changeNameFunc(event){
     const name = nameInputEl.value;
     if(name.length < 3){
         alert("The Name should be at least 3 letters")
+        nameInputEl.value = ''
         event.preventDefault();
     }
     if (/[^a-zA-Z]/.test(name)){
@@ -55,9 +60,13 @@ async function changeNameFunc(event){
             headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
             body: JSON.stringify(name)
         });
-        const result = await response.text();
-        if(result === 'error')
-            logoutButtonEl.addEventListener('Click')
+
+        let result = await response.text();
+        if(result === 'error') {
+            result = ''
+            window.location.href = '/path';
+        }
+        alert("The name changed successfully")
         window.location.replace(result)
     }
 }
@@ -70,6 +79,7 @@ async function changePasswordFunc(event){
     const newPassword = newPasswordInputEl.value;
     if (newPassword === null || newPassword.length < 3){
         alert("password should be at least 3 characters")
+        newPasswordInputEl.value = '';
         event.preventDefault();
     }
 
@@ -87,8 +97,12 @@ async function changePasswordFunc(event){
             body: JSON.stringify(newPassword)
         });
 
-        const result = await response.text();
-        // TODO להגיד למשתמש שהסיסמא שונתה בהצלחה
+        let result = await response.text();
+        if(result === 'error') {
+            result = ''
+            window.location.href = '/path';
+        }
+        alert("The password changed successfully")
         window.location.replace(result)
     }
 }
@@ -98,6 +112,7 @@ async function changePhoneFunc(event){
     const phone = phoneInputEl.value
     if (phone === null || phone.length < 3){
         alert("phone number should be at least 3 digits")
+        phoneInputEl.value = ''
         event.preventDefault();
     }
 
@@ -115,8 +130,12 @@ async function changePhoneFunc(event){
             body: JSON.stringify(phone)
         });
 
-        const result = await response.text();
-
+        let result = await response.text();
+        if(result === 'error') {
+            result = ''
+            window.location.href = '/path';
+        }
+        alert("The phone number changed successfully")
         window.location.replace(result)
     }
 }
@@ -161,4 +180,14 @@ function showEmailNameContent(){
         '<br/>'+
         '<button type="button" onclick="changeEmailFunc()"> Save The Changes</button>'
     pageContentEl.innerHTML = htmlToInsert;
+}
+
+function validatorEmail(email){
+    var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if(email.match(mailformat)){
+        return true;
+    }
+    else {
+        return false;
+    }
 }

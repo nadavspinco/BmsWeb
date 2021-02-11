@@ -30,25 +30,22 @@ public class ChangePasswordServlet extends HttpServlet {
         try (PrintWriter out = resp.getWriter()) {
             SystemManagement systemManagement = ServletUtils.getSystemManagment(getServletContext());
             HttpSession session = req.getSession();
-            if (session == null)
-                return;
-
-            String memberID = SessionUtils.getUserId(req);
-            ChangePasswordServletResponse servletResponse = new ChangePasswordServletResponse();
-            if (memberID == null || memberID.isEmpty()) {
-                servletResponse.errorDetails = "need to login";
-                resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                out.println(servletResponse);
-                out.print(Constants.Start_Page);
+            if (session == null) {
+                out.print(Constants.Error);// TODO MAKE TO REDIRECT TO HOME PAGE
                 return;
             }
-            Member member = systemManagement.getMemberByID(memberID);
 
-            if (member == null){
-                servletResponse.errorDetails = "member is deleted";
+            String memberID = SessionUtils.getUserId(req);
+            if (memberID == null || memberID.isEmpty()) {
                 resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                out.print(servletResponse.errorDetails);
-                out.print(Constants.Start_Page);
+                out.print(Constants.Error);// TODO MAKE TO REDIRECT TO HOME PAGE
+                return;
+            }
+
+            Member member = systemManagement.getMemberByID(memberID);
+            if (member == null){
+                resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                out.print(Constants.Error); // TODO MAKE TO REDIRECT TO HOME PAGE
                 return;
             }
 
@@ -57,14 +54,12 @@ public class ChangePasswordServlet extends HttpServlet {
             String gsonString = reader.lines().collect(Collectors.joining());
             String newPassword = gson.fromJson(gsonString, String.class);
             systemManagement.changePassword(member, newPassword);
+            System.out.println(member.getPassword()); // TODO DELETE
             String redirectUrlPage = Constants.Member_Page;
             out.print(redirectUrlPage);
         }
         catch (IOException e) {
             e.getStackTrace();
         }
-    }
-    static class ChangePasswordServletResponse {
-        private String errorDetails;
     }
 }
