@@ -1,13 +1,11 @@
 package Servlet;
 
 import Objects.Member;
-
 import Objects.SystemManagement;
-import Utils.SessionUtils;
-import com.google.gson.Gson;
-
 import Utils.Constants;
 import Utils.ServletUtils;
+import Utils.SessionUtils;
+import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,16 +18,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.stream.Collectors;
 
-@WebServlet(name = "ChangePhoneServlet", urlPatterns = "/changePhone")
-public class ChangePhoneServlet extends HttpServlet {
+@WebServlet(name = "ChangeNameServlet", urlPatterns = "/changeName")
+public class ChangeNameServlet extends HttpServlet {
     private Gson gson = new Gson();
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        changePhoneServlet(req, resp);
+        changeNameServlet(req, resp);
     }
-
-    public void changePhoneServlet(HttpServletRequest req, HttpServletResponse resp) {
+    public void changeNameServlet(HttpServletRequest req, HttpServletResponse resp) {
         try (PrintWriter out = resp.getWriter()) {
             SystemManagement systemManagement = ServletUtils.getSystemManagment(getServletContext());
             HttpSession session = req.getSession();
@@ -55,14 +52,17 @@ public class ChangePhoneServlet extends HttpServlet {
             resp.setStatus(HttpServletResponse.SC_OK);
             BufferedReader reader = req.getReader();
             String gsonString = reader.lines().collect(Collectors.joining());
-            String phoneNum = gson.fromJson(gsonString, String.class);
-            systemManagement.changePhoneNumber(member, phoneNum);
-            System.out.println(member.getPhoneNumber()); // TODO DELETE
+            String newName = gson.fromJson(gsonString, String.class);
+            systemManagement.changeName(member, newName);
+            System.out.println(member.getNameMember());     // TODO DELETE
             String redirectUrlPage = Constants.Member_Page;
             out.print(redirectUrlPage);
         }
         catch (IOException e) {
             e.getStackTrace();
         }
+    }
+    static class ChangeNameServletResponse {
+        private String errorDetails;
     }
 }

@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
             if (loggedInMember != null){
                 response.setStatus(HttpServletResponse.SC_OK);
                 request.getSession(true).setAttribute(Constants.USERID, loggedInMember.getSerial());
-                String redirectUrlPage = loggedInMember.getIsManager() ? Constants.MANAGERPAGE : Constants.MEMBERPAGE;
+                String redirectUrlPage = loggedInMember.getIsManager() ? Constants.Manager_Page : Constants.Member_Page;
                 out.print(redirectUrlPage);
             }
             else {  // logged in dined

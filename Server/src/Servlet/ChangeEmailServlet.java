@@ -1,13 +1,12 @@
 package Servlet;
 
+import Objects.EmailAlreadyExistException;
 import Objects.Member;
-
 import Objects.SystemManagement;
-import Utils.SessionUtils;
-import com.google.gson.Gson;
-
 import Utils.Constants;
 import Utils.ServletUtils;
+import Utils.SessionUtils;
+import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,16 +19,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.stream.Collectors;
 
-@WebServlet(name = "ChangePhoneServlet", urlPatterns = "/changePhone")
-public class ChangePhoneServlet extends HttpServlet {
+@WebServlet(name = "ChangeEmailServlet", urlPatterns = "/changeEmail")
+public class ChangeEmailServlet extends HttpServlet {
     private Gson gson = new Gson();
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        changePhoneServlet(req, resp);
+        changeEmailServlet(req, resp);
     }
-
-    public void changePhoneServlet(HttpServletRequest req, HttpServletResponse resp) {
+    public void changeEmailServlet(HttpServletRequest req, HttpServletResponse resp) {
         try (PrintWriter out = resp.getWriter()) {
             SystemManagement systemManagement = ServletUtils.getSystemManagment(getServletContext());
             HttpSession session = req.getSession();
@@ -51,17 +49,23 @@ public class ChangePhoneServlet extends HttpServlet {
                 out.print(Constants.Error); // TODO MAKE TO REDIRECT TO HOME PAGE
                 return;
             }
-
             resp.setStatus(HttpServletResponse.SC_OK);
             BufferedReader reader = req.getReader();
             String gsonString = reader.lines().collect(Collectors.joining());
-            String phoneNum = gson.fromJson(gsonString, String.class);
-            systemManagement.changePhoneNumber(member, phoneNum);
-            System.out.println(member.getPhoneNumber()); // TODO DELETE
+            String newEmail = gson.fromJson(gsonString, String.class);
+
+            //check if email is already exist in the system
+            if(systemManagement.isEmailAlreadyExist(newEmail)){
+                out.print(Constants.Existed_Email);
+                return;
+            }
+
+            systemManagement.changeEmail(member, newEmail);
+            System.out.println(member.getEmail()); // TODO DELETE
             String redirectUrlPage = Constants.Member_Page;
             out.print(redirectUrlPage);
         }
-        catch (IOException e) {
+        catch (IOException | EmailAlreadyExistException e) {
             e.getStackTrace();
         }
     }

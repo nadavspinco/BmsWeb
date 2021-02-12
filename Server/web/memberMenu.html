@@ -13,7 +13,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid" id="MemberMenu">
-            <a class="navbar-brand" href="/webApp/memberMenu.html">Member Menu</a>
+            <a class="navbar-brand" href="/WebApp/memberMenu.html">Member Menu</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -24,7 +24,7 @@
                             Manage Personality Details
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" id="changeName" >Change Name</a></li>
+                            <li><a class="dropdown-item" id="changeName" href="#">Change Name</a></li>
                             <li><a class="dropdown-item" id="changeEmail" href="#">Change email</a></li>
                             <li><a class="dropdown-item" id="changePassword" href="#">Change Password</a></li>
                             <li><a class="dropdown-item" id="changePhone" href="#">Change Phone Number</a></li>
@@ -49,21 +49,16 @@
                     <li class="nav-item" id="showRegistration">
                         <a class="nav-link" href="#">Show Registration request</a>
                     </li>
-                    <li class="nav-item" id="logout">
-                        <a class="nav-link" href="/webApp">Logout</a>
+                    <li class="nav-item" id="logoutButton">
+                        <a class="nav-link" href="/WebApp">Logout</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div id="pageContent">Hey</div>
-    <!--
-    <label class="lbl"> Enter your input </label><br>
-    <input class= "inpt" type="text" id="managerMenuInput" autofocus/>
-    -->
-
-    <script src="memberMenu.js"></script>
+    <div id="pageContent"></div>
+    <script src="PersonalityDetailsMemberMenu.js"></script>
     <script src="showHistoryScripts.js"></script>
 
 </body>
