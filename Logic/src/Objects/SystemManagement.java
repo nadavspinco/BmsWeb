@@ -209,6 +209,7 @@ public class SystemManagement implements EngineInterface {
                 "123",26,"nothing",LevelEnum.WorldClass,true,"a2");
         addMember("spinco","05011111994","n@walla.com",
                 "123",26,"nothing",LevelEnum.WorldClass,false,"a3");
+        addWindowRegistration(new WindowRegistration(LocalTime.now().minusHours(1),LocalTime.now()));
     }
 
     public boolean isRegistrationAllowedForMember(Registration registration, Member member) {
