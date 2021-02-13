@@ -9,60 +9,38 @@
             "sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </head>
 <body>
-<form class="row g-3">
-    <div class="col-md-4">
-        <label for="memberEmailInput" class="form-label">Email</label>
-        <input type="text" class="form-control" id="memberEmailInput">
-    </div>
-    <div class="col-md-4">
-        <label for="memberPasswordInput" class="form-label">Password</label>
-        <input type="password" class="form-control" id="memberPasswordInput">
-    </div>
-    <div>
-        <div class="col-md-4">
-            <label for="memberNameInput" class="form-label">Rower Name</label>
-            <input type="text" class="form-control" id="memberNameInput">
-        </div>
-        <div class="col-md-4">
-            <label for="memberSerialInput" class="form-label">Rower Serial</label>
-            <input type="text" class="form-control" id="memberSerialInput">
-        </div>
-        <div class="col-md-12">
-            <label for="memberCommentInput" class="form-label">Comment</label>
-            <input type="text" class="form-control" id="memberCommentInput">
-        </div>
-        <div class="col-md-12">
-            <label for="memberPhoneInput" class="form-label">Phone Number</label>
-            <input type="text" class="form-control" id="memberPhoneInput">
-        </div>
-        <div>
-            <label for="memberAgeInput">Age (13-99):</label><br>
-            <input type="number" id="memberAgeInput" name="Age" min="13" max="100">
-        </div>
-
-    </div>
-    <div class="col-12">
-        <div class="col-4">
-            <label class="visually-hidden" for="chooseRowerLevel">Preference</label>
-            <select class="form-select" id="chooseRowerLevel">
-                <option selected>Rower Level</option>
-                <option value="1">Beginner</option>
-                <option value="2">Intermediate</option>
-                <option value="3">Advanced</option>
-            </select>
-        </div>
-    </div>
-    <div class="col-12">
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="managerCheckBox">
-            <label class="form-check-label" for="managerCheckBox">
-                Manager Position
-            </label>
-        </div>
-    </div>
-    <div class="col-12">
-        <button type="submit" class="btn btn-primary">Confirm</button>
-    </div>
-</form>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Boat Name</th>
+        <th scope="col">Serial</th>
+        <th scope="col">Boat Type</th>
+        <th scope="col">is Wide</th>
+        <th scope="col">is Coastal</th>
+        <th scope="col">is Private</th>
+        <th scope="col">is Available</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+    </tr>
+    <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+    </tr>
+    <tr>
+        <th scope="row">3</th>
+        <td colspan="2">Larry the Bird</td>
+        <td>@twitter</td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
