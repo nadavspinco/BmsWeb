@@ -4,10 +4,7 @@ const passwordInputEl = document.querySelector('#passwordInputId')
 
 LoginButtonEl.addEventListener ('click', memberDetailsIn);
 
-console.log("here in js")
-
 async function memberDetailsIn(event) {
-    console.log("here in js")
     const email = emailInputEl.value;
     const pass = passwordInputEl.value;
     if (!ValidInputArgs(email, pass)) {

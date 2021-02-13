@@ -11,45 +11,52 @@
 <body>
 <form class="row g-3">
     <div class="col-md-4">
-        <label for="boatNameInput" class="form-label">Boat Name</label>
-        <input type="text" class="form-control" id="boatNameInput">
+        <label for="memberEmailInput" class="form-label">Email</label>
+        <input type="text" class="form-control" id="memberEmailInput">
     </div>
     <div class="col-md-4">
-        <label for="boatSerialInput" class="form-label">Serial Number</label>
-        <input type="text" class="form-control" id="boatSerialInput">
+        <label for="memberPasswordInput" class="form-label">Password</label>
+        <input type="password" class="form-control" id="memberPasswordInput">
+    </div>
+    <div>
+        <div class="col-md-4">
+            <label for="memberNameInput" class="form-label">Rower Name</label>
+            <input type="text" class="form-control" id="memberNameInput">
+        </div>
+        <div class="col-md-4">
+            <label for="memberSerialInput" class="form-label">Rower Serial</label>
+            <input type="text" class="form-control" id="memberSerialInput">
+        </div>
+        <div class="col-md-12">
+            <label for="memberCommentInput" class="form-label">Comment</label>
+            <input type="text" class="form-control" id="memberCommentInput">
+        </div>
+        <div class="col-md-12">
+            <label for="memberPhoneInput" class="form-label">Phone Number</label>
+            <input type="text" class="form-control" id="memberPhoneInput">
+        </div>
+        <div>
+            <label for="memberAgeInput">Age (13-99):</label><br>
+            <input type="number" id="memberAgeInput" name="Age" min="13" max="100">
+        </div>
+
     </div>
     <div class="col-12">
         <div class="col-4">
-            <label class="visually-hidden" for="chooseBoatType">Preference</label>
-            <select class="form-select" id="chooseBoatType">
-                <option selected>Choose Boat Type</option>
-                <option value="1">Single</option>
-                <option value="2">Double</option>
-                <option value="3">Coxed Double</option>
-                <option value="4">Pair</option>
-                <option value="5">Coxed Pair</option>
-                <option value="6">Four</option>
-                <option value="7">Coxed Four</option>
-                <option value="8">Quad</option>
-                <option value="9">Coxed Quad</option>
-                <option value="10">Octuple</option>
-                <option value="11">Eight</option>
+            <label class="visually-hidden" for="chooseRowerLevel">Preference</label>
+            <select class="form-select" id="chooseRowerLevel">
+                <option selected>Rower Level</option>
+                <option value="1">Beginner</option>
+                <option value="2">Intermediate</option>
+                <option value="3">Advanced</option>
             </select>
         </div>
     </div>
     <div class="col-12">
         <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="coastalCheckBox">
-            <label class="form-check-label" for="coastalCheckBox">
-                Coastal Boat
-            </label>
-        </div>
-    </div>
-    <div class="col-12">
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="wideCheckBox">
-            <label class="form-check-label" for="wideCheckBox">
-                Wide Boat
+            <input class="form-check-input" type="checkbox" id="managerCheckBox">
+            <label class="form-check-label" for="managerCheckBox">
+                Manager Position
             </label>
         </div>
     </div>
