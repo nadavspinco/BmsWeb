@@ -62,7 +62,4 @@ public class ChangeNameServlet extends HttpServlet {
             e.getStackTrace();
         }
     }
-    static class ChangeNameServletResponse {
-        private String errorDetails;
-    }
 }
