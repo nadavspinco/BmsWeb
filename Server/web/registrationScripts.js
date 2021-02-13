@@ -29,20 +29,31 @@ function showAddRegistrationForm(){
 
 }
 
+function clearTimeOffsetOnDate(date)
+{
+    date.setHours(0,0,0,0,)
+}
+
  function setDate (){
     //set the date on the Reservation object and call makeWindowRegistrationSelection
     const dateEl = document.querySelector("#registrationDate")
     if(dateEl!=null) {
         let date = dateEl.valueAsDate;
+        let currentDate = new Date(Date.now());
+        clearTimeOffsetOnDate(date)
+        clearTimeOffsetOnDate(currentDate)
         if(date == null){
             alert("please chose a date ")
             return;
         }
-        // else if(date.getDate() < Date.now())
-        // {
-        //     alert("you can't chose a day that past")
-        //     return;
-        // }
+        else if(date < currentDate)
+        {
+            console.log(date)
+            console.log(new Date(Date.now()))
+
+            alert("you can't chose a day that past")
+            return;
+        }
         setDateOnObject(dateEl.value);
         makeWindowRegistrationSelection();
     }
