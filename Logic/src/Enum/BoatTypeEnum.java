@@ -10,7 +10,7 @@ import static java.lang.Math.max;
 
 public enum BoatTypeEnum
 {
-    SingleBoat(),
+    SingleBoat,
     DoubleBoat, DoubleBoatPaddle, DoubleCoxed, DoublePaddleCoxed,
     QuartetBoat, QuartetBoatPaddle, QuartetBoatCoxed, QuartetBoatPaddleCoxed,
     OctetBoatCoxed, OctetBoatCoxedPaddle;

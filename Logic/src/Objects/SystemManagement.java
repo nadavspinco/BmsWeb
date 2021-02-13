@@ -209,6 +209,7 @@ public class SystemManagement implements EngineInterface {
                 "123",26,"nothing",LevelEnum.WorldClass,true,"a2");
         addMember("spinco","05011111994","n@walla.com",
                 "123",26,"nothing",LevelEnum.WorldClass,false,"a3");
+        addWindowRegistration(new WindowRegistration(LocalTime.now().minusHours(1),LocalTime.now()));
     }
 
     public boolean isRegistrationAllowedForMember(Registration registration, Member member) {
@@ -560,6 +561,7 @@ public class SystemManagement implements EngineInterface {
         //}
         if(assignPrivateBoutIfExists && registration.getRowerOfRegistration().getHasPrivateBoat())
            assignPrivateBoat(registration);
+        System.out.println("yessssssss");
     }
 
     public Assignment[] getAssignmentByDate(LocalDate date){
@@ -1314,7 +1316,7 @@ public class SystemManagement implements EngineInterface {
         memberList.forEach(member -> { membersToAdd.add(member); });
         membersToAdd.remove(mainRower);
 
-        if (membersToAdd.size() != 0){
+        if (membersToAdd.size() > 1){
             Map <Member, Integer> finalMemberMap = new HashMap<>(memberList.size());
             initMemberMap(finalMemberMap, membersToAdd);
             updateMemberMap(finalMemberMap, mainRower);
