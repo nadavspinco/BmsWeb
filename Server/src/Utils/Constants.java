@@ -10,4 +10,5 @@ public class Constants {
     public static final String Error = "error";
     public static final String Existed_Email = "error";
 
+    public static final int InvalidRegistration= 1;
 }

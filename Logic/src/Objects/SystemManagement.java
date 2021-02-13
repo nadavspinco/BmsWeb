@@ -561,6 +561,7 @@ public class SystemManagement implements EngineInterface {
         //}
         if(assignPrivateBoutIfExists && registration.getRowerOfRegistration().getHasPrivateBoat())
            assignPrivateBoat(registration);
+        System.out.println("yessssssss");
     }
 
     public Assignment[] getAssignmentByDate(LocalDate date){
@@ -1315,7 +1316,7 @@ public class SystemManagement implements EngineInterface {
         memberList.forEach(member -> { membersToAdd.add(member); });
         membersToAdd.remove(mainRower);
 
-        if (membersToAdd.size() != 0){
+        if (membersToAdd.size() > 1){
             Map <Member, Integer> finalMemberMap = new HashMap<>(memberList.size());
             initMemberMap(finalMemberMap, membersToAdd);
             updateMemberMap(finalMemberMap, mainRower);
