@@ -1,7 +1,10 @@
 const addMemberButtonEl = document.querySelector('#addRower')
+const showMemberButtonEl = document.querySelector('#showAllRower')
 
 
-addMemberButtonEl.addEventListener('click', showAddMember);
+addMemberButtonEl.addEventListener('click', addMemberForm);
+showMemberButtonEl.addEventListener('click', showAllMember);
+let memberListObj ={}
 
 async function addNewMember(event) {
     const emailInputEl = document.querySelector('#memberEmailInput')
@@ -98,7 +101,7 @@ async function addNewMember(event) {
     }
 }
 
-function showAddMember(){
+function addMemberForm(){
     clearPageContent();
     let htmlToInsert = '<form class="row g-3">'+
     '<div class="col-md-4">'+
@@ -155,4 +158,89 @@ function showAddMember(){
     '</div>'+
 '</form>';
     pageContentManagerEl.innerHTML = htmlToInsert;
+}
+
+async function showAllMember(){
+    const response = await fetch('../showMembers', {method: 'get'});
+    const memberList = await response.json();
+    memberListObj = memberList;
+    clearPageContent();
+    let htmlToInsert = '<table class="table">'+
+        '<thead>'+
+        '<tr>'+
+        '<th scope="col">#</th>'+
+        '<th scope="col">Rower Name</th>'+
+        '<th scope="col">Email</th>'+
+        '<th scope="col">ID</th>'+
+        '<th scope="col">is Manager</th>'+
+        '<th scope="col">Has Private Boat</th>'+
+        '<th scope="col">Level</th>'+
+        '<th scope="col">Phone Number</th>'+
+        '<th scope="col">Age</th>'+
+        '<th scope="col">Comment</th>'+
+        '</tr>'+
+        '</thead>'+
+        '<tbody>'
+    let index = 0;
+    memberList.forEach(member => {htmlToInsert += createElementMember(member, index++)});
+    htmlToInsert += '</tbody></table>'+
+        '<td>'+
+        '<button type="submit" class="btn btn-primary" id="removeMemberButton" onclick="removeMember()">Remove Member</button>'+
+        '</td> <td></td><td></td>'+
+        '<td>'+
+        '<button type="submit" class="btn btn-primary" id="editMemberButton" onclick="editMember()">Edit Member</button>'+
+        '</td>';
+
+    pageContentManagerEl.innerHTML = htmlToInsert;
+}
+
+function createElementMember(member, index){
+    let htmlMember = '<tr>'+
+        '<th scope="row">' +
+            '<div class="form-check">'+
+                '<input class="form-check-input" type="radio" name="flexRadioDefault" id = "flexRadioDefault">'+
+            '</div>'+
+        '</th>'+
+        '<td>' + member.nameMember + '</td>'+
+        '<td>' + member.email + '</td>'+
+        '<td>' + member.memberSerial + '</td>'+
+        '<td>' + member.isManager + '</td>'+
+        '<td>' + member.hasPrivateBoat + '</td>'+
+        '<td>' + member.level + '</td>'+
+        '<td>' + member.phoneNumber + '</td>'+
+        '<td>' + member.age + '</td>'+
+        '<td>' + member.additionalDetails + '</td>'+
+        '</tr>';
+    return htmlMember;
+}
+
+function wantedMember() {
+    let index = 0;
+    const selectedEl = document.querySelectorAll('#flexRadioDefault');
+    for (let el of selectedEl) {
+        if (el.checked === true) {
+            return index;
+        }
+        index++;
+    }
+    return -1
+}
+
+async function removeMember(event){
+    const memberCheckedEl = document.querySelector('#flexRadioDefault:checked')
+    if(memberCheckedEl === null){
+        alert("Choose member first")
+        event.preventDefault();
+    }
+
+    let indexMember = wantedMember();
+    const response = await fetch('../removeMember', {
+        method: 'put',
+        headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
+        body: JSON.stringify(memberListObj[indexMember])
+    });
+
+    let result = await response.text();
+    alert("The member has been removed successfully")
+    window.location.replace(result)
 }

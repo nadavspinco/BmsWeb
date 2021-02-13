@@ -209,6 +209,10 @@ public class SystemManagement implements EngineInterface {
                 "123",26,"nothing",LevelEnum.WorldClass,true,"a2");
         addMember("spinco","05011111994","n@walla.com",
                 "123",26,"nothing",LevelEnum.WorldClass,false,"a3");
+        addBoat("gabri",BoatTypeEnum.DoubleBoat,true,false,"a11");
+        addBoat("ronen",BoatTypeEnum.QuartetBoat,false,true,"a22");
+        addBoat("sagi",BoatTypeEnum.SingleBoat,true,true,"a33");
+        addBoat("Hadar",BoatTypeEnum.OctetBoatCoxed,false,false,"a44");
         addWindowRegistration(new WindowRegistration(LocalTime.now().minusHours(1),LocalTime.now()));
     }
 
