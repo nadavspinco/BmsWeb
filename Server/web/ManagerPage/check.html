@@ -9,38 +9,33 @@
             "sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </head>
 <body>
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Boat Name</th>
-        <th scope="col">Serial</th>
-        <th scope="col">Boat Type</th>
-        <th scope="col">is Wide</th>
-        <th scope="col">is Coastal</th>
-        <th scope="col">is Private</th>
-        <th scope="col">is Available</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-    </tr>
-    <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-    </tr>
-    <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-    </tr>
-    </tbody>
-</table>
+<label for="startTimeActivity">Start time:</label>
+<input type="time" id ="startTimeActivity">
+
+<label for="endTimeActivity"> End time:</label>
+<input type="time" id="endTimeActivity">
+<select class="form-select" aria-label="Select Window Registration"  id="boatTypeSelectWindow" o >
+    <option selected disabled>Select Window Registration</option>
+    <option value="0">None</option>
+    <option value="1">SingleBoat</option>
+    <option value="2">DoubleBoat</option>
+    <option value="3">DoubleBoatPaddle</option>
+    <option value="4">DoubleCoxed</option>
+    <option value="5">DoublePaddleCoxed</option>
+    <option value="6">QuartetBoat</option>
+    <option value="7">QuartetBoatPaddle</option>
+    <option value="8">QuartetBoatCoxed</option>
+    <option value="9">QuartetBoatPaddleCoxed</option>
+    <option value="10">OctetBoatCoxed</option>
+    <option value="11">OctetBoatCoxedPaddle</option>
+</select>
+
+<select class="form-select" aria-label="Select activity type"  id="activityTypeSelectWindow" >
+    <option selected disabled>Select activity type</option>
+    <option value="0">None</option>
+    <option value="1">Sailing</option>
+    <option value="2">Training</option>
+</select>
+<button type="button" class="btn btn-primary">Add</button>
 </body>
 </html>
