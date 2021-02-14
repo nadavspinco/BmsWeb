@@ -24,6 +24,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -71,7 +72,15 @@ private Gson gson = new Gson();
 
                 Set<BoatTypeEnum > boatTypeEnumSet = new HashSet<BoatTypeEnum>();
                 RegistrationInput.boatTypes.forEach(boatTypeEnum -> boatTypeEnumSet.add(boatTypeEnum));
-                Registration registrationToAdd = new Registration(member,memberList, RegistrationInput.windowRegistration,localDate,boatTypeEnumSet);
+                WindowRegistration windowRegistration;
+                if(RegistrationInput.fromWindowRegistration == false){
+                     windowRegistration = new WindowRegistration(LocalTime.parse(RegistrationInput.startTime),LocalTime.parse(RegistrationInput.endTime));
+                }
+                else {
+                    windowRegistration = RegistrationInput.windowRegistration;
+                }
+
+                Registration registrationToAdd = new Registration(member,memberList, windowRegistration,localDate,boatTypeEnumSet);
                 systemManagement.addRegistration(registrationToAdd,true);
 
             }
@@ -107,6 +116,9 @@ private Gson gson = new Gson();
         WindowRegistration windowRegistration;
         LinkedList<Member>  members;
         LinkedList<BoatTypeEnum> boatTypes;
+        boolean fromWindowRegistration;
+        String startTime;
+        String endTime;
     }
 
     static class Response{

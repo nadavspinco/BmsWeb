@@ -20,6 +20,9 @@ const reservationToAdd = {
     },
     members : [],
     boatTypes: [],
+    fromWindowRegistration: true,
+    startTime: "",
+    endTime: "",
 }
 
 function showAddRegistrationForm(){
@@ -31,7 +34,7 @@ function showAddRegistrationForm(){
 
 function clearTimeOffsetOnDate(date)
 {
-    date.setHours(0,0,0,0,)
+    date.setHours(0,0,0,0)
 }
 
  function setDate (){
@@ -115,6 +118,8 @@ function setTimeFromPickers(){
     if(startTimeEl!= null && endTimeEl!= null){
         const startTime = startTimeEl.valueAsDate
         const endTime = endTimeEl.valueAsDate
+        console.log(startTime)
+        console.log(endTime)
         if(startTime == null) {
             alert("please chose start time")
             return ;
@@ -125,14 +130,13 @@ function setTimeFromPickers(){
         }
          if(startTime >= endTime){ //invalid time selection
              alert("start time should be before end time!")
+             return ;
          }
-//TODO: FIX hours bug
-        reservationToAdd.windowRegistration.startTime.hour = startTimeEl.valueAsDate.getHours()
-        reservationToAdd.windowRegistration.startTime.minute = startTimeEl.valueAsDate.getMinutes()
-        reservationToAdd.windowRegistration.endTime.hour = endTimeEl.valueAsDate.getHours()
-        reservationToAdd.windowRegistration.endTime.minute = endTimeEl.valueAsDate.getMinutes()
-        reservationToAdd.windowRegistration.boatType = null //reset boatType
-        reservationToAdd.windowRegistration.activityType = null//reset activityType
+
+        reservationToAdd.fromWindowRegistration = false;
+        reservationToAdd.startTime = startTimeEl.value;
+        reservationToAdd.endTime = endTimeEl.value
+        reservationToAdd.windowRegistration = null
         makeBoatTypeSelection()
     }
 }
@@ -256,6 +260,7 @@ function setTimeFromWindow(){
         const chosenIndex = selectEl.selectedIndex;
         if(chosenIndex!== -1){
             reservationToAdd.windowRegistration =windowRegistrations[chosenIndex]
+            reservationToAdd.fromWindowRegistration = true;
             makeBoatTypeSelection()
         }
         else {

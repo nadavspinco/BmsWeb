@@ -44,6 +44,7 @@ function addRegistrationWindow() {
     const startTimeEl = document.querySelector('#startTimeActivity')
     const endTimeEl = document.querySelector('#endTimeActivity')
     //TODO: check that start time < end time
+    startTimeEl.valueAsDate
 
     const startTime = startTimeEl.value; //string
     const endTime = endTimeEl.value; //string
