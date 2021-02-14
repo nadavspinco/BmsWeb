@@ -36,6 +36,7 @@ private Gson gson = new Gson();
 
     }
 
+
     private void addRegistration(HttpServletRequest req, HttpServletResponse resp) {
         Response response = new Response();
         HttpSession session = req.getSession();
