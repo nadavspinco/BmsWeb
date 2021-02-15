@@ -22,8 +22,8 @@ public class Member implements Serializable {
     private String phoneNumber;
     private String email;
     private String password;
-    @XmlTransient
-    private final List<Registration> mineRegistrationRequest = new LinkedList<>();
+   // @XmlTransient
+    private transient final List<Registration> mineRegistrationRequest = new LinkedList<>();
 
     private Member () {}
 
@@ -216,6 +216,7 @@ public class Member implements Serializable {
     public Boolean getManager() {
         return isManager;
     }
+
 
     public List<Registration> getMineRegistrationRequest() {
         return mineRegistrationRequest;
