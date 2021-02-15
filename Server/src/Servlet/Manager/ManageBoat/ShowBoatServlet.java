@@ -2,7 +2,6 @@ package Servlet.Manager.ManageBoat;
 
 import Objects.Boat;
 import Objects.SystemManagement;
-import Utils.Constants;
 import Utils.ServletUtils;
 import com.google.gson.Gson;
 
@@ -11,12 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @WebServlet(name = "ShowBoatServlet", urlPatterns = "/showBoats")
 public class ShowBoatServlet extends HttpServlet {
