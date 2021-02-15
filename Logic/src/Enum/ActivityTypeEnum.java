@@ -9,7 +9,7 @@ public enum ActivityTypeEnum{
 
     public static ActivityTypeEnum convertFromInt(int selection){
         switch (selection){
-            case 1 : return  Sailing;
+            case 1: return  Sailing;
             case 2: return  Training;
             default: return null;
         }
