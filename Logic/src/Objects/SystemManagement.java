@@ -2,6 +2,7 @@ package Objects;
 
 import Enum.BoatTypeEnum;
 import Enum.LevelEnum;
+import Logic.Enum.ActivityTypeEnum;
 import Objects.*;
 import jaxb.Activities;
 import jaxb.Boats;
@@ -213,7 +214,7 @@ public class SystemManagement implements EngineInterface {
         addBoat("ronen",BoatTypeEnum.QuartetBoat,false,true,"a22");
         addBoat("sagi",BoatTypeEnum.SingleBoat,true,true,"a33");
         addBoat("Hadar",BoatTypeEnum.OctetBoatCoxed,false,false,"a44");
-        addWindowRegistration(new WindowRegistration(LocalTime.now().minusHours(1),LocalTime.now()));
+        addWindowRegistration(new WindowRegistration(ActivityTypeEnum.Sailing, BoatTypeEnum.DoubleBoat, LocalTime.now().minusHours(1),LocalTime.now()));
     }
 
     public boolean isRegistrationAllowedForMember(Registration registration, Member member) {

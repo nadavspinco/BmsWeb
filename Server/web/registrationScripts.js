@@ -89,7 +89,7 @@ function setWindowRegistrations(responseObj)
                + '<input type="time" id="startTime">'
             +'</div>'
             +'<div>'
-               +'<label for="endTime">Select Wmanted end time: </label>'
+               +'<label for="endTime">Select Wanted end time: </label>'
                + '<input type="time" id="endTime">'
             +'</div>'
                 +'<br>'
