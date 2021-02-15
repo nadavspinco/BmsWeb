@@ -198,21 +198,23 @@ function pickMembers(){
 function showFinalDetails(){
     //show the final details before submitting the Registration
     pageContentEl.innerHTML = ''
-    let html = getRegistrationDetailsHtml();
+    let html = getRegistrationDetailsHtml(reservationToAdd);
     html+='<button type="button" class="btn btn-primary" onclick="sendRegistration()">Submit! </button>'
     pageContentEl.innerHTML = html;
 }
-function getRegistrationDetailsHtml(){
+function getRegistrationDetailsHtml(reservation){
     //return the html for the Registration Details
     let html = '<h2> Registration Info: </h2>'
-        +'<h3>' +makeWindowRegistrationString(reservationToAdd.windowRegistration) + '</h3>'
+        +'<h3>' +makeWindowRegistrationString(reservation.windowRegistration) + '</h3>'
         + '<h3> RequestBoatTypes : </h3>'
-    for(let boatType of reservationToAdd.boatTypes){
+    for(let boatType of reservation.boatTypes){
         html+= '<h4>' + boatType + '</h4>'
     }
     html+= '<h3>Members: </h3>'
-    for (let member of reservationToAdd.members){
-        html+= '<h4>' + member.nameMember + '  '+ member.email +'</h4>'
+    if(reservation.members!= null && reservation.members.length !==0) {
+        for (let member of reservation.members) {
+            html += '<h4>' + member.nameMember + '  ' + member.email + '</h4>'
+        }
     }
     return html;
 }
@@ -227,7 +229,7 @@ async function sendRegistration(){
     const responseObj = await response.json();
     let html='';
     if(responseObj.errorCode ===0){
-        html= getRegistrationDetailsHtml();
+        html= getRegistrationDetailsHtml(reservationToAdd);
         html += '<h3> Registration Added successfully</h3> '
         pageContentEl.innerHTML= html;
     }

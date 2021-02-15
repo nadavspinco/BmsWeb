@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class GetRegistrationServlet extends HttpServlet {
     private Gson gson = new Gson();
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         getRegistrationByDays(req,resp);
     }
 

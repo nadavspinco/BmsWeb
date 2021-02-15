@@ -1,7 +1,6 @@
-package Servlet.Manager.Assignments;
+package Servlet.Manager.ManageBoat;
 
 import Objects.Boat;
-import Objects.InvalidAssignmentException;
 import Objects.Registration;
 import Objects.SystemManagement;
 import Utils.Constants;
@@ -17,49 +16,55 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.stream.Collectors;
 
-@WebServlet(name = "AssignmentsServlet",urlPatterns = "/assignBoat")
-public class AssignmentsServlet extends HttpServlet {
+@WebServlet (name = "BoatSuggestionServlet", urlPatterns = "/boatSuggestion")
+public class BoatSuggestionServlet extends HttpServlet {
     private Gson gson = new Gson();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        assignBoat(req,resp);
-
+        System.out.println("BoatSuggestionServlet");
+        getBoatSuggestion(req,resp);
     }
 
-    private void assignBoat(HttpServletRequest req, HttpServletResponse resp) {
+    private void getBoatSuggestion(HttpServletRequest req, HttpServletResponse resp) {
         SystemManagement systemManagement = (SystemManagement) getServletContext().getAttribute(Constants.SystemManagment);
         Response response = new Response();
         try(BufferedReader reader = req.getReader()){
             String jsonString = reader.lines().collect(Collectors.joining());
+            System.out.println(jsonString);
             Request request = gson.fromJson(jsonString,Request.class);
-            systemManagement.assignBoat(request.registration,request.boat);
+            if(request != null)
+            {
+                System.out.println("not null");
+                Boat []  boats=systemManagement.getArrayOfValidBoats(request.registration);
+                System.out.println("after getArrayOfValidBoats");
+                response.boats = boats;
+                System.out.println("after getArrayOfValidBoats");
+            }
+            else {
+                System.out.println("gson gave us null");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try(PrintWriter out =resp.getWriter()){
+            String stringResponse = gson.toJson(response);
+            out.write(stringResponse);
+            out.flush();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        catch (InvalidAssignmentException e){
-            response.errorCode = 2;//TODO: constans
-            response.errorDetails = "InvalidAssignmentException";
-        }
-        finally {
-            try(PrintWriter out = resp.getWriter()) {
-                String responseString = gson.toJson(response);
-                out.print(responseString);
-                out.flush();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
+
     static class Request{
         Registration registration;
-        Boat boat;
     }
 
     static class Response{
         int errorCode;
         String errorDetails;
-        }
-
+        Boat [] boats;
+    }
 
 }
