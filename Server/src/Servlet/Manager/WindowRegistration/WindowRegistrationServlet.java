@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@WebServlet(name = "AddWindowRegistrationServlet", urlPatterns = "/addWindowRegistration")
+@WebServlet(name = "WindowRegistrationServlet", urlPatterns = "/addWindowRegistration")
 public class  WindowRegistrationServlet extends HttpServlet {
     private Gson gson = new Gson();
 
