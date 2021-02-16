@@ -154,11 +154,11 @@ public interface EngineInterface {
 
     Registration[] getRegistrationByMember(Member member);
 
-    String[] convertBoatsFromXml(String boatDetailsString, boolean toDelete);
+    String[] convertBoatsFromXml(String boatDetailsString);
 
-    String[] convertMembersFromXml(String memberDetailsString, boolean toDelete);
+    String[] convertMembersFromXml(String memberDetailsString);
 
-    String[] convertWindowsFromXml(String activitiesDetailsString, boolean toDelete);
+    String[] convertWindowsFromXml(String activitiesDetailsString);
 
     String exportMembersToString();
 

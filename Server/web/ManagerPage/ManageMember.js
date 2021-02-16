@@ -64,6 +64,11 @@ async function addNewMember(event) {
         event.preventDefault();
     }
 
+    if(memberAgeInputEl.value === ""){
+        alert("rower age required")
+        event.preventDefault();
+    }
+
     const MemberArgs = {
         email: email,
         password: password,
@@ -76,7 +81,7 @@ async function addNewMember(event) {
         isManager: isManagerCheckBoxEl.checked
     }
 
-    let keepTheChanges = confirm("are you sure about boat's details");
+    let keepTheChanges = confirm("are you sure about rower's details");
     if (keepTheChanges === true) {
         const response = await fetch('../addMember', {
             method: 'post',
