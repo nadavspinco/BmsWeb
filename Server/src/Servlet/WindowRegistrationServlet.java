@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "WindowRegistrationServlet",urlPatterns = "/windowRegistration")
+@WebServlet(name = "GetWindowRegistrationServlet",urlPatterns = "/windowRegistration")
 public class WindowRegistrationServlet extends HttpServlet {
     private Gson gson = new Gson();
 
