@@ -25,8 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@WebServlet(name = "WindowRegistrationServlet", urlPatterns = "/addWindowRegistration")
-public class WindowRegistrationServlet extends HttpServlet {
+@WebServlet(name = "AddWindowRegistrationServlet", urlPatterns = "/addWindowRegistration")
+public class  WindowRegistrationServlet extends HttpServlet {
     private Gson gson = new Gson();
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

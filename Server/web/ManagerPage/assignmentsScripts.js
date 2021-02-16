@@ -1,6 +1,118 @@
 
 const addAssignmentEl = document.querySelector('#assignBoat')
 addAssignmentEl.addEventListener('click',showAssignBoat)
+const  showAssignmentsByDateEl = document.querySelector('#ShowAssigmentByDate')
+showAssignmentsByDateEl.addEventListener('click',showAssignmentsByDateOption)
+function showAssignmentsByDateOption() {
+    pageContentManagerEl.innerHTML=' <label for="dateForAssignments">Select Wanted date:</label>'
+        +'<input type="date" id="dateForAssignments" > '
+        + '<br>'+'<button type="button" class="btn btn-primary" onclick="getAssignmentsByDate()">Select</button>';
+}
+
+function getDate(pickerSelector){
+    const assigmentDatePicker = document.querySelector(pickerSelector)
+    if(assigmentDatePicker!=null){
+        return assigmentDatePicker.value;
+    }
+    return null
+}
+
+ function getAssignmentsByDate() {
+    const date = getDate('#dateForAssignments');
+    if (date === ' ') {
+        alert("please chose a date")
+        return;
+    }
+   showAssignmentsByDate(date);
+
+}
+
+async function showAssignmentsByDate(dateInput){
+    pageContentManagerEl.innerHTML = ' '
+    let html = ''
+    const response = await fetch('../assignmentByDate?date=' + dateInput);
+    const responseObj = await response.json();
+    if(responseObj.errorCode ===0){
+        if(responseObj.assignments == null || responseObj.assignments.length ===0){
+            html = '<h3>no Assignments On This Date</h3>'
+        }
+        else {
+            assignmentsScriptsObj.assignmentsByDate = responseObj.assignments;
+            assignmentsScriptsObj.chosenDate = dateInput
+            html = getHtmlForAssignmentsForm();
+            responseObj.assignments.forEach(assignment=> html+=createHtmlForAssignmentRow(assignment))
+            html+='</tbody>'
+            html+='<button type="button" class="btn btn-danger" onclick="deleteChosenAssignment()">Delete</button>'
+        }
+    }
+    pageContentManagerEl.innerHTML = html;
+}
+
+async function deleteChosenAssignment() {
+    const index = getSelectedIndex();
+    if (index === -1) {
+        alert("no assignment chosen")
+        return;
+    }
+    const toDeleteAssignment = assignmentsScriptsObj.assignmentsByDate[index];
+    const toDeleteRegistarionAlso = confirm("to Delete Registation also?")
+    const areYouSure = confirm("Are you sure you want to Delete?")
+    if (areYouSure === true) {
+        const requestObj = {
+            assignment: toDeleteAssignment,
+            toDeleteRegistration: toDeleteRegistarionAlso
+        }
+        const response = await fetch('../assignments', {
+            method: 'DELETE',
+            headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
+            body: JSON.stringify(requestObj)
+        })
+        const responseObj =await response.json()
+        if(responseObj.errorCode === 0){
+            alert("assignment deleted")
+            showAssignmentsByDate(assignmentsScriptsObj.chosenDate)
+        }
+    }
+}
+
+function getHtmlForAssignmentsForm(){
+    return '<table class="table">'+
+        '<thead>'+
+        '<tr>'+
+        '<th scope="col">#</th>'+
+        '<th scope="col">StartTime </th>'+
+        '<th scope="col">End Time</th>'+
+        '<th scope="col">Boat Types</th>'+
+        '<th scope="col">Rowers</th>'+
+        '<th scope="col">Boat Id</th>'+
+        '<th scope="col">Boat name</th>'+
+        '<th scope="col">Boat Type</th>'+
+        '</tr>'+
+        '</thead>'+
+        '<tbody>'
+}
+
+function createHtmlForAssignmentRow(assignment){
+    return'<tr>' +
+        '<th scope="row">' +
+        '<div class="form-check">'+
+        '<input class="form-check-input" type="radio" name="flexRadioDefault" id = "flexRadioDefault">'+
+        '</div>'+
+        '</th>'+
+        '<td>' + localDateTimeToString(assignment.registration.activityDate) + '</td>'+
+        '<td>' + localDateTimeToString(assignment.registration.endTime) + '</td>'+
+        '<td>' + createStringForBoatTypes(assignment.registration) + '</td>'+
+        '<td>' + creatStringForMembersInRegistration(assignment.registration) + '</td>'+
+        '<td>' + assignment.boat.serialBoatNumber + '</td>'+
+        '<td>' + assignment.boat.boatName + '</td>'+
+        '<td>' + assignment.boat.boatType + '</td>'+
+        '</tr>';
+
+}
+
+
+// assignBoat code:
+
 const assignmentsScriptsObj ={}
 async function showAssignBoat() {
     pageContentManagerEl.innerHTML=''
@@ -107,7 +219,7 @@ async function assignBoat(registraion, boat) {
     const requestObj =
         {registration: registraion, boat: boat}
 
-    let response = await fetch("../assignBoat", {
+    let response = await fetch("../assignments", {
         method: 'POST',
         headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
         body: JSON.stringify(requestObj)
@@ -221,38 +333,3 @@ function LocalDateToString(localDate){
     return  localDate.day +'/' +localDate.month+'/' + localDate.year
 }
 
-// function getRegistrationDetailsHtml(reservation){
-//
-//     //TODO: code duplication , define common moudle
-//     //return the html for the Registration Details
-//     let html = '<h2> Registration Info: </h2>'
-//         +'<h3>' +makeWindowRegistrationString(reservation.windowRegistration) + '</h3>'
-//         + '<h3> RequestBoatTypes : </h3>'
-//     for(let boatType of reservation.boatTypes){
-//         html+= '<h4>' + boatType + '</h4>'
-//     }
-//     html+= '<h3>Members: </h3>'
-//     if(reservation.members.length!== 0) {
-//         for (let member of reservation.members) {
-//             html += '<h4>' + member.nameMember + '  ' + member.email + '</h4>'
-//         }
-//     }
-//     return html;
-// }
-//
-// function makeWindowRegistrationString(windowRegistration){
-//     //Return  string for the window Registration
-//     //TODO: code duplication , define common moudle
-//     let toReturnString = ""
-//     if(windowRegistration!=null && windowRegistration!= undefined){
-//         toReturnString+="from " +windowRegistration.startTime.hour + ":" +  windowRegistration.startTime.minute;
-//         toReturnString+= " to "+windowRegistration.endTime.hour + ":" +  windowRegistration.endTime.minute;
-//         if(windowRegistration.activityType != null){
-//             toReturnString+= "activity type: " + windowRegistration.activityType
-//         }
-//         if(windowRegistration.boatType != null){
-//             toReturnString+= "boat type: " + windowRegistration.boatType
-//         }
-//     }
-//     return toReturnString
-// }

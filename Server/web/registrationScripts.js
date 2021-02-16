@@ -112,7 +112,6 @@ function setWindowRegistrations(responseObj)
 }
 
 function setTimeFromPickers(){
-    //TODO: Fix bugs
     const startTimeEl = document.querySelector('#startTime')
     const endTimeEl = document.querySelector('#endTime')
     if(startTimeEl!= null && endTimeEl!= null){
