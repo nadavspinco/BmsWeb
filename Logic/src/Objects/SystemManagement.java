@@ -124,6 +124,10 @@ public class SystemManagement implements EngineInterface {
         optionalBoat.ifPresent(assignment::setBoat);
     }
 
+    public XmlManagement getXmlManagement() {
+        return xmlManagement;
+    }
+
     public void linkBoatsToMembersAfterImport() {
         //link between boats to member after importing from outsource data
         for(Member member: memberList){
@@ -1180,12 +1184,9 @@ public class SystemManagement implements EngineInterface {
     //---------------------------------------------------- XML
     // input from the xml the boats and add them to system.
     @Override
-    public String[] convertBoatsFromXml(String boatDetailsString, boolean toDelete){
+    public String[] convertBoatsFromXml(String boatDetailsString){
         List <String> wrongDetails = new ArrayList<>();
         try {
-            if(toDelete) // if the manager want to delete all the boat's date in the system
-                cleanAllBoatsBecauseImport();
-
             Boats boatsXml = xmlManagement.loadBoatsFromXmlString(boatDetailsString);
             for (jaxb.Boat boatL : boatsXml.getBoat()){
                 if (!xmlManagement.checkBoatLAlreadyExist(boatL)){
@@ -1204,12 +1205,9 @@ public class SystemManagement implements EngineInterface {
     }
 
     // input from the xml the members and add them to system.
-    public String[] convertMembersFromXml(String memberDetailsString, boolean toDelete) {
+    public String[] convertMembersFromXml(String memberDetailsString) {
         List <String> wrongDetails = new ArrayList<>();
         try {
-            if (toDelete)  // if the manager want to delete all the member's date in the system
-                cleanAllMembersBecauseImport();
-
             Members membersXml = xmlManagement.loadMembersFromXmlString(memberDetailsString);
             for (jaxb.Member memberL : membersXml.getMember()) {
                 if (!xmlManagement.checkMemberLEmailNameEmpty(memberL)) {             // check email&name arent empty
@@ -1235,12 +1233,9 @@ public class SystemManagement implements EngineInterface {
 
     // input from the xml the windows registration and add them to system.
     @Override
-    public String[] convertWindowsFromXml(String activitiesDetailsString, boolean toDelete) {
+    public String[] convertWindowsFromXml(String activitiesDetailsString) {
         List <String> wrongDetails = new ArrayList<>();
         try {
-            if (toDelete) // if the manager want to delete all the windows registration date in the system
-                cleanAllWindowRegistarionBecauseImport();
-
             Activities activitiesXml = xmlManagement.loadActivitiesFromXmlString(activitiesDetailsString);
             for (Timeframe window : activitiesXml.getTimeframe()) {
                 if (!xmlManagement.checkActivitiesTimeAlreadyExist(window)) {
