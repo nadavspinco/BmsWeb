@@ -1,5 +1,4 @@
 package Servlet.Manager.ManageBoat;
-
 import Objects.Boat;
 import Objects.SystemManagement;
 import Utils.ServletUtils;

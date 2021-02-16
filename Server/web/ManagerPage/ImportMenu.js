@@ -4,7 +4,7 @@ importButtonEl.addEventListener('click', showMainImportFrm);
 
 function showMainImportFrm(){
     clearPageContent();
-    let html = '<label>Choose What Type of data you want to import</label>'+
+    let html = '<label>Choose What Type of data do you want to import</label>'+
     '<div class="col-8">'+
     '<select class="form-select" id="DataTypeSelect">'+
     '<option selected disabled >Choose Data?</option>'+
