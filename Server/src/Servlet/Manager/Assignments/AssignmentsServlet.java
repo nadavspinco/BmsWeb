@@ -3,6 +3,7 @@ package Servlet.Manager.Assignments;
 import Objects.*;
 import Utils.Constants;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,10 +18,10 @@ import java.util.stream.Collectors;
 @WebServlet(name = "AssignmentsServlet",urlPatterns = "/assignments")
 public class AssignmentsServlet extends HttpServlet {
     private Gson gson = new Gson();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         assignBoat(req,resp);
-
     }
 
     @Override
@@ -87,10 +88,48 @@ public class AssignmentsServlet extends HttpServlet {
         Boat boat;
     }
 
+    static class unionAssignmentRequest{
+        Assignment assignment;
+        Registration registration;
+    }
+
     static class Response{
         int errorCode;
         String errorDetails;
         }
 
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("on doPut");
+        unionAssinmentAndRegistration(req,resp);
+    }
 
+    private void unionAssinmentAndRegistration(HttpServletRequest req, HttpServletResponse resp) {
+        SystemManagement systemManagement = (SystemManagement) getServletContext().getAttribute(Constants.SystemManagment);
+        System.out.println("in unionAssinmentAndRegistration");
+        Response response = new Response();
+        try(BufferedReader reader = req.getReader()){
+            String jsonString = reader.lines().collect(Collectors.joining());
+            System.out.println(jsonString);
+            unionAssignmentRequest request = gson.fromJson(jsonString, unionAssignmentRequest.class);
+            System.out.println("gson worked");
+            systemManagement.unionRequestToAssignment(request.assignment, request.registration);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        catch (JsonSyntaxException e)
+        {
+            System.out.println("failed gson on unionAssinmentAndRegistration");
+        }
+
+        finally {
+            try(PrintWriter out = resp.getWriter()) {
+                String responseString = gson.toJson(response);
+                out.print(responseString);
+                out.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
