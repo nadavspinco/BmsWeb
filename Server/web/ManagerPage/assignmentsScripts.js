@@ -42,12 +42,89 @@ async function showAssignmentsByDate(dateInput){
             html = getHtmlForAssignmentsForm();
             responseObj.assignments.forEach(assignment=> html+=createHtmlForAssignmentRow(assignment))
             html+='</tbody>'
-            html+='<button type="button" class="btn btn-danger" onclick="deleteChosenAssignment()">Delete</button>'
+            html += '</table>'
+            html+='<div>'
+            html+='<button type="button" class="btn btn-success" onClick="unionAssignment()">Union assignment</button>'
+            html+='<button type="button" class="btn btn-warning">Remove Rower</button>'
+            html+='<button type="button" class="btn btn-danger" onclick="deleteChosenAssignment()">Delete</button>'+'</div>'
+
         }
     }
     pageContentManagerEl.innerHTML = html;
 }
+async function unionAssignment(){
+    const index = getSelectedIndex();
+    if (index === -1) {
+        alert("no assignment chosen")
+        return;
+    }
+    const toUnionAssignment = assignmentsScriptsObj.assignmentsByDate[index];
+    pageContentManagerEl.innerHTML = ''
+    let html = ''
+    const request = {assignment: toUnionAssignment}
+    const response = await fetch("../unionSuggestion",{method: 'POST',
+        headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
+        body: JSON.stringify(request)})
 
+    const responseObj = await response.json()
+    if(responseObj.errorCode ===0){
+        assignmentsScriptsObj.totoUnionAssignment = toUnionAssignment;
+        if(responseObj.registrations ==null || responseObj.registrations.length ===0){
+            html = '<h3>no valid registrations to union with the chosen assignment</h3>'
+        }
+        else {
+            assignmentsScriptsObj.registrationsToUnion = responseObj.registrations;
+            html+= getHtmlForRegistraionTbale();
+            assignmentsScriptsObj.registrationsToUnion.forEach(registration=> html+=createHtmlForRegistrationRow(registration))
+            html+='<button type="button" class="btn btn-success" onclick="showUnionFinalDetails()">Select</button>'
+        }
+    }
+    pageContentManagerEl.innerHTML = html
+
+}
+
+function showUnionFinalDetails(){
+    const index = getSelectedIndex()
+    if(index ===-1){
+        alert("no registration selected");
+        return;
+    }
+    assignmentsScriptsObj.toUnionRegistration = assignmentsScriptsObj.registrationsToUnion[index];
+    let html = '<h2>Assignment info:</h2>'
+    html+=  getRegistrationDetailsHtml(assignmentsScriptsObj.totoUnionAssignment.registration);
+    html+=  getHtmlForBoatDetails(assignmentsScriptsObj.totoUnionAssignment.boat);
+    html += '<h2>Registaion info:</h2>'
+    html+= getRegistrationDetailsHtml(assignmentsScriptsObj.toUnionRegistration)
+    html += '<button type="button" class="btn btn-primary" onclick="submitUnionAssignment()">Submit</button>'
+    pageContentManagerEl.innerHTML = html
+}
+
+async function submitUnionAssignment(){
+    const request= { assignment: assignmentsScriptsObj.totoUnionAssignment,
+        registration: assignmentsScriptsObj.toUnionRegistration}
+    pageContentManagerEl.innerHTML = ''
+    const response = await fetch('../assignments',{method:'PUT',
+        headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
+        body: JSON.stringify(request)})
+    const responseObj = await response.json()
+    let html;
+    if(responseObj.errorCode ===0){
+        html = '<h2>Assignment info:</h2>'
+        html+=  getRegistrationDetailsHtml(assignmentsScriptsObj.totoUnionAssignment.registration);
+        html+=  getHtmlForBoatDetails(assignmentsScriptsObj.totoUnionAssignment.boat);
+        html += '<h2>Registaion info:</h2>'
+        html+= getRegistrationDetailsHtml(assignmentsScriptsObj.toUnionRegistration)
+        html+= '<h3>Union Confirmed</h3>'
+
+    }
+    else{
+        html = '<h3>error</h3>'
+    }
+    pageContentManagerEl.innerHTML = html;
+}
+
+
+//delete Assignment Code:
 async function deleteChosenAssignment() {
     const index = getSelectedIndex();
     if (index === -1) {
@@ -130,17 +207,7 @@ async function showAssignBoat() {
         }
         else {
             assignmentsScriptsObj.registrations = responseObj.registrations;
-            html +='<table class="table">'+
-                '<thead>'+
-                '<tr>'+
-                '<th scope="col">#</th>'+
-                '<th scope="col">StartTime </th>'+
-                '<th scope="col">End Time</th>'+
-                '<th scope="col">Boat Types</th>'+
-                '<th scope="col">Rowers</th>'+
-                '</tr>'+
-                '</thead>'+
-                '<tbody>'
+            html +=getHtmlForRegistraionTbale()
             assignmentsScriptsObj.registrations.forEach(registration=> html+=createHtmlForRegistrationRow(registration))
             html+= '</tbody>' + '</table>'
             html+= '<button type="button" class="btn btn-primary" onclick="selectRegistraion()">Next</button>'
@@ -148,11 +215,26 @@ async function showAssignBoat() {
     }
 
 
+
+
     else {
 
     }
     pageContentManagerEl.innerHTML = html
 
+}
+function getHtmlForRegistraionTbale(){
+    return '<table class="table">'+
+        '<thead>'+
+            '<tr>'+
+                '<th scope="col">#</th>'+
+                '<th scope="col">StartTime </th>'+
+                '<th scope="col">End Time</th>'+
+                '<th scope="col">Boat Types</th>'+
+                '<th scope="col">Rowers</th>'+
+                '</tr>'+
+            '</thead>'+
+        '<tbody>'
 }
 
 async function makeSelectBoatForRegisration() {

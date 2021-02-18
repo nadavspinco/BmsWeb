@@ -39,6 +39,7 @@ public class  WindowRegistrationServlet extends HttpServlet {
 
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         removeWindowRegistration(req, resp);
+
     }
 
     public void AddWindowRegistration(HttpServletRequest req, HttpServletResponse resp) {
