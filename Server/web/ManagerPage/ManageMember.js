@@ -5,6 +5,7 @@ const showMemberButtonEl = document.querySelector('#showAllRower')
 addMemberButtonEl.addEventListener('click', addMemberForm);
 showMemberButtonEl.addEventListener('click', showAllMember);
 let memberListObj ={}
+let globalIndexMember;
 
 async function addNewMember(event) {
     const emailInputEl = document.querySelector('#memberEmailInput')
@@ -26,7 +27,7 @@ async function addNewMember(event) {
 
     const memberNameInputEl = document.querySelector('#memberNameInput')
     const name = memberNameInputEl.value;
-    if (/[^A-Za-z0-9]/.test(name)) {
+    if (/[^A-Za-z]/.test(name)) {
         alert("name with letter and numbers only")
         memberNameInputEl.value = '';
         event.preventDefault();
@@ -193,13 +194,13 @@ async function showAllMember(){
         '<button type="submit" class="btn btn-primary" id="removeMemberButton" onclick="removeMember()">Remove Member</button>'+
         '</td> <td></td><td></td>'+
         '<td>'+
-        '<button type="submit" class="btn btn-primary" id="editMemberButton" onclick="editMember()">Edit Member</button>'+
+        '<button type="submit" class="btn btn-primary" id="editMemberButton" onclick="EditMemberForm()">Edit Member</button>'+
         '</td>';
 
     pageContentManagerEl.innerHTML = htmlToInsert;
 }
 
-function createElementMember(member, index){
+function createElementMember(member){
     let htmlMember = '<tr>'+
         '<th scope="row">' +
             '<div class="form-check">'+
@@ -248,4 +249,148 @@ async function removeMember(event){
     let result = await response.text();
     alert("The member has been removed successfully")
     window.location.replace(result)
+}
+
+function EditMemberForm(event){
+    const memberCheckedEl = document.querySelector('#flexRadioDefault:checked')
+    if(memberCheckedEl === null){
+        alert("Choose member first")
+        event.preventDefault();
+    }
+    globalIndexMember = wantedMember();
+
+
+    clearPageContent();
+    let htmlToInsert = '<h2>Edit Rower Page</h2>'+
+        '<label style="font-weight: bold"> Fill the wanted categories you want to change</label><br/><br/>'+
+    '<form class="row g-3">'+
+    '<div class="col-md-3">'+
+        '<input class="form-check-input" type="checkbox" id="editNameCheckBox" style="margin-right: 10px">'+
+        '<label for="editMemberName" class="form-label">Edit new Name</label>'+
+        '<input type="text" class="form-control" id="editMemberName">'+
+    '</div>'+
+    '<div class="col-md-3">'+
+        '<input class="form-check-input" type="checkbox" id="editPhoneCheckBox" style="margin-right: 10px">'+
+        '<label for="editMemberPhoneInput" class="form-label">Edit new Phone Number</label>'+
+        '<input type="text" class="form-control" id="editMemberPhoneInput">'+
+    '</div>'+
+    '<div>'+
+        '<input class="form-check-input" type="checkbox" id="editExtendDateCheckBox" style="margin-right: 10px">'+
+        '<label for="editExtendMemberShip">Extend end date membership by years:</label>'+
+        '<input type="number" id="editExtendMemberShip" name="Age" min="1" max="5">'+
+    '</div>'+
+    '<div>'+
+        '<input class="form-check-input" type="checkbox" id="editAgeCheckBox" style="margin-right: 10px">'+
+        '<label for="editMemberAgeInput">Edit New Age (13-99):</label>'+
+        '<input type="number" id="editMemberAgeInput" name="Age" min="13" max="100">'+
+    '</div>'+
+'</div>'+
+    '<div class="col-8">'+
+        '<div class="col-2">'+
+            '<label class="visually-hidden" for="editRowerLevel">Preference</label>'+
+            '<select class="form-select" id="editRowerLevel">'+
+                '<option selected disabled value="0"> Edit New Rower Level</option>'+
+                '<option value="0">None</option>'+
+                '<option value="1">Beginner</option>'+
+                '<option value="2">Intermediate</option>'+
+                '<option value="3">Advanced</option>'+
+            '</select>'+
+        '</div>'+
+    '</div>'+
+    '<div class="col-12">'+
+        '<button type="submit" class="btn btn-primary" onclick="addPrivateBoat()">Add Private Boat</button>'+
+        '<button type="submit" class="btn btn-primary" onclick="cancelPrivateBoat()" style="margin-left: 20px">Cancel Private Boat</button><br/><br/>'+
+        '<button type="submit" class="btn btn-primary" onclick="editMember()" style="margin-left: 700px">Confirm</button>'+
+    '</div>'+
+'</form>'
+    pageContentManagerEl.innerHTML = htmlToInsert;
+}
+
+async function editMember(event){
+    const editNameCheckBoxEl = document.querySelector('#editNameCheckBox')
+    const editNameEl = document.querySelector('#editMemberName')
+    let newName = editNameEl.value;
+    if (editNameCheckBoxEl.checked){
+        if (/[^A-Za-z]/.test(newName)) {
+            alert("name with letters only")
+            editNameEl.value = '';
+            event.preventDefault();
+        }
+    }
+    else
+        newName = null;
+
+    const editPhoneCheckBoxEl = document.querySelector('#editPhoneCheckBox')
+    const editPhoneEl = document.querySelector('#editMemberName')
+    let newPhone = editPhoneEl.value;
+    if (editPhoneCheckBoxEl.checked){
+        if (!(/^[0-9]+$/.test(newPhone))) {
+            editPhoneEl.value = '';
+            alert("phone with numbers only")
+            event.preventDefault();
+        }
+    }
+    else
+        newPhone = null;
+
+    const editLevelEl = document.querySelector('#editRowerLevel')
+    let newLevel = null;
+    if (editLevelEl.value !== "0")
+        newLevel = editLevelEl.value
+
+    const editAgeCheckBoxEl = document.querySelector('#editAgeCheckBox')
+    const editAgeEl = document.querySelector('#editMemberAgeInput')
+    let newAge = 0;
+    if (editAgeCheckBoxEl.checked)
+        newAge = editAgeEl.value
+
+    let indexMember = globalIndexMember;
+
+    if(!(editNameCheckBoxEl.checked || editLevelEl.value !== "0" || editNameCheckBoxEl.checked || editPhoneCheckBoxEl.checked)){
+        alert("You have to fill at least one thing")
+        event.preventDefault();
+    }
+    const EditMemberArgs = {
+        index: indexMember,
+        name: newName,
+        phone: newPhone,
+        age: newAge,
+        level: newLevel,
+    }
+
+    let keepTheChanges = confirm("are you sure about rower's new details");
+    if (keepTheChanges === true) {
+        const response = await fetch('../editMember', {
+            method: 'put',
+            headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
+            body: JSON.stringify(EditMemberArgs)
+        });
+
+        let result = await response.text();
+        alert("The Rower has been edited successfully")
+        window.location.replace(result)
+    }
+}
+
+async function cancelPrivateBoat(){
+    let index = globalIndexMember;
+
+    let keepTheChanges = confirm("are you sure to cancel rower's private boat?");
+    if (keepTheChanges === true) {
+        const response = await fetch('../editPrivateBoatOfMember', {
+            method: 'put',
+            headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
+            body: JSON.stringify(memberListObj[index])
+        });
+
+        let result = await response.text();
+        if (result === 'error') {
+            alert("This rower doesn't have private boat")
+            result = ''
+            window.location.href = '/path';
+        }
+        alert("The private boat removed successfully")
+        window.location.replace(result)
+    }
+
 }

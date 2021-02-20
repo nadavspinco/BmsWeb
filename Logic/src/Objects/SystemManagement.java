@@ -221,6 +221,8 @@ public class SystemManagement implements EngineInterface {
         addBoat("sagi",BoatTypeEnum.SingleBoat,true,true,"a33");
         addBoat("Hadar",BoatTypeEnum.OctetBoatCoxed,false,false,"a44");
         addWindowRegistration(new WindowRegistration(ActivityTypeEnum.Sailing, BoatTypeEnum.DoubleBoat, LocalTime.now().minusHours(1),LocalTime.now()));
+        Member member = getMemberByID("a2");
+        addPrivateBoat(member,"a11");
     }
 
     public boolean isRegistrationAllowedForMember(Registration registration, Member member) {
