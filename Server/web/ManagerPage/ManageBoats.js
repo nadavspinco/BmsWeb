@@ -154,7 +154,7 @@ async function showAllBoat(){
 
 function wantedBoat() {
     let index = 0;
-    const selectedEl = document.querySelectorAll('#flexRadioDefault');
+    const selectedEl = document.querySelectorAll('#flexRadioDefaultBoat');
     for (let el of selectedEl) {
         if (el.checked === true) {
             return index;
@@ -168,7 +168,7 @@ function createElementBoat(boat){
     let htmlBoat = '<tr>'+
                      '<th scope="row">' +
                         '<div class="form-check">'+
-                            '<input class="form-check-input" type="radio" name="flexRadioDefault" id = "flexRadioDefault">'+
+                            '<input class="form-check-input" type="radio" name="flexRadioDefault" id = "flexRadioDefaultBoat">'+
                         '</div>'+
                      '</th>'+
                      '<td>' + boat.boatName + '</td>'+
@@ -183,7 +183,7 @@ function createElementBoat(boat){
 }
 
 async function removeBoat(event){
-    const boatCheckedEl = document.querySelector('#flexRadioDefault:checked')
+    const boatCheckedEl = document.querySelector('#flexRadioDefaultBoat:checked')
     if(boatCheckedEl === null){
         alert("Choose boat first")
         event.preventDefault();
@@ -202,5 +202,5 @@ async function removeBoat(event){
 }
 
 function editBoat(event){
-    const boatCheckedEl = document.querySelector('#flexRadioDefault:checked')
+    const boatCheckedEl = document.querySelector('#flexRadioDefaultBoat:checked')
 }

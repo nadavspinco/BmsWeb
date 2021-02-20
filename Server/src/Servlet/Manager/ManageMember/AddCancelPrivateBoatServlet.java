@@ -1,5 +1,5 @@
 package Servlet.Manager.ManageMember;
-import Enum.LevelEnum;
+import Objects.Boat;
 import Objects.Member;
 import Objects.SystemManagement;
 import Utils.Constants;
@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @WebServlet(name = "AddCancelPrivateBoatServlet", urlPatterns = "/editPrivateBoatOfMember")
@@ -25,7 +27,68 @@ public class AddCancelPrivateBoatServlet extends HttpServlet {
         cancelPrivateBoat(req, resp);
     }
 
-    public void cancelPrivateBoat(HttpServletRequest req, HttpServletResponse resp) {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        getUnPrivateBoatList(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        addPrivateBoat(req, resp);
+    }
+
+    private void addPrivateBoat(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try (PrintWriter out = resp.getWriter()) {
+            SystemManagement systemManagement = ServletUtils.getSystemManagment(getServletContext());
+            List<Boat> boatList = systemManagement.getBoatList();
+            List<Boat> newBoatList = new ArrayList<>();
+            for (Boat boat : boatList){
+                if (!boat.isPrivate())
+                    newBoatList.add(boat);
+            }
+
+            BufferedReader reader = req.getReader();
+            String gsonString = reader.lines().collect(Collectors.joining());
+            AddPrivatBoatArgs addPrivatBoatArgs = gson.fromJson(gsonString, AddPrivatBoatArgs.class);
+            Member member = systemManagement.getMemberList().get(addPrivatBoatArgs.indexMember);
+            Boat boat = newBoatList.get(addPrivatBoatArgs.indexBoat);
+
+            systemManagement.addPrivateBoat(member, boat.getSerialBoatNumber());
+            resp.setStatus(HttpServletResponse.SC_OK);
+            String redirectUrlPage = Constants.ManagerPage;
+            out.print(redirectUrlPage);
+        }
+        catch (IOException e) {
+            e.getStackTrace();
+        }
+    }
+
+    private void getUnPrivateBoatList(HttpServletRequest req, HttpServletResponse resp){
+        try (PrintWriter out = resp.getWriter()) {
+            SystemManagement systemManagement = ServletUtils.getSystemManagment(getServletContext());
+            List<Boat> boatList = systemManagement.getBoatList();
+            List<Boat> newBoatList = new ArrayList<>();
+            for (Boat boat : boatList){
+                if (!boat.isPrivate())
+                    newBoatList.add(boat);
+            }
+
+            if (newBoatList.size() == 0){
+                out.print("There are not un private boats");
+                return;
+            }
+
+            String BoatListJson = gson.toJson(newBoatList);
+            resp.setStatus(HttpServletResponse.SC_OK);
+            resp.setContentType("application/json");
+            out.print(BoatListJson);
+        }
+        catch (IOException e) {
+            e.getStackTrace();
+        }
+    }
+
+    private void cancelPrivateBoat(HttpServletRequest req, HttpServletResponse resp) {
         try (PrintWriter out = resp.getWriter()) {
             SystemManagement systemManagement = ServletUtils.getSystemManagment(getServletContext());
 
@@ -48,11 +111,8 @@ public class AddCancelPrivateBoatServlet extends HttpServlet {
         }
     }
 
-    static class EditMemberArgs{
-        private int index;
-        private String name;
-        private String phone;
-        private int age;
-        private String level;
+    static class AddPrivatBoatArgs{
+        private int indexMember;
+        private int indexBoat;
     }
 }

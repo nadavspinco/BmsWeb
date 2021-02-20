@@ -5,7 +5,9 @@ const showMemberButtonEl = document.querySelector('#showAllRower')
 addMemberButtonEl.addEventListener('click', addMemberForm);
 showMemberButtonEl.addEventListener('click', showAllMember);
 let memberListObj ={}
+let unPrivateBoatListObj ={}
 let globalIndexMember;
+let globalIndexOfPrivateBoat;
 
 async function addNewMember(event) {
     const emailInputEl = document.querySelector('#memberEmailInput')
@@ -393,4 +395,58 @@ async function cancelPrivateBoat(){
         window.location.replace(result)
     }
 
+}
+
+async function addPrivateBoat(){
+    clearPageContent();
+    const response = await fetch('../editPrivateBoatOfMember', {method: 'get'});
+    const boatList = await response.json();
+    boatListObj = boatList;
+    let htmlToInsert = '<label style="font-weight: bold"> Select the wanted boat! </label><br/><br/>'+
+        '<table class="table">'+
+        '<thead>'+
+            '<tr>'+
+                '<th scope="col">#</th>'+
+                '<th scope="col">Boat Name</th>'+
+                '<th scope="col">Serial</th>'+
+                '<th scope="col">Boat Type</th>'+
+                '<th scope="col">is Wide</th>'+
+                '<th scope="col">is Coastal</th>'+
+                '<th scope="col">is Private</th>'+
+                '<th scope="col">is Available</th>'+
+            '</tr>'+
+        '</thead>'+
+        '<tbody>'
+    boatList.forEach(boat => {htmlToInsert += createElementBoat(boat)});
+    htmlToInsert += '</tbody></table>'+
+        '<td>'+
+        '<button type="submit" class="btn btn-primary" id="addPrivateBoatButton" onclick="addPrivateBoatFunc()">Add private boat</button>'+
+        '</td>';
+
+    pageContentManagerEl.innerHTML = htmlToInsert;
+}
+
+async function addPrivateBoatFunc(event){
+    const boatCheckedEl = document.querySelector('#flexRadioDefaultBoat:checked')
+    if(boatCheckedEl === null){
+        alert("Choose boat first")
+        event.preventDefault();
+    }
+
+    let indexBoat = wantedBoat();
+
+    const AddPrivatBoatArgs = {
+        indexMember: globalIndexMember,
+        indexBoat: indexBoat,
+    }
+
+    const response = await fetch('../editPrivateBoatOfMember', {
+        method: 'POST',
+        headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
+        body: JSON.stringify(AddPrivatBoatArgs)
+    });
+
+    let result = await response.text();
+    alert("The private boat has been added successfully")
+    window.location.replace(result)
 }
