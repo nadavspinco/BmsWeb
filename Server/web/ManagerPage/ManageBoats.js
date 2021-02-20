@@ -1,10 +1,9 @@
 const addBoatButtonEl = document.querySelector('#addBoat')
-const removeBoatButtonEl = document.querySelector('#removeBoatButton')
-const editBoatButtonEl = document.querySelector('#removeBoatButton')
 const showBoatButtonEl = document.querySelector('#showAllBoat')
 
 const pageContentManagerEl = document.querySelector('#pageContentManager')
 let boatListObj ={}
+let globalIndexBoat;
 
 addBoatButtonEl.addEventListener('click', addBoatForm);
 showBoatButtonEl.addEventListener('click', showAllBoat)
@@ -135,18 +134,17 @@ async function showAllBoat(){
                 '<th scope="col">is Wide</th>'+
                 '<th scope="col">is Coastal</th>'+
                 '<th scope="col">is Private</th>'+
-                '<th scope="col">is Available</th>'+
+                '<th scope="col">Able To Sail</th>'+
             '</tr>'+
         '</thead>'+
         '<tbody>'
-    let index = 0;
     boatList.forEach(boat => {htmlToInsert += createElementBoat(boat)});
     htmlToInsert += '</tbody></table>'+
     '<td>'+
         '<button type="submit" class="btn btn-primary" id="removeBoatButton" onclick="removeBoat()">Remove Boat</button>'+
     '</td> <td></td><td></td>'+
     '<td>'+
-        '<button type="submit" class="btn btn-primary" id="editBoatButton" onclick="editBoat()">Edit Boat</button>'+
+        '<button type="submit" class="btn btn-primary" id="editBoatButton" onclick="editBoatForm()">Edit Boat</button>'+
     '</td>';
 
     pageContentManagerEl.innerHTML = htmlToInsert;
@@ -201,6 +199,100 @@ async function removeBoat(event){
     window.location.replace(result)
 }
 
-function editBoat(event){
+function editBoatForm(event){
     const boatCheckedEl = document.querySelector('#flexRadioDefaultBoat:checked')
+    if(boatCheckedEl === null){
+        alert("Choose Boat first")
+        event.preventDefault();
+    }
+    globalIndexBoat = wantedBoat();
+
+    clearPageContent();
+    let htmlToInsert = '<h2>Edit Boat Page</h2>'+
+        '<label style="font-weight: bold"> Fill the wanted categories you want to change</label><br/><br/>'+
+        '<form class="row g-3">'+
+            '<div class="col-md-3">'+
+                '<input class="form-check-input" type="checkbox" id="editBoatNameCheckBox" style="margin-right: 10px">'+
+                    '<label for="editBoatName" class="form-label">Edit new Boat Name</label>'+
+                    '<input type="text" class="form-control" id="editBoatName">'+
+            '</div>'+
+            '<div>'+
+                '<input class="form-check-input" type="checkbox" id="editWidthCheckBox" style="margin-right: 10px">'+
+                    '<label for="editWidthCheckBox" class="form-label">Change the width of the boat</label>'+
+            '</div>'+
+            '<div>'+
+                '<input class="form-check-input" type="checkbox" id="editCoastalCheckBox" style="margin-right: 10px">'+
+                '<label for="editCoastalCheckBox" class="form-label">Change the Coastal of the boat</label>'+
+            '</div>'+
+            '<div>'+
+                '<input class="form-check-input" type="checkbox" id="disableBoatCheckBox" style="margin-right: 10px">'+
+                '<label for="disableBoatCheckBox" class="form-label">Disable Boat</label>'+
+            '</div>'+
+            '<div class="col-12">'+
+                '<button type="submit" class="btn btn-primary" onclick="fixBoatFunc()">Fix Boat</button><br/><br/>'+
+                '<button type="submit" class="btn btn-primary" onclick="editBoat()" style="margin-left: 700px">Confirm</button>'+
+            '</div>'+
+        '</form>'
+    pageContentManagerEl.innerHTML = htmlToInsert;
+}
+
+async function editBoat(event){
+    const editBoatCheckBoxEl = document.querySelector('#editBoatNameCheckBox')
+    const editBoatNameEl = document.querySelector('#editBoatName')
+    let newName = editBoatNameEl.value;
+    if (editBoatCheckBoxEl.checked){
+        if (/[^A-Za-z]/.test(newName)) {
+            alert("name with letters only")
+            editBoatNameEl.value = '';
+            event.preventDefault();
+        }
+    }
+    else
+        newName = null;
+
+    const editWidthCheckBoxEl = document.querySelector('#editWidthCheckBox')
+    const editCoastalCheckBoxEl = document.querySelector('#editCoastalCheckBox')
+    const disableBoatCheckBoxEl = document.querySelector('#disableBoatCheckBox')
+
+    const EditBoatArgs = {
+        index: globalIndexBoat,
+        name: newName,
+        isWidth: editWidthCheckBoxEl.checked,
+        isCoastal: editCoastalCheckBoxEl.checked,
+        disableBoat: disableBoatCheckBoxEl.checked
+    }
+
+    let keepTheChanges = confirm("are you sure about boat's new details");
+    if (keepTheChanges === true) {
+        const response = await fetch('../editBoat', {
+            method: 'put',
+            headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
+            body: JSON.stringify(EditBoatArgs)
+        });
+
+        let result = await response.text();
+        if (result === 'error') {
+            alert("This boat is already disable")
+            alert("The boat has been edited successfully")
+            window.location.replace('managerMenu.html');
+        }
+        alert("The boat has been edited successfully")
+        window.location.replace(result)
+    }
+}
+
+async function fixBoatFunc(){
+    const response = await fetch('../editBoat', {
+        method: 'POST',
+        headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
+        body: JSON.stringify(globalIndexBoat)
+    });
+
+    let result = await response.text();
+    if (result === 'error') {
+        alert("This boat is already fixed")
+        window.location.replace('managerMenu.html');
+    }
+    alert("The boat has been fixed successfully")
+    window.location.replace(result)
 }

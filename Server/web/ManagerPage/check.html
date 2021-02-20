@@ -13,42 +13,22 @@
 <label style="font-weight: bold"> Fill the wanted categories you want to change</label><br/><br/>
 <form class="row g-3">
     <div class="col-md-3">
-        <input class="form-check-input" type="checkbox" id="editNameCheckBox" style="margin-right: 10px">
-        <label for="editMemberName" class="form-label">Edit new Name</label>
-        <input type="text" class="form-control" id="editMemberName">
+        <input class="form-check-input" type="checkbox" id="editBoatNameCheckBox" style="margin-right: 10px">
+        <label for="editBoatName" class="form-label">Edit new Boat Name</label>
+        <input type="text" class="form-control" id="editBoatName">
     </div>
-        <div class="col-md-3">
-            <input class="form-check-input" type="checkbox" id="editPhoneCheckBox" style="margin-right: 10px">
-            <label for="editMemberPhoneInput" class="form-label">Edit new Phone Number</label>
-            <input type="text" class="form-control" id="editMemberPhoneInput">
-        </div>
-        <div>
-            <input class="form-check-input" type="checkbox" id="editExtendDateCheckBox" style="margin-right: 10px">
-            <label for="editExtendMemberShip">Extend end date membership by years:</label>
-            <input type="number" id="editExtendMemberShip" name="Age" min="1" max="5">
-        </div>
-        <div>
-            <input class="form-check-input" type="checkbox" id="editAgeCheckBox" style="margin-right: 10px">
-            <label for="editMemberAgeInput">Edit New Age (13-99):</label>
-            <input type="number" id="editMemberAgeInput" name="Age" min="13" max="100">
-            </div>
-        </div>
-    <div class="col-8">
-        <div class="col-2">
-            <label class="visually-hidden" for="editRowerLevel">Preference</label>
-            <select class="form-select" id="editRowerLevel">
-                <option selected disabled>Edit New Rower Level</option>
-                <option value="1">Beginner</option>
-                <option value="2">Intermediate</option>
-                <option value="3">Advanced</option>
-                </select>
-            </div>
-        </div>
-
+    <div>
+        <input class="form-check-input" type="checkbox" id="editWidthCheckBox" style="margin-right: 10px">
+        <label for="editWidthCheckBox" class="form-label">Change the width of the boat</label>
+    </div>
+    <div>
+        <input class="form-check-input" type="checkbox" id="editCoastalCheckBox" style="margin-right: 10px">
+        <label for="editCoastalCheckBox" class="form-label">Change the Coastal of the boat</label>
+    </div>
     <div class="col-12">
-        <button type="submit" class="btn btn-primary" onclick="addPrivateBoat()">Add Private Boat</button>
-        <button type="submit" class="btn btn-primary" style="margin-left: 20px">Cancel Private Boat</button><br/><br/>
-        <button type="submit" class="btn btn-primary" onclick="EditMember()" style="margin-left: 700px">Confirm</button>
+        <button type="submit" class="btn btn-primary" onclick="addPrivateBoat()">Disable Boat</button>
+        <button type="submit" class="btn btn-primary" style="margin-left: 20px">Fix Boat</button><br/><br/>
+        <button type="submit" class="btn btn-primary" onclick="EditBoat()" style="margin-left: 700px">Confirm</button>
     </div>
     </form>
 </body>
