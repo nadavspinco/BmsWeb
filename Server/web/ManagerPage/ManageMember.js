@@ -5,9 +5,7 @@ const showMemberButtonEl = document.querySelector('#showAllRower')
 addMemberButtonEl.addEventListener('click', addMemberForm);
 showMemberButtonEl.addEventListener('click', showAllMember);
 let memberListObj ={}
-let unPrivateBoatListObj ={}
 let globalIndexMember;
-let globalIndexOfPrivateBoat;
 
 async function addNewMember(event) {
     const emailInputEl = document.querySelector('#memberEmailInput')
@@ -389,9 +387,9 @@ async function cancelPrivateBoat(){
         if (result === 'error') {
             alert("This rower doesn't have private boat")
             result = ''
-            window.location.href = '/path';
+            window.location.replace('managerMenu.html');
         }
-        alert("The private boat removed successfully")
+        alert("Cancel private boat has been done successfully")
         window.location.replace(result)
     }
 
