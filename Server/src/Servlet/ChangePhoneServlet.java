@@ -34,21 +34,21 @@ public class ChangePhoneServlet extends HttpServlet {
             SystemManagement systemManagement = ServletUtils.getSystemManagment(getServletContext());
             HttpSession session = req.getSession();
             if (session == null) {
-                out.print(Constants.Error);// TODO MAKE TO REDIRECT TO HOME PAGE
+                out.print(Constants.Error);
                 return;
             }
 
             String memberID = SessionUtils.getUserId(req);
             if (memberID == null || memberID.isEmpty()) {
                 resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                out.print(Constants.Error);// TODO MAKE TO REDIRECT TO HOME PAGE
+                out.print(Constants.Error);
                 return;
             }
 
             Member member = systemManagement.getMemberByID(memberID);
             if (member == null){
                 resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                out.print(Constants.Error); // TODO MAKE TO REDIRECT TO HOME PAGE
+                out.print(Constants.Error);
                 return;
             }
 
@@ -57,7 +57,6 @@ public class ChangePhoneServlet extends HttpServlet {
             String gsonString = reader.lines().collect(Collectors.joining());
             String phoneNum = gson.fromJson(gsonString, String.class);
             systemManagement.changePhoneNumber(member, phoneNum);
-            System.out.println(member.getPhoneNumber()); // TODO DELETE
             String redirectUrlPage = Constants.Member_Page;
             out.print(redirectUrlPage);
         }
