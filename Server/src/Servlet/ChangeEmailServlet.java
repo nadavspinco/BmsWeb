@@ -27,6 +27,7 @@ public class ChangeEmailServlet extends HttpServlet {
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         changeEmailServlet(req, resp);
     }
+
     public void changeEmailServlet(HttpServletRequest req, HttpServletResponse resp) {
         try (PrintWriter out = resp.getWriter()) {
             SystemManagement systemManagement = ServletUtils.getSystemManagment(getServletContext());
@@ -39,14 +40,14 @@ public class ChangeEmailServlet extends HttpServlet {
             String memberID = SessionUtils.getUserId(req);
             if (memberID == null || memberID.isEmpty()) {
                 resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                out.print(Constants.Error);// TODO MAKE TO REDIRECT TO HOME PAGE
+                out.print(Constants.Error);
                 return;
             }
 
             Member member = systemManagement.getMemberByID(memberID);
             if (member == null){
                 resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                out.print(Constants.Error); // TODO MAKE TO REDIRECT TO HOME PAGE
+                out.print(Constants.Error);
                 return;
             }
             resp.setStatus(HttpServletResponse.SC_OK);
@@ -61,7 +62,6 @@ public class ChangeEmailServlet extends HttpServlet {
             }
 
             systemManagement.changeEmail(member, newEmail);
-            System.out.println(member.getEmail()); // TODO DELETE
             String redirectUrlPage = Constants.Member_Page;
             out.print(redirectUrlPage);
         }
