@@ -170,6 +170,7 @@ async function showAllMember(){
     const memberList = await response.json();
     memberListObj = memberList;
     clearPageContent();
+    //TODO: move to a html to a a function:
     let htmlToInsert = '<table class="table">'+
         '<thead>'+
         '<tr>'+

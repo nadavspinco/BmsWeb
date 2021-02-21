@@ -45,13 +45,98 @@ async function showAssignmentsByDate(dateInput){
             html += '</table>'
             html+='<div>'
             html+='<button type="button" class="btn btn-success" onClick="unionAssignment()">Union assignment</button>'
-            html+='<button type="button" class="btn btn-warning">Remove Rower</button>'
+            html+='<button type="button" class="btn btn-warning" onClick="removeRowerFromAssignment()">Remove Rower</button>'
             html+='<button type="button" class="btn btn-danger" onclick="deleteChosenAssignment()">Delete</button>'+'</div>'
 
         }
     }
     pageContentManagerEl.innerHTML = html;
 }
+function removeRowerFromAssignment(){
+    const selectdIndex = getSelectedIndex();
+    if (selectdIndex === -1) {
+        alert("no rower chosen")
+        return;
+    }
+    const toUnionAssignment = assignmentsScriptsObj.assignmentsByDate[selectdIndex];
+    if(toUnionAssignment.registration.rowersListInBoat.length < 2){
+        alert("no option to delete assignement with one Rowar")
+        return;
+    }
+    assignmentsScriptsObj.choseAssignmentToChange= toUnionAssignment;
+    pageContentManagerEl.innerHTML = '';
+    let html ='<table class="table">'+
+    '<thead>'+
+    '<tr>'+
+    '<th scope="col">#</th>'+
+    '<th scope="col">Rower Name</th>'+
+    '<th scope="col">Email</th>'+
+    '<th scope="col">ID</th>'+
+    '<th scope="col">is Manager</th>'+
+    '<th scope="col">Has Private Boat</th>'+
+    '<th scope="col">Level</th>'+
+    '<th scope="col">Phone Number</th>'+
+    '<th scope="col">Age</th>'+
+    '<th scope="col">Comment</th>'+
+    '</tr>'+
+    '</thead>'+
+    '<tbody>'
+    let index = 0;
+    toUnionAssignment.registration.rowersListInBoat.forEach(member=>{html += createElementMember(member, index++)})
+    html+= '</tbody></table>'
+    html+= '<button type="button" class="btn btn-danger" onClick="showFinalDetailsRemoveMember()">Remove</button>'
+    pageContentManagerEl.innerHTML = html;
+}
+function showFinalDetailsRemoveMember(){
+    const selectdIndex = getSelectedIndex();
+    if (selectdIndex === -1) {
+        alert("no assignment chosen")
+        return;
+    }
+    assignmentsScriptsObj.memberToRemove = assignmentsScriptsObj.choseAssignmentToChange.registration.rowersListInBoat[selectdIndex];
+    pageContentManagerEl.innerHTML = ''
+    let html = getRegistrationDetailsHtml(assignmentsScriptsObj.choseAssignmentToChange.registration)
+    html+= '<h2>Are you sure you want to remove the chosen Rower? </h2>'
+     html+=getHtmlForMemberDetails(assignmentsScriptsObj.memberToRemove)
+    html+= '<div class="form-check">'
+       + '<input class="form-check-input" type="checkbox" value="" id="toSplitFlexCheck" checked>'
+       +     '<label class="form-check-label" for="toSplitFlexCheck">'
+       +        'Split Registration'
+       +     '</label>'
+    +'</div>'
+    html+= '<button type="button" class="btn btn-danger" onclick="removeTheChosenMember()">Confirm</button>'
+    pageContentManagerEl.innerHTML = html;
+}
+
+async function removeTheChosenMember(){
+    const toSplitFlexCheckEl = document.querySelector('#toSplitFlexCheck');
+    pageContentManagerEl.innerHTML = ''
+    let toSplitRegistration = false;
+    if(toSplitFlexCheckEl.checked === true){
+        toSplitRegistration = true;
+    }
+    const request = {assignment: assignmentsScriptsObj.choseAssignmentToChange,
+       member: assignmentsScriptsObj.memberToRemove,
+        toSplitRegistration: toSplitRegistration
+    }
+    const response =  await fetch("../removeMemberFromAssignment",{method: 'DELETE',
+        headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
+        body: JSON.stringify(request)})
+    const responseObj = await response.json();
+    if(responseObj.errorCode ===0){
+        alert("remove member succeeded");
+        showAssignmentsByDate(assignmentsScriptsObj.chosenDate);
+    }
+    else {
+        //TODO: error message
+    }
+}
+
+function getHtmlForMemberDetails(member){
+    return '<h3>'+member.nameMember+'</h3><h3>'+member.email+'</h3>'
+}
+
+
 async function unionAssignment(){
     const index = getSelectedIndex();
     if (index === -1) {
