@@ -854,6 +854,7 @@ public class SystemManagement implements EngineInterface {
     }
 
     private Assignment getAssignmentRef(Assignment assignment){
+        System.out.println(assignment.getRegistration().getActivityDate().toLocalDate());
         for(Assignment assignmentRef : assignmentsMap.get(assignment.getRegistration().getActivityDate().toLocalDate())){
             if(assignmentRef.equals(assignment)){
                 return assignmentRef;
