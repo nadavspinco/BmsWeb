@@ -4,6 +4,7 @@ const showRegistrationWindowEl = document.querySelector('#showAllRegistrationWin
 addRegistrationWindowEl.addEventListener('click',addRegistrationWindowForm)
 showRegistrationWindowEl.addEventListener('click',showAllWindowsRegistration)
 let windowsListObj = {}
+let globalIndexWindow;
 
 function addRegistrationWindowForm() {
     clearPageContent();
@@ -111,7 +112,7 @@ async function showAllWindowsRegistration(){
         '<button type="submit" class="btn btn-primary" id="removeWindowButton" onclick="removeWindow()">Remove Window Registration</button>'+
         '</td> <td></td><td></td>'+
         '<td>'+
-        '<button type="submit" class="btn btn-primary" id="editWindowButton" onclick="editWindow()">Edit Window Regiistration</button>'+
+        '<button type="submit" class="btn btn-primary" id="editWindowButton" onclick="editWindowForm()">Edit Window Regiistration</button>'+
         '</td>';
 
     pageContentManagerEl.innerHTML = htmlToInsert;
@@ -166,4 +167,106 @@ async function removeWindow(event){
     let result = await response.text();
     alert("The Window Registration has been removed successfully")
     window.location.replace(result)
+}
+
+function editWindowForm(event){
+    const windowCheckedEl = document.querySelector('#flexRadioDefaultWindow:checked')
+    if(windowCheckedEl === null){
+        alert("Choose window registration first")
+        event.preventDefault();
+    }
+    globalIndexWindow = wantedWindow();
+
+    clearPageContent();
+    let htmlToInsert = '<h2>Edit Window Registration Page</h2>'+
+    '<label style="font-weight: bold"> Fill / Choose the wanted categories you want to change</label><br/><br/>'+
+    '<form class="row g-3">'+
+        '<div class="col-md-3">'+
+            '<input class="form-check-input" type="checkbox" id="editActivityCheckBox" style="margin-right: 10px">'+
+                '<label for="editActivityCheckBox" class="form-label">Change Activity of the Window Registration</label>'+
+        '</div>'+
+        '<div>'+
+            '<input class="form-check-input" type="checkbox" id="editWindowTimeCheckBox" style="margin-right: 10px">'+
+                '<label for="editStartTimeActivity">New Start time:</label>'+
+                '<input type="time" id ="editStartTimeActivity">'+
+                    '<label for="editEndTimeActivity">New End time:</label>'+
+                    '<input type="time" id="editEndTimeActivity">'+
+        '</div>'+
+        '<div class="col-12">'+
+            '<div>'+
+                '<input class="form-check-input" type="checkbox" id="editBoatTypeCheckBox" style="margin-right: 10px">'+
+                    '<label for="editBoatTypeCheckBox" class="form-label">Add new Boat Type to Activitiy</label>'+
+                    '<div class="col-2">'+
+                    '<select class="form-select" aria-label="Select Window Registration" id="editBoatTypeSelected">'+
+                        '<option selected disabled value ="0"> Select Window Registration</option>'+
+                        '<option value="1">Single</option>'+
+                        '<option value="2">Double</option>'+
+                        '<option value="3">Coxed Double</option>'+
+                        '<option value="4">Pair</option>'+
+                        '<option value="5">Coxed Pair</option>'+
+                        '<option value="6">Four</option>'+
+                        '<option value="7">Coxed Four</option>'+
+                        '<option value="8">Quad</option>'+
+                        '<option value="9">Coxed Quad</option>'+
+                        '<option value="10">Octuple</option>'+
+                        '<option value="11">Eight</option>'+
+                    '</select>'+
+                '</div>'+
+            '</div>'+
+            '<button type="submit" class="btn btn-primary" onclick="editWindow()" style="margin-left: 500px">Confirm</button>'+
+        '</div>'+
+    '</form>'
+    pageContentManagerEl.innerHTML = htmlToInsert;
+}
+async function editWindow(event){
+    const editActivityEl = document.querySelector('#editActivityCheckBox')
+    const editBoatTypeEl = document.querySelector('#editBoatTypeCheckBox')
+    const editWindowTimeTypeEl = document.querySelector('#editWindowTimeCheckBox')
+
+    const editStartTimeEl = document.querySelector('#editStartTimeActivity')
+    const editEndTimeEl = document.querySelector('#editEndTimeActivity')
+
+    if(editActivityEl.checked === false && editBoatTypeEl.checked === false && editWindowTimeTypeEl.checked === false){
+        alert("fill all the fields")
+        event.preventDefault();
+    }
+
+    let boatType = '0'
+    const editBoatTypeSelectedEl = document.querySelector('#editBoatTypeSelected')
+    if (editBoatTypeEl.checked)
+        boatType = editBoatTypeSelectedEl.value;
+
+    let newStart = null , newEnd = null;
+    if (editWindowTimeTypeEl.checked){
+        if (!validTime(editStartTimeEl,editEndTimeEl)){
+            alert("end time should be 'later' start time")
+            editEndTimeEl.value = ''
+            event.preventDefault();
+        }
+        else{
+            newStart = editStartTimeEl.value;
+            newEnd = editEndTimeEl.value;
+        }
+    }
+
+    const WindowEditArgs = {
+        index: globalIndexWindow,
+        startTime: newStart,   //string
+        endTime: newEnd,       //string
+        boatType: boatType,
+        activityType: editActivityEl.checked,
+    }
+
+    let keepTheChanges = confirm("are you sure about Activity's details");
+    if (keepTheChanges === true) {
+        const response = await fetch('../editActivity', {
+            method: 'put',
+            headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
+            body: JSON.stringify(WindowEditArgs)
+        });
+
+        let result = await response.text();
+        alert("The Activity has been edited successfully")
+        window.location.replace(result)
+    }
 }

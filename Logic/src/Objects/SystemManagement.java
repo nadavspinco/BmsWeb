@@ -167,6 +167,14 @@ public class SystemManagement implements EngineInterface {
         }
         return null;
     }
+    private WindowRegistration getWindowRegistrationRef(WindowRegistration window){
+        for(WindowRegistration windowRef: windowRegistrationList){
+            if(window.equals(windowRef)){
+                return windowRef;
+            }
+        }
+        return null;
+    }
 
   @XmlElement(name = "Assignments")
     public void setAssignmentsList(AssignmentListAdapter assignmentListAdapter) {
@@ -1355,6 +1363,25 @@ public class SystemManagement implements EngineInterface {
     @Override
     public boolean isMemberHasPrivateBoat(Member member){
         return member.getHasPrivateBoat();
+    }
+
+    public void changeWindowRegistrationActivity(WindowRegistration window){
+        window = getWindowRegistrationRef(window);
+        if (window.getActivityType() == ActivityTypeEnum.Training)
+            window.setActivityType(ActivityTypeEnum.Sailing);
+        else
+            window.setActivityType(ActivityTypeEnum.Training);
+    }
+
+    public void changeWindowRegistrationTime(WindowRegistration window, LocalTime startTime, LocalTime endTime){
+        window = getWindowRegistrationRef(window);
+        window.setStartTime(startTime);
+        window.setEndTime(endTime);
+    }
+
+    public void changeBoatTypeToWindowRegistration(WindowRegistration window, BoatTypeEnum boatType){
+        window = getWindowRegistrationRef(window);
+        window.setBoatType(boatType);
     }
 }
 
