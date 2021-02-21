@@ -9,26 +9,42 @@
             "sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </head>
 <body>
-<h2>Edit Rower Page</h2>
-<label style="font-weight: bold"> Fill the wanted categories you want to change</label><br/><br/>
+<h2>Edit Window Registration Page</h2>
+<label style="font-weight: bold"> Fill / Choose the wanted categories you want to change</label><br/><br/>
 <form class="row g-3">
     <div class="col-md-3">
-        <input class="form-check-input" type="checkbox" id="editBoatNameCheckBox" style="margin-right: 10px">
-        <label for="editBoatName" class="form-label">Edit new Boat Name</label>
-        <input type="text" class="form-control" id="editBoatName">
+        <input class="form-check-input" type="checkbox" id="editActivityCheckBox" style="margin-right: 10px">
+        <label for="editActivityCheckBox" class="form-label">Change Activity of the Window Registration</label>
     </div>
     <div>
-        <input class="form-check-input" type="checkbox" id="editWidthCheckBox" style="margin-right: 10px">
-        <label for="editWidthCheckBox" class="form-label">Change the width of the boat</label>
-    </div>
-    <div>
-        <input class="form-check-input" type="checkbox" id="editCoastalCheckBox" style="margin-right: 10px">
-        <label for="editCoastalCheckBox" class="form-label">Change the Coastal of the boat</label>
+        <input class="form-check-input" type="checkbox" id="editWindowTimeCheckBox" style="margin-right: 10px">
+        <label for="editStartTimeActivity">New Start time:</label>
+        <input type="time" id ="editStartTimeActivity">
+        <label for="editEndTimeActivity">New End time:</label>
+        <input type="time" id="editEndTimeActivity">
     </div>
     <div class="col-12">
-        <button type="submit" class="btn btn-primary" onclick="addPrivateBoat()">Disable Boat</button>
-        <button type="submit" class="btn btn-primary" style="margin-left: 20px">Fix Boat</button><br/><br/>
-        <button type="submit" class="btn btn-primary" onclick="EditBoat()" style="margin-left: 700px">Confirm</button>
+    <div>
+        <input class="form-check-input" type="checkbox" id="editBoatTypeCheckBox" style="margin-right: 10px">
+        <label for="editBoatTypeCheckBox" class="form-label">Add new Boat Type to Activitiy</label>
+        '<div class="col-2">
+            <select class="form-select" aria-label="Select Window Registration" id="boatTypeSelectWindow">
+                <option selected disabled value ="0"> Select Window Registration</option>
+                <option value="1">Single</option>
+                <option value="2">Double</option>
+                <option value="3">Coxed Double</option>
+                <option value="4">Pair</option>
+                <option value="5">Coxed Pair</option>
+                <option value="6">Four</option>
+                <option value="7">Coxed Four</option>
+                <option value="8">Quad</option>
+                <option value="9">Coxed Quad</option>
+                <option value="10">Octuple</option>
+                <option value="11">Eight</option>
+            </select>
+        </div>
+    </div>
+        <button type="submit" class="btn btn-primary" onclick="EditBoat()" style="margin-left: 500px">Confirm</button>
     </div>
     </form>
 </body>
