@@ -361,7 +361,7 @@ async function makeSelectBoatForRegisration() {
     pageContentManagerEl.innerHTML = html
 }
 function selectBoat(){
-    const selectedIndex = getSelectedIndex();
+    const selectedIndex = getSelectedIndex('#flexRadioDefaultBoat');
     if(selectedIndex === -1){
         alert("you must select Boat")
         return ;
@@ -444,8 +444,8 @@ function selectRegistraion(){
 
 }
 
-function getSelectedIndex(){
-    const allRadios = document.querySelectorAll('#flexRadioDefault');
+function getSelectedIndex(id = '#flexRadioDefault'){
+    const allRadios = document.querySelectorAll(id);
     let index = 0;
     for(let radio of allRadios){
         if(radio.checked === true){
