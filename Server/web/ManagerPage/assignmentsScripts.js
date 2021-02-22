@@ -353,10 +353,10 @@ async function makeSelectBoatForRegisration() {
                 '</tr>'+
                 '</thead>'+
                 '<tbody>'
+            responseObj.boats.forEach(boat => html+=createElementBoat(boat))
+            html+= '</tbody>' + '</table>'
+            html+='<button type="button" class="btn btn-primary" onclick="selectBoat()">Next</button>'
         }
-        responseObj.boats.forEach(boat => html+=createElementBoat(boat))
-        html+= '</tbody>' + '</table>'
-        html+='<button type="button" class="btn btn-primary" onclick="selectBoat()">Next</button>'
     }
     pageContentManagerEl.innerHTML = html
 }
