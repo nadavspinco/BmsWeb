@@ -4,7 +4,7 @@ showRegistrationButtonEl.addEventListener('click', showAllRegistrationForm)
 let regiListObj;
 
 async function showAllRegistrationForm() {
-    const response = await fetch('manageRegistration', {method: 'get'});
+    const response = await fetch('../futureAssignment', {method: 'get'});
     const registrationList = await response.json();
     regiListObj = registrationList;
 
@@ -37,7 +37,7 @@ async function showAllRegistrationForm() {
 }
 
 function createElementRegistration(regi){
-    let htmlBoat = '<tr>'+
+    let htmlRegi = '<tr>'+
         '<th scope="row">' +
         '<div class="form-check">'+
         '<input class="form-check-input" type="radio" name="flexRadioDefault" id = "flexRadioDefaultRegi">'+
@@ -50,7 +50,7 @@ function createElementRegistration(regi){
         '<td>' + createRowerListName(regi.rowersListInBoat) + '</td>'+
         '<td>' + createBoatTypeList(regi.boatTypes) + '</td>'+
         '</tr>';
-    return htmlBoat;
+    return htmlRegi;
 }
 
 async function removeRegistration(event){

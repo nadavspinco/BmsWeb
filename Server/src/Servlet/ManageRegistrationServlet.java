@@ -1,5 +1,4 @@
 package Servlet;
-import Objects.Boat;
 import Objects.Member;
 import Objects.Registration;
 import Objects.SystemManagement;
