@@ -44,8 +44,8 @@ async function showAssignmentsByDate(dateInput){
             html+='</tbody>'
             html += '</table>'
             html+='<div>'
-            html+='<button type="button" class="btn btn-success" onClick="unionAssignment()">Union assignment</button>'
-            html+='<button type="button" class="btn btn-warning" onClick="removeRowerFromAssignment()">Remove Rower</button>'
+            html+='<button type="button" class="btn btn-success" onClick="unionAssignment()" style="margin-right: 20px">Union assignment</button>'
+            html+='<button type="button" class="btn btn-warning" onClick="removeRowerFromAssignment()" style="margin-right: 20px">Remove Rower</button>'
             html+='<button type="button" class="btn btn-danger" onclick="deleteChosenAssignment()">Delete</button>'+'</div>'
 
         }

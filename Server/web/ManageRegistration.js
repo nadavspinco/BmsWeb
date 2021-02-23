@@ -4,7 +4,7 @@ showRegistrationButtonEl.addEventListener('click', showAllRegistrationForm)
 let regiListObj;
 
 async function showAllRegistrationForm() {
-    const response = await fetch('../futureAssignment', {method: 'get'});
+    const response = await fetch('manageRegistration', {method: 'get'});
     const registrationList = await response.json();
     regiListObj = registrationList;
 
