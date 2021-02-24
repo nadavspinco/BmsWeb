@@ -83,6 +83,8 @@ public class SystemManagement implements EngineInterface {
     }
 
     private void fixRegistration(Registration registration) {
+        // TODO ספינקו צריך להוריד פה שלא יוסיף את הבקשה החדשה לכל החותרים אלא שזה יהיה מבחוץ לפונקציה הזאת!!!
+        // זה מוסיף לפה בקשות של חותרים חופפים ואז זורק אקספשיין
         //fix Registration references after importing
         List<Member> oldMemberList = registration.getRowersListInBoat();
         List<Member> newMemberList = new LinkedList<Member>();

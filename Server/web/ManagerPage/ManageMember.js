@@ -198,6 +198,9 @@ async function showAllMember(){
         '<button type="submit" class="btn btn-primary" id="editMemberButton" onclick="EditMemberForm()">Edit Member</button>'+
         '</td>';
 
+    if (memberList === null || memberList.length === 0)
+        htmlToInsert = '<h1> There are no rowers in the Bout House</h1>'
+
     pageContentManagerEl.innerHTML = htmlToInsert;
 }
 
@@ -421,6 +424,10 @@ async function addPrivateBoat(){
         '<td>'+
         '<button type="submit" class="btn btn-primary" id="addPrivateBoatButton" onclick="addPrivateBoatFunc()">Add private boat</button>'+
         '</td>';
+
+    if (boatList === null || boatList.length === 0)
+        htmlToInsert = '<h1> There are no boat in the Bout House</h1>'
+
 
     pageContentManagerEl.innerHTML = htmlToInsert;
 }

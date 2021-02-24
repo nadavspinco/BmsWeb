@@ -1,10 +1,53 @@
-let showHistory = document.querySelector('#historyAssignment')
+showFutureAssignmentButtonEl = document.querySelector('#futureAssignment');
+showHistoryButtonEl = document.querySelector('#historyAssignment')
 
-showHistory.addEventListener('click',showHistoryAssignmentForm)
+showHistoryButtonEl.addEventListener('click',showHistoryAssignmentForm)
+showFutureAssignmentButtonEl.addEventListener('click', showFutureAssignmentForm)
 
+async function showFutureAssignmentForm() {
+    const response = await fetch('../futureAssignment', {method: 'get'});
+    const assignmentList = await response.json();
+
+    clearPageContent();
+    let htmlToInsert = '<table class="table">'+
+        '<thead>'+
+        '<tr>'+
+        '<th scope="col">#</th>'+
+        '<th scope="col">Main Rower</th>'+
+        '<th scope="col">Activity Date</th>'+
+        '<th scope="col">Activity Details</th>'+
+        '<th scope="col">Rower List</th>'+
+        '<th scope="col">Boat Type List</th>'+
+        '</tr>'+
+        '</thead>'+
+        '<tbody>'
+    assignmentList.forEach(assign => {htmlToInsert += createElementAssignment(assign)});
+    htmlToInsert += '</tbody></table>'
+
+    if (assignmentList.length === 0)
+        htmlToInsert = '<h1>You dont have any Future Assignment</h1>'
+
+    pageContentManagerEl.innerHTML = htmlToInsert;
+}
+
+function createElementAssignment(regi){
+    let htmlAssignment = '<tr>'+
+        '<th scope="row">' +
+        '<div class="form-check">'+
+        '<input class="form-check-input" type="radio" name="flexRadioDefault" id = "flexRadioDefaultRegi">'+
+        '</div>'+
+        '</th>'+
+        '<td>' + regi.rowerOfRegistration.nameMember + '</td>'+
+        '<td>' + localDateTimeToString(regi.activityDate) + '</td>'+
+        '<td>' + createWindowDetails(regi.windowRegistration) + '</td>'+
+        '<td>' + createRowerListName(regi.rowersListInBoat) + '</td>'+
+        '<td>' + createBoatTypeList(regi.boatTypes) + '</td>'+
+        '</tr>';
+    return htmlAssignment;
+}
 
 async function showHistoryAssignmentForm() {
-    const response = await fetch('historyAssignment', {method: 'get'});
+    const response = await fetch('../historyAssignment', {method: 'get'});
     const historyAssignmentList = await response.json();
 
     clearPageContent();
@@ -27,7 +70,7 @@ async function showHistoryAssignmentForm() {
         htmlToInsert += '</tbody></table>'
     }
 
-    pageContentEl.innerHTML = htmlToInsert;
+    pageContentManagerEl.innerHTML = htmlToInsert;
 }
 
 function createElementAssignment(regi){
@@ -47,7 +90,7 @@ function createElementAssignment(regi){
 }
 
 function clearPageContent(){
-    pageContentEl.innerHTML = '';
+    pageContentManagerEl.innerHTML = '';
 }
 
 function createRowerListName (rowerList){
