@@ -60,7 +60,7 @@ public class AddRemoveRowerServlet extends HttpServlet {
             String urlToRedirect = null;
             if (!regi.getRowersListInBoat().contains(member)) // choosen a rower who is not part of the registration
                 urlToRedirect = Constants.Error;
-            else if (regi.getRowersListInBoat().size() < 2){
+            else if (regi.getRowersListInBoat().size() > 1){
                 systemManagement.removeRowerSpecificFromRegiRequest(member,regi,false);
                 validRower = true;
             }
@@ -68,7 +68,7 @@ public class AddRemoveRowerServlet extends HttpServlet {
                 urlToRedirect = Constants.ErrorCapacity;
 
             if (validRower)
-                urlToRedirect = mainMember.getIsManager() ? Constants.Manager_Page : Constants.Member_Page;
+                urlToRedirect = mainMember.getIsManager() ? Constants.ManagerPage : Constants.Member_Page;
 
             resp.setStatus(HttpServletResponse.SC_OK);
             resp.setContentType("application/json");
@@ -131,7 +131,7 @@ public class AddRemoveRowerServlet extends HttpServlet {
                 urlToRedirect = Constants.ErrorCapacity;
 
             if (validRower)
-                urlToRedirect = mainMember.getIsManager() ? Constants.Manager_Page : Constants.Member_Page;
+                urlToRedirect = mainMember.getIsManager() ? Constants.ManagerPage : Constants.Member_Page;
 
             resp.setStatus(HttpServletResponse.SC_OK);
             resp.setContentType("application/json");

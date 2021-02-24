@@ -64,9 +64,16 @@ public class ManageRegistrationServlet extends HttpServlet {
             String gsonString = reader.lines().collect(Collectors.joining());
             Registration registration = gson.fromJson(gsonString, Registration.class);
 
+            String memberID = SessionUtils.getUserId(req);
+            if (memberID == null || memberID.isEmpty()) {
+                resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                return;
+            }
+            Member mainMember = systemManagement.getMemberByID(memberID);
+
             resp.setStatus(HttpServletResponse.SC_OK);
             systemManagement.removeRegistrationRequestByMember(registration);
-            String redirectUrlPage = Constants.Member_Page;
+            String redirectUrlPage = mainMember.getIsManager() ? Constants.ManagerPage : Constants.Member_Page;
             out.print(redirectUrlPage);
         }
         catch (IOException e) {
