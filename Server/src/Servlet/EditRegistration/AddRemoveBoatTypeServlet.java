@@ -61,7 +61,7 @@ public class AddRemoveBoatTypeServlet extends HttpServlet {
                 urlToRedirect = Constants.Error;
 
             if (validBoatType)
-                urlToRedirect = mainMember.getIsManager() ? Constants.Manager_Page : Constants.Member_Page;
+                urlToRedirect = mainMember.getIsManager() ? Constants.ManagerPage : Constants.Member_Page;
 
             resp.setStatus(HttpServletResponse.SC_OK);
             resp.setContentType("application/json");
@@ -100,7 +100,7 @@ public class AddRemoveBoatTypeServlet extends HttpServlet {
                 urlToRedirect = Constants.Error;
 
             if (validBoatType)
-                urlToRedirect = mainMember.getIsManager() ? Constants.Manager_Page : Constants.Member_Page;
+                urlToRedirect = mainMember.getIsManager() ? Constants.ManagerPage : Constants.Member_Page;
 
             resp.setStatus(HttpServletResponse.SC_OK);
             resp.setContentType("application/json");
