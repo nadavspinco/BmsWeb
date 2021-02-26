@@ -1,9 +1,8 @@
 const addRegistrationEl = document.querySelector("#addRegistration");
 addRegistrationEl.addEventListener('click', showAddRegistrationForm)
 let members = []
-let windowRegistrations={
+let windowRegistrations={}
 
-}
 const reservationToAdd = {
     date: "",
     windowRegistration: {
@@ -32,8 +31,7 @@ function showAddRegistrationForm(){
 
 }
 
-function clearTimeOffsetOnDate(date)
-{
+function clearTimeOffsetOnDate(date){
     date.setHours(0,0,0,0)
 }
 
@@ -159,7 +157,6 @@ function makeBoatTypeSelection(){
 +'</select>'
     +'<button type="button" class="btn btn-primary" onclick="setBoatTypes()">next</button>'
     pageContentEl.innerHTML = html
-
 }
 
 async function makeMembersSelection(){
@@ -180,9 +177,8 @@ async function makeMembersSelection(){
     }
     html+= '</select>' + '<button type="button" class="btn btn-primary" onclick="pickMembers()">next</button>'
     pageContentEl.innerHTML = html;
-
-
 }
+
 function pickMembers(){
     // add to the Object all the chosen Members and call to showFinalDetails
     reservationToAdd.members =[] //reset
@@ -234,12 +230,9 @@ async function sendRegistration(){
     }
     else {
         //TODO: specify details
-        html += '<h3> Error</h3> '
+        html += '<h3> there is a rower who is part of other registration / assignment in this time</h3> '
         pageContentEl.innerHTML= html;
     }
-
-
-
 }
 
 
@@ -274,14 +267,16 @@ function setTimeFromWindow(){
 function makeWindowRegistrationString(windowRegistration){
     //Return  string for the window Registration
     let toReturnString = ""
-    if(windowRegistration!=null && windowRegistration!= undefined){
-        toReturnString+="from " +windowRegistration.startTime.hour + ":" +  windowRegistration.startTime.minute;
-        toReturnString+= " to "+windowRegistration.endTime.hour + ":" +  windowRegistration.endTime.minute;
-        if(windowRegistration.activityType != null){
-            toReturnString+= "activity type: " + windowRegistration.activityType
+    if(windowRegistration!=null && windowRegistration!= undefined) {
+        toReturnString += "from " + windowRegistration.startTime.hour + ":" + windowRegistration.startTime.minute;
+        toReturnString += " to " + windowRegistration.endTime.hour + ":" + windowRegistration.endTime.minute;
+        if (windowRegistration.activityType != null) {
+            toReturnString += "activity type: " + windowRegistration.activityType
         }
-        if(windowRegistration.boatType != null){
-            toReturnString+= "boat type: " + windowRegistration.boatType
+        if (windowRegistration.boatType != null) {
+            if (windowRegistration.boatType != null) {
+                toReturnString += "boat type: " + windowRegistration.boatType
+            }
         }
     }
     return toReturnString

@@ -2,7 +2,7 @@ const changeNameButtonEl = document.querySelector('#changeName')
 const changePasswordButtonEl = document.querySelector('#changePassword')
 const changePhoneNumberButtonEl = document.querySelector('#changePhone')
 const changeEmailButtonEl = document.querySelector('#changeEmail')
-const pageContentEl = document.querySelector('#pageContent')
+let pageContentEl = document.querySelector('#pageContent')
 
 changeEmailButtonEl.addEventListener('click',showEmailNameContent);
 changeNameButtonEl.addEventListener('click', showChangeNameContent);

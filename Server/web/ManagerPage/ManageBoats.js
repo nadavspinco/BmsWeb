@@ -147,6 +147,9 @@ async function showAllBoat(){
         '<button type="submit" class="btn btn-primary" id="editBoatButton" onclick="editBoatForm()">Edit Boat</button>'+
     '</td>';
 
+    if (boatList === null || boatList.length === 0)
+        htmlToInsert = '<h1> There are no boat in the Boat House</h1>'
+
     pageContentManagerEl.innerHTML = htmlToInsert;
 }
 

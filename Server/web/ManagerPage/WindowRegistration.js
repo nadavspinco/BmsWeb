@@ -115,6 +115,9 @@ async function showAllWindowsRegistration(){
         '<button type="submit" class="btn btn-primary" id="editWindowButton" onclick="editWindowForm()">Edit Window Regiistration</button>'+
         '</td>';
 
+    if (windowsList === null || windowsList.length === 0)
+        htmlToInsert = '<h1> There are no Activity to regist in the Boat House</h1>'
+
     pageContentManagerEl.innerHTML = htmlToInsert;
 }
 
