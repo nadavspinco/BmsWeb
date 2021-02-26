@@ -25,7 +25,9 @@ public class ContextListener implements ServletContextListener {
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent){
         SystemManagement systemManagement = (SystemManagement) servletContextEvent.getServletContext().getAttribute(Constants.SystemManagment);
+        NotificationManager notificationManager = (NotificationManager) servletContextEvent.getServletContext().getAttribute(Constants.NotificationManager);
         XmlManagement.exportSystemManagementDetails(systemManagement);
+        XmlManagement.exportNotificationManagerDetails(notificationManager);
         System.out.println("The app is down");
     }
 
@@ -43,7 +45,15 @@ public class ContextListener implements ServletContextListener {
     }
 
     private void createNotificationManager(ServletContext servletContext){
-        NotificationManager manager = new NotificationManager();
+        NotificationManager manager ;
+        try {
+            manager = XmlManagement.importNotificationManagerDetails() ;
+            System.out.println("notification GOOD!");
+
+        } catch (Exception e) {
+            System.out.println("notification failed");
+            manager = new NotificationManager();
+        }
         servletContext.setAttribute(Constants.NotificationManager, manager);
 
     }

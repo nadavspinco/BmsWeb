@@ -1,12 +1,23 @@
 package Objects;
 
-import java.util.Objects;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Objects;
+@XmlRootElement
 public class Notification extends Message {
+    @XmlAttribute
     private boolean isPrivate;
-    Notification(String header, String content,boolean isPrivate) {
+    private Member member;
+    private Notification(){
+        super();
+
+    }
+    Notification(String header, String content,boolean isPrivate,Member member) {
         super(header,content);
         this.isPrivate = isPrivate;
+        this.member= member;
     }
 
     @Override
@@ -24,6 +35,16 @@ public class Notification extends Message {
 
     public boolean isPrivate(){
         return isPrivate;
+    }
+
+
+@XmlElement(name ="member")
+    public Member getMember(){
+        return member;
+    }
+
+    private void setMember(Member member){
+        this.member = member;
     }
 
 }
