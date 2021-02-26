@@ -577,11 +577,11 @@ public class SystemManagement implements EngineInterface {
             registrationListToAdd.add(registration);
             registrationMapToConfirm.put(registration.getActivityDate().toLocalDate(),registrationListToAdd);
         }
-        //Member tempMember;
-       // for(Member member : registration.getRowersListInBoat()){ // add to each member the new register request;
-       //     tempMember = getMemberRef(member);
-        //    tempMember.addRegisterRequest(registration);
-        //}
+        Member tempMember;
+        for(Member member : registration.getRowersListInBoat()){ // add to each member the new register request;
+            tempMember = getMemberRef(member);
+            tempMember.addRegisterRequest(registration);
+        }
         if(assignPrivateBoutIfExists && registration.getRowerOfRegistration().getHasPrivateBoat())
            assignPrivateBoat(registration);
         System.out.println("yessssssss");

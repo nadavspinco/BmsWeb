@@ -282,9 +282,9 @@ public class XmlManagement {
         }
     }
 
-    public SystemManagement importSystemManagementDetails() throws Exception {
+    public static SystemManagement importSystemManagementDetails() throws Exception {
         try {
-            InputStream inputStream = new FileInputStream(new File("SystemManagement.xml"));
+            InputStream inputStream = new FileInputStream(new File("c:\\temp\\SystemManagement.xml"));
             JAXBContext jxb = JAXBContext.newInstance(SystemManagement.class);
             Unmarshaller unmarshaller = jxb.createUnmarshaller();
             SystemManagement importedSystemManagement = (SystemManagement) unmarshaller.unmarshal(inputStream);
@@ -303,9 +303,9 @@ public class XmlManagement {
         }
     }
 
-    public void exportSystemManagementDetails(SystemManagement systemManagement){
+    public static void exportSystemManagementDetails(SystemManagement systemManagement){
         try {
-            File file = new File("SystemManagement.xml");
+            File file = new File("c:\\temp\\SystemManagement.xml");
             JAXBContext jaxbContext = JAXBContext.newInstance(SystemManagement.class);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
