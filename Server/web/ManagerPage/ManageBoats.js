@@ -197,8 +197,9 @@ async function removeBoat(event){
         body: JSON.stringify(boatListObj[indexBoat])
     });
 
-    let result = await response.text();
     alert("The boat has been removed successfully")
+
+    let result = await response.text();
     window.location.replace(result)
 }
 
@@ -296,6 +297,7 @@ async function fixBoatFunc(){
         alert("This boat is already fixed")
         window.location.replace('managerMenu.html');
     }
+
     alert("The boat has been fixed successfully")
     window.location.replace(result)
 }

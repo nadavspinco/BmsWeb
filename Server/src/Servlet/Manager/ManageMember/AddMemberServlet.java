@@ -53,7 +53,7 @@ public class AddMemberServlet extends HttpServlet {
             resp.setStatus(HttpServletResponse.SC_OK);
             systemManagement.addMember(member.name,member.phone,member.email,member.password,member.age,
                     member.comment, level, member.isManager, member.serial);
-            String redirectUrlPage = Constants.Manager_Page;
+            String redirectUrlPage = Constants.ManagerPage;
             out.print(redirectUrlPage);
         }
         catch (IOException e) {

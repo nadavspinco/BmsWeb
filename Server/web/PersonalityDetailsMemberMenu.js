@@ -20,7 +20,7 @@ async function changeEmailFunc(event){
 
     let keepTheChanges = confirm("are you sure you want to change the email?");
     if(keepTheChanges === true){
-        const response = await fetch('changeEmail', {
+        const response = await fetch('../changeEmail', {
             method: 'put',
             headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
             body: JSON.stringify(email)
@@ -55,7 +55,7 @@ async function changeNameFunc(event){
 
     let keepTheChanges = confirm("are you sure you want to change the name?");
     if(keepTheChanges === true){
-        const response = await fetch('changeName', {
+        const response = await fetch('../changeName', {
             method: 'put',
             headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
             body: JSON.stringify(name)
@@ -91,7 +91,7 @@ async function changePasswordFunc(event){
 
     let keepTheChanges = confirm("are you sure you want to change the password?");
     if(keepTheChanges === true){
-        const response = await fetch('changePassword', {
+        const response = await fetch('../changePassword', {
             method: 'put',
             headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
             body: JSON.stringify(newPassword)
@@ -124,7 +124,7 @@ async function changePhoneFunc(event){
 
     let keepTheChanges = confirm("are you sure you want to change the phone number?");
     if(keepTheChanges === true){
-        const response = await fetch('changePhone', {
+        const response = await fetch('../changePhone', {
             method: 'put',
             headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
             body: JSON.stringify(phone)

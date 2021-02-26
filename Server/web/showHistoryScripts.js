@@ -4,7 +4,7 @@ showHistory.addEventListener('click',showHistoryAssignmentForm)
 
 
 async function showHistoryAssignmentForm() {
-    const response = await fetch('historyAssignment', {method: 'get'});
+    const response = await fetch('../historyAssignment', {method: 'get'});
     const historyAssignmentList = await response.json();
 
     clearPageContent();

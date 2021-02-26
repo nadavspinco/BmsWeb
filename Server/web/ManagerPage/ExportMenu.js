@@ -16,35 +16,35 @@ function showMainExportForm(){
 
 async function downloadRowers(){
     response = await fetch('../exportRower', {method: 'get'});
-    answer = await response.text();
+    var answer = await response.text();
     document.getElementById("exportRower").addEventListener('click',function () {
-        download("rowers.xml",answer);},false);
-    alert("The Rower export has been done successfully")
+        download("rowers.xml",answer);});
+    // alert("The Rower export has been done successfully")
 }
 
 async function downloadBoats(){
     response = await fetch('../exportBoat', {method: 'get'});
-    answer = await response.text();
+    var answer = await response.text();
     document.getElementById("exportBoat").addEventListener('click',function () {
-        download("boat.xml",answer);},false);
-    alert("The Boat export has been done successfully")
+        download("boat.xml",answer);});
+    // alert("The Boat export has been done successfully")
 
 }
 
 async function downloadActivity(){
     response = await fetch('../exportActivity', {method: 'get'});
-    answer = await response.text();
+    var answer = await response.text();
     document.getElementById("exportActivity").addEventListener('click',function () {
-        download("Activity.xml",answer);},false);
-    alert("The Activity export has been done successfully")
+        download("Activity.xml",answer);});
 }
 
 
 function download(filename, text){
     var element = document.createElement('a');
-    element.style.display = 'none';
     element.setAttribute('href', 'data:text/plain;charest=utf-8,' + encodeURIComponent(text));
     element.setAttribute('download', filename);
+
+    element.style.display = 'none';
     document.body.appendChild(element);
 
     element.click();
