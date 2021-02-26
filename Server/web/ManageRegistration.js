@@ -153,7 +153,7 @@ function AddRowerToRegistration(){
 
 async function showRowerToAdd(flag) {
     chosenRegiGlobal = regiListObj[indexRegiGlobal]
-    const response = await fetch('editRegistration', {method: 'get'});
+    const response = await fetch('../editRegistration', {method: 'get'});
     const rowerList = await response.json();
     mainRowerListGlobal = rowerList;
 
@@ -232,7 +232,7 @@ async function addRower(){
 
     let keepTheChanges = confirm("are you sure to add this rower?");
     if (keepTheChanges === true) {
-        const response = await fetch('editRegistration', {
+        const response = await fetch('../editRegistration', {
             method: 'put',
             headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
             body: JSON.stringify(RegiAndRowerArgs)
