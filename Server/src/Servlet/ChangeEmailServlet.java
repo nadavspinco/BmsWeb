@@ -62,7 +62,8 @@ public class ChangeEmailServlet extends HttpServlet {
             }
 
             systemManagement.changeEmail(member, newEmail);
-            String redirectUrlPage = Constants.Member_Page;
+
+            String redirectUrlPage = member.getIsManager() ? Constants.ManagerPage : Constants.MemberPage;
             out.print(redirectUrlPage);
         }
         catch (IOException | EmailAlreadyExistException e) {

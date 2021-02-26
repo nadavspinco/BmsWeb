@@ -50,7 +50,7 @@ public class AddBoatServlet extends HttpServlet {
 
             resp.setStatus(HttpServletResponse.SC_OK);
             systemManagement.addBoat(name, boatType, isCoastal, isWide, serial);
-            String redirectUrlPage = Constants.Manager_Page;
+            String redirectUrlPage = Constants.ManagerPage;
             out.print(redirectUrlPage);
         }
         catch (IOException e) {

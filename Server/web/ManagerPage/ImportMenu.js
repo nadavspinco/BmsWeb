@@ -14,7 +14,7 @@ function showMainImportFrm(){
     '</select><br>'+
     '</div>'
     pageContentManagerEl.innerHTML = html;
-    pageContentManagerEl.innerHTML += '<input type="Submit" class="btn btn-primary" onclick=" switgcherForm()" value="Submit"><br>'
+    pageContentManagerEl.innerHTML += '<input type="Submit" class="btn btn-primary" onclick=" switcherForm()" value="Submit"><br>'
 }
 
 function switcherForm(){
@@ -22,22 +22,22 @@ function switcherForm(){
     const whatToImport = dataTypeSelectButtonEl.value;
     switch (whatToImport){
         case "1":
-            showImportRowerForm();
+            showImportRowerForm("Rower's");
             break;
         case "2":
-            showImportBoatForm();
+            showImportBoatForm("Boats's");
             break;
         case "3":
-            showImportActivityForm();
+            showImportActivityForm("Activity's");
             break;
         default:
             break;
     }
 }
-function showImportRowerForm(){
+function showImportRowerForm(whatToAdd){
     clearPageContent();
     let html = '<form action="../importRower" enctype="multipart/form-data" method="POST">'+
-        '<h3>Select a File:</h3>'+
+        '<h3>Select ' + whatToAdd + ' File:</h3>'+
         '<div class="col-md-4">'+
         '<div class="col-8">'+
             '<select class="form-select" id="deleteSelect">'+

@@ -14,31 +14,34 @@ async function addNewMember(event) {
     if(!email.match(mailformat)){
         alert("invalid email")
         emailInputEl.value = '';
-        event.preventDefault();
+        // event.preventDefault();
     }
 
     const passwordInputEl = document.querySelector('#memberPasswordInput')
     const password = passwordInputEl.value
-    if (/[^A-Za-z0-9]/.test(password)) {
+    if (/[^A-Za-z0-9]/.test(password) || password === '') {
         alert("password with letter and numbers only")
         passwordInputEl.value = '';
-        event.preventDefault();
+        return;
+        // event.preventDefault();
     }
 
     const memberNameInputEl = document.querySelector('#memberNameInput')
     const name = memberNameInputEl.value;
-    if (/[^A-Za-z]/.test(name)) {
+    if (/[^A-Za-z]/.test(name) || name === '') {
         alert("name with letter and numbers only")
         memberNameInputEl.value = '';
-        event.preventDefault();
+        // event.preventDefault();
+        return;
     }
 
     const memberSerialInputEl = document.querySelector('#memberSerialInput')
     const serial = memberSerialInputEl.value;
-    if (/[^A-Za-z0-9]/.test(serial)) {
+    if (/[^A-Za-z0-9]/.test(serial) || serial === '') {
         memberSerialInputEl.value = '';
         alert("Serial with letter and numbers only")
-        event.preventDefault();
+        return;
+        // event.preventDefault();
     }
 
     const memberCommentInputEl = document.querySelector('#memberCommentInput')
@@ -46,7 +49,8 @@ async function addNewMember(event) {
     if (!(/^[0-9A-Za-z ]+$/.test(comment))) {
         memberCommentInputEl.value = '';
         alert("comment with letters only")
-        event.preventDefault();
+        return;
+        // event.preventDefault();
     }
 
     const memberPhoneInputEl = document.querySelector('#memberPhoneInput')
@@ -54,7 +58,8 @@ async function addNewMember(event) {
     if (!(/^[0-9]+$/.test(phone))) {
         memberPhoneInputEl.value = '';
         alert("phone with numbers only")
-        event.preventDefault();
+        return;
+        // event.preventDefault();
     }
 
     const isManagerCheckBoxEl = document.querySelector('#managerCheckBox')
@@ -62,12 +67,14 @@ async function addNewMember(event) {
     const chooseRowerLevelEl = document.querySelector('#chooseRowerLevel')
     if (chooseRowerLevelEl.value === "Rower Level"){
         alert("rower level required")
-        event.preventDefault();
+        return;
+        // event.preventDefault();
     }
 
     if(memberAgeInputEl.value === ""){
         alert("rower age required")
-        event.preventDefault();
+        return;
+        // event.preventDefault();
     }
 
     const MemberArgs = {
@@ -102,7 +109,8 @@ async function addNewMember(event) {
             window.location.href = '/path';
         }
         else
-            alert("The Rower has added successfully")
+            pageContentManagerEl.innerHTML = "The Rower has added successfully"
+
         window.location.replace(result)
     }
 }

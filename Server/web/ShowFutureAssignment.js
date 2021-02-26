@@ -3,7 +3,7 @@ showFutureAssignmentButtonEl = document.querySelector('#futureAssignment');
 showFutureAssignmentButtonEl.addEventListener('click', showFutureAssignmentForm)
 
 async function showFutureAssignmentForm() {
-    const response = await fetch('futureAssignment', {method: 'get'});
+    const response = await fetch('../futureAssignment', {method: 'get'});
     const assignmentList = await response.json();
 
     clearPageContent();

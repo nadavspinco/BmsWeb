@@ -7,7 +7,7 @@ let indexRegiGlobal;
 let mainRowerListGlobal;
 
 async function showAllRegistrationForm() {
-    const response = await fetch('manageRegistration', {method: 'get'});
+    const response = await fetch('../manageRegistration', {method: 'get'});
     const registrationList = await response.json();
     regiListObj = registrationList;
 
@@ -64,7 +64,7 @@ async function removeRegistration(event){
     }
 
     let indexRegi = wantedRegistration();
-    const response = await fetch('manageRegistration', {
+    const response = await fetch('../manageRegistration', {
         method: 'put',
         headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
         body: JSON.stringify(regiListObj[indexRegi])
@@ -153,7 +153,7 @@ function AddRowerToRegistration(){
 
 async function showRowerToAdd(flag) {
     chosenRegiGlobal = regiListObj[indexRegiGlobal]
-    const response = await fetch('editRegistration', {method: 'get'});
+    const response = await fetch('../editRegistration', {method: 'get'});
     const rowerList = await response.json();
     mainRowerListGlobal = rowerList;
 
@@ -232,7 +232,7 @@ async function addRower(){
 
     let keepTheChanges = confirm("are you sure to add this rower?");
     if (keepTheChanges === true) {
-        const response = await fetch('editRegistration', {
+        const response = await fetch('../editRegistration', {
             method: 'put',
             headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
             body: JSON.stringify(RegiAndRowerArgs)
@@ -269,7 +269,7 @@ async function removeRower() {
 
     let keepTheChanges = confirm("are you sure to remove this rower?");
     if (keepTheChanges === true) {
-        const response = await fetch('editRegistration', {
+        const response = await fetch('../editRegistration', {
             method: 'post',
             headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
             body: JSON.stringify(RegiAndRowerArgs)
@@ -303,7 +303,7 @@ async function addBoatType() {
 
     let keepTheChanges = confirm("are you sure to add this BoatType?");
     if (keepTheChanges === true) {
-        const response = await fetch('editBoatTypeInRegi', {
+        const response = await fetch('../editBoatTypeInRegi', {
             method: 'put',
             headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
             body: JSON.stringify(RegiAndBoatTypeArgs)
@@ -335,7 +335,7 @@ async function removeBoatType() {
 
     let keepTheChanges = confirm("are you sure to remove this BoatType?");
     if (keepTheChanges === true) {
-        const response = await fetch('editBoatTypeInRegi', {
+        const response = await fetch('../editBoatTypeInRegi', {
             method: 'post',
             headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
             body: JSON.stringify(RegiAndBoatTypeArgs)

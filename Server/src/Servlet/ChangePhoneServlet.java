@@ -57,7 +57,7 @@ public class ChangePhoneServlet extends HttpServlet {
             String gsonString = reader.lines().collect(Collectors.joining());
             String phoneNum = gson.fromJson(gsonString, String.class);
             systemManagement.changePhoneNumber(member, phoneNum);
-            String redirectUrlPage = Constants.Member_Page;
+            String redirectUrlPage = member.getIsManager() ? Constants.ManagerPage : Constants.MemberPage;
             out.print(redirectUrlPage);
         }
         catch (IOException e) {

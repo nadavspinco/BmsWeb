@@ -44,7 +44,12 @@ public class ManageRegistrationServlet extends HttpServlet {
             }
 
             Member member = systemManagement.getMemberByID(memberID);
-            Registration[] regiList = systemManagement.getRegistrationByMember(member);
+            Registration[] regiList;
+            if (member.getIsManager())
+                regiList = systemManagement.getMainRegistrationByDays(7);
+            else
+                regiList = systemManagement.getRegistrationByMember(member);
+
             String regiListJson = gson.toJson(Arrays.asList(regiList));
 
             resp.setStatus(HttpServletResponse.SC_OK);

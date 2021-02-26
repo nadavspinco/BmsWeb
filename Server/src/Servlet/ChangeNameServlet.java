@@ -54,7 +54,7 @@ public class ChangeNameServlet extends HttpServlet {
             String gsonString = reader.lines().collect(Collectors.joining());
             String newName = gson.fromJson(gsonString, String.class);
             systemManagement.changeName(member, newName);
-            String redirectUrlPage = Constants.Member_Page;
+            String redirectUrlPage = member.getIsManager() ? Constants.ManagerPage : Constants.MemberPage;
             out.print(redirectUrlPage);
         }
         catch (IOException e) {

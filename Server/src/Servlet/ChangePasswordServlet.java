@@ -54,7 +54,7 @@ public class ChangePasswordServlet extends HttpServlet {
             String gsonString = reader.lines().collect(Collectors.joining());
             String newPassword = gson.fromJson(gsonString, String.class);
             systemManagement.changePassword(member, newPassword);
-            String redirectUrlPage = Constants.Member_Page;
+            String redirectUrlPage = member.getIsManager() ? Constants.ManagerPage : Constants.MemberPage;
             out.print(redirectUrlPage);
         }
         catch (IOException e) {

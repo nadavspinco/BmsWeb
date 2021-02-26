@@ -68,7 +68,7 @@ public class AddRemoveRowerServlet extends HttpServlet {
                 urlToRedirect = Constants.ErrorCapacity;
 
             if (validRower)
-                urlToRedirect = mainMember.getIsManager() ? Constants.ManagerPage : Constants.Member_Page;
+                urlToRedirect = mainMember.getIsManager() ? Constants.ManagerPage : Constants.MemberPage;
 
             resp.setStatus(HttpServletResponse.SC_OK);
             resp.setContentType("application/json");
@@ -131,7 +131,7 @@ public class AddRemoveRowerServlet extends HttpServlet {
                 urlToRedirect = Constants.ErrorCapacity;
 
             if (validRower)
-                urlToRedirect = mainMember.getIsManager() ? Constants.ManagerPage : Constants.Member_Page;
+                urlToRedirect = mainMember.getIsManager() ? Constants.ManagerPage : Constants.MemberPage;
 
             resp.setStatus(HttpServletResponse.SC_OK);
             resp.setContentType("application/json");
