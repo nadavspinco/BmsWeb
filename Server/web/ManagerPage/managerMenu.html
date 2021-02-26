@@ -85,6 +85,23 @@
                         <li><a class="dropdown-item" id="exportStation" href="#">Export Station</a></li>
                     </ul>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="notificationsDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Notifications
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="notificationsList">
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="mangeNotificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        mange Notification
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" id="sendNotification" href="#">Send Notification</a></li>
+                        <li><a class="dropdown-item" id="deleteNotification" href="#">Delete Notification</a></li>
+                    </ul>
+                </li>
+
 
                 <li class="nav-item" id="logoutButton">
                     <a class="nav-link" href="/WebApp">Logout</a>
@@ -103,7 +120,8 @@
 <script src="ImportMenu.js"></script>
 <script src="ExportMenu.js"></script>
 <script src="PersonalityDetailsManager.js"></script>
+<script src="../Notifications/NotificationsScripts.js" ></script>
+<script src="ManageNotificationsScripts.js"></script>
 <script src="ShowAssignment.js"></script>
-
 </body>
 </html>

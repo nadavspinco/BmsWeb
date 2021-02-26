@@ -60,6 +60,9 @@ public class AssignmentsServlet extends HttpServlet {
             String jsonString = reader.lines().collect(Collectors.joining());
             AssignBoatRequest request = gson.fromJson(jsonString, AssignBoatRequest.class);
             systemManagement.assignBoat(request.registration,request.boat);
+            NotificationManager notificationManager = (NotificationManager) getServletContext().getAttribute(Constants.NotificationManager);
+            request.registration.getRowersListInBoat().forEach(member ->
+                    notificationManager.addPrivateNotification(member,getAssignmentHeader(request.registration),getAssignmentMessage(request.registration,request.boat)));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -77,6 +80,24 @@ public class AssignmentsServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
+    }
+
+    private String getAssignmentHeader(Registration registration){
+        return "new Assignment on " +registration.getActivityDate().toLocalDate();
+    }
+
+    private String getAssignmentMessage(Registration registration,Boat boat){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("rowers:\n");
+        registration.getRowersListInBoat().forEach(member -> {
+            stringBuilder.append(member.getNameMember());
+            stringBuilder.append("\n");
+        });
+        stringBuilder.append(boat.getBoatName());
+        stringBuilder.append(" ");
+        stringBuilder.append(boat.getBoatType());
+        stringBuilder.append("\n");
+        return stringBuilder.toString();
     }
 
     static class DeleteAssignmentRequest{

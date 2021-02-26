@@ -14,7 +14,7 @@ function showMainImportFrm(){
     '</select><br>'+
     '</div>'
     pageContentManagerEl.innerHTML = html;
-    pageContentManagerEl.innerHTML += '<input type="Submit" class="btn btn-primary" onclick=" switcherForm()" value="Submit"><br>'
+    pageContentManagerEl.innerHTML += '<input type="Submit" class="btn btn-primary" onclick=" switgcherForm()" value="Submit"><br>'
 }
 
 function switcherForm(){

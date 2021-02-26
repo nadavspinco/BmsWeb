@@ -161,6 +161,7 @@ async function unionAssignment(){
             assignmentsScriptsObj.registrationsToUnion = responseObj.registrations;
             html+= getHtmlForRegistraionTbale();
             assignmentsScriptsObj.registrationsToUnion.forEach(registration=> html+=createHtmlForRegistrationRow(registration))
+            html+= '</tbody></table>'
             html+='<button type="button" class="btn btn-success" onclick="showUnionFinalDetails()">Select</button>'
         }
     }
