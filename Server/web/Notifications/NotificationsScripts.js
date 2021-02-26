@@ -1,4 +1,6 @@
 let refreshNotificationsTime = 4000; //2000 milliseconds == 4 seconds
+
+const notificationPageContent =document.querySelector('#pageContent')
 const notificationsObject ={
     lastUpdated :null
 }
@@ -55,14 +57,14 @@ function getHtmlForNotificationEl(notification,index){
 }
 function showNotification(notification){
     const notificationSelectd = notificationsObject.notifications[notification.getAttribute("tabindex")];
-    pageContentEl.innerHTML = getHtmlForNotification(notificationSelectd);
+    notificationPageContent.innerHTML = getHtmlForNotification(notificationSelectd);
     if(notificationSelectd.isPrivate === true){
-        deleteNotification(notification);
+        deleteNotification(notificationSelectd);
     }
 }
 
 function showHtmlForEl(notificationEl){
-    pageContentEl.innerHTML = notificationEl.value;
+    notificationPageContent.innerHTML = notificationEl.value;
 }
 
 function getHtmlForNotification(notification){

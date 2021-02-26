@@ -1,7 +1,7 @@
 const addBoatButtonEl = document.querySelector('#addBoat')
 const showBoatButtonEl = document.querySelector('#showAllBoat')
 
-const pageContentManagerEl = document.querySelector('#pageContentManager')
+const pageContentManagerEl = document.querySelector('#pageContent')
 let boatListObj ={}
 let globalIndexBoat;
 
