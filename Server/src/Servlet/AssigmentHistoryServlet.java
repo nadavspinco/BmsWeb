@@ -21,9 +21,10 @@ import java.util.List;
 public class AssigmentHistoryServlet extends HttpServlet {
     private Gson gson = new Gson();
 
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         getAssignmentHistory(req,resp);
     }
 

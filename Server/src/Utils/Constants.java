@@ -3,6 +3,7 @@ package Utils;
 
 public class Constants {
     public static final String SystemManagment = "SystemManagment";
+    public static final String NotificationManager = "NotificationManager";
     public static final String USERID = "userid";
     public static final String Member_Page = "memberMenu.html";
     public static final String Manager_Page = "ManagerPage/managerMenu.html";
