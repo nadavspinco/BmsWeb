@@ -304,6 +304,27 @@ public class XmlManagement {
         }
     }
 
+    public static NotificationManager importNotificationManagerDetails() throws Exception {
+        try {
+            InputStream inputStream = new FileInputStream(new File("c:\\temp\\NotificationManager.xml"));
+            // file location by Liron
+            JAXBContext jxb = JAXBContext.newInstance(NotificationManager.class);
+            Unmarshaller unmarshaller = jxb.createUnmarshaller();
+            NotificationManager notificationManager = (NotificationManager) unmarshaller.unmarshal(inputStream);
+            return notificationManager;
+        }
+        catch (JAXBException e) {
+            throw new Exception("Load xml was failed",e);
+        }
+        catch (FileNotFoundException e) {
+            throw new Exception("Filed not found",e);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            throw new Exception("Load xml was failed",e);
+        }
+    }
+
     public static void exportSystemManagementDetails(SystemManagement systemManagement){
         try {
             File file = new File("c:\\temp\\SystemManagement.xml");
@@ -312,6 +333,20 @@ public class XmlManagement {
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             jaxbMarshaller.marshal(systemManagement, file);
+        }
+        catch (JAXBException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void exportNotificationManagerDetails(NotificationManager notificationManager){
+        try {
+            File file = new File("c:\\temp\\NotificationManager.xml");
+            // file location by Liron
+            JAXBContext jaxbContext = JAXBContext.newInstance(NotificationManager.class);
+            Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            jaxbMarshaller.marshal(notificationManager, file);
         }
         catch (JAXBException e) {
             e.printStackTrace();
