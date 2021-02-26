@@ -1,0 +1,25 @@
+body{
+    background-image: url("img.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+h1{
+    font-family: "Comic Sans MS";
+    color: whitesmoke;
+    position: relative;
+    text-align:center;
+    text-shadow: 5px 5px 5px gray, 0 0 1em blue, 0 0 0.5em blue;
+}
+
+div{
+    background-color: white;
+}
+h2,h3{
+    color: deepskyblue;
+}
+h3{
+    color: darkred;
+;
+}
