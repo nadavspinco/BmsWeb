@@ -41,13 +41,14 @@ function clearTimeOffsetOnDate(date){
     if(dateEl!=null) {
         let date = dateEl.valueAsDate;
         let currentDate = new Date(Date.now());
-        clearTimeOffsetOnDate(date)
-        clearTimeOffsetOnDate(currentDate)
         if(date == null){
             alert("please chose a date ")
             return;
         }
-        else if(date < currentDate)
+        clearTimeOffsetOnDate(date)
+        clearTimeOffsetOnDate(currentDate)
+
+        if(date < currentDate)
         {
             console.log(date)
             console.log(new Date(Date.now()))
