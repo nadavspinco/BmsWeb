@@ -71,7 +71,7 @@ async function deleteChosenNotification() {
         alert("no notification Selected")
         return;
     }
-    const isDeleted = await deleteNotification(notificationsObject.showNotificationsne[chosenIndex])
+    const isDeleted = await deleteNotification(notificationsObject.showNotifications[chosenIndex])
     if (isDeleted === true) {
         alert("notification Deleted");
         pageContentManagerEl.innerHTML = ''

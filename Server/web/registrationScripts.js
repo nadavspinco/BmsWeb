@@ -63,7 +63,7 @@ function clearTimeOffsetOnDate(date){
 
 async function makeWindowRegistrationSelection(){
     pageContentEl.innerHTML = ''
-    let windowRegistraionRes = await fetch("windowRegistration")
+    let windowRegistraionRes = await fetch("../windowRegistration")
 
     let responseObj = await windowRegistraionRes.json();
     if (responseObj != null && responseObj != undefined) {
@@ -164,7 +164,7 @@ async function makeMembersSelection(){
     pageContentEl.innerHTML = ''
     let html = '<select class="form-select" aria-label="Select Members"  id="membersSelect" multiple>'
     // Error after the first time!
-    let response = await fetch("membersSuggestion",{
+    let response = await fetch("../membersSuggestion",{
         method: 'POST',
     headers: new Headers({'Content-Type': 'application/json;charset=utf-8'})
     })
@@ -217,7 +217,7 @@ function getRegistrationDetailsHtml(reservation){
 async function sendRegistration(){
     //send the Registration to the servlet and show the result
     pageContentEl.innerHTML= ' '
-    const response = await fetch("addRegistration", {
+    const response = await fetch("../addRegistration", {
     method: 'POST',
     headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
     body: JSON.stringify(reservationToAdd)})

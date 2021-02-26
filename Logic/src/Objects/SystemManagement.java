@@ -77,14 +77,12 @@ public class SystemManagement implements EngineInterface {
         //fix multiple references after importing
         if(registrationMapToConfirm!= null){
             for (List<Registration> registrations : registrationMapToConfirm.values()){
-                registrations.forEach(this::fixRegistration);
+                registrations.forEach(registration -> fixRegistration(registration,true));
             }
         }
     }
 
-    private void fixRegistration(Registration registration) {
-        // TODO ספינקו צריך להוריד פה שלא יוסיף את הבקשה החדשה לכל החותרים אלא שזה יהיה מבחוץ לפונקציה הזאת!!!
-        // זה מוסיף לפה בקשות של חותרים חופפים ואז זורק אקספשיין
+    private void fixRegistration(Registration registration,boolean afterImport) {
         //fix Registration references after importing
         List<Member> oldMemberList = registration.getRowersListInBoat();
         List<Member> newMemberList = new LinkedList<Member>();
@@ -93,9 +91,11 @@ public class SystemManagement implements EngineInterface {
                    -> memberInList.equals(member)).findFirst();
             if(optionalMember.isPresent()) {
                 newMemberList.add(optionalMember.get());
-                if(!registration.isConfirmed() &&
-                        !optionalMember.get().getMineRegistrationRequestNotConfirmed().contains(registration)) {
-                    optionalMember.get().addRegisterRequest(registration);
+                if(afterImport == true) {
+                    if (!registration.isConfirmed() &&
+                            !optionalMember.get().getMineRegistrationRequestNotConfirmed().contains(registration)) {
+                        optionalMember.get().addRegisterRequest(registration);
+                    }
                 }
             }
         }
@@ -116,7 +116,7 @@ public class SystemManagement implements EngineInterface {
 
     private void fixAssignment(Assignment assignment) {
         //fix Assignment references after importing
-        fixRegistration(assignment.getRegistration());
+        fixRegistration(assignment.getRegistration(),true);
         fixBoatReference(assignment);
     }
 
@@ -237,7 +237,7 @@ public class SystemManagement implements EngineInterface {
 
     public boolean isRegistrationAllowedForMember(Registration registration, Member member) {
         //this function return true if a member is valid for registration
-         fixRegistration(registration);
+         fixRegistration(registration,false);
        List<Registration> registrationArr = getRegistrationBySpecificDay(registration.getActivityDate().toLocalDate());
        if(registrationArr != null && registrationArr.size() != 0){
            for (Registration registrationExist : registrationArr){
@@ -261,7 +261,7 @@ public class SystemManagement implements EngineInterface {
 
     public boolean isRegistrationAllowed(Registration registration)
     {
-        fixRegistration(registration);
+        fixRegistration(registration,false);
         //return true if is possible to add this registration
         for (Member member:registration.getRowersListInBoat())
         {
@@ -565,7 +565,7 @@ public class SystemManagement implements EngineInterface {
     }
 
     public void addRegistration(Registration registration, boolean assignPrivateBoutIfExists) throws InvalidRegistrationException {
-        fixRegistration(registration);
+        fixRegistration(registration,false);
         if(!isRegistrationAllowed(registration))
             throw new InvalidRegistrationException();
 
