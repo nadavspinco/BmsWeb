@@ -285,6 +285,7 @@ public class XmlManagement {
     public static SystemManagement importSystemManagementDetails() throws Exception {
         try {
             InputStream inputStream = new FileInputStream(new File("c:\\temp\\SystemManagement.xml"));
+            // file location by Liron
             JAXBContext jxb = JAXBContext.newInstance(SystemManagement.class);
             Unmarshaller unmarshaller = jxb.createUnmarshaller();
             SystemManagement importedSystemManagement = (SystemManagement) unmarshaller.unmarshal(inputStream);
@@ -306,6 +307,7 @@ public class XmlManagement {
     public static void exportSystemManagementDetails(SystemManagement systemManagement){
         try {
             File file = new File("c:\\temp\\SystemManagement.xml");
+            // file location by Liron
             JAXBContext jaxbContext = JAXBContext.newInstance(SystemManagement.class);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);

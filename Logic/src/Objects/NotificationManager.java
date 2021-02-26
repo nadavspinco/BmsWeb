@@ -62,7 +62,7 @@ public class NotificationManager {
         if(lastFetchTime == null){
             return false;
         }
-        if(lastUpdatedGeneral.isAfter(lastFetchTime)){
+        if(lastUpdatedGeneral == null || lastFetchTime.isAfter(lastFetchTime)){
             return false;
         }
 
