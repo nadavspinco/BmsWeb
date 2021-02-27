@@ -1,0 +1,72 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background-image: url("img.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+h1{
+    font-size: 50px;
+    font-family: "Comic Sans MS";
+    color: whitesmoke;
+    position: relative;
+    text-align:center;
+    text-shadow: 5px 5px 5px gray, 0 0 1em blue, 0 0 0.5em blue;
+}
+.diving{
+    position: relative;
+    height: 200px;
+    margin-left: 600px;
+}
+h3{
+    font-size: 40px;
+    font-weight: bold;
+    color: whitesmoke;
+    text-shadow: 2px 2px 2px gray, 0 0 1em blue, 0 0 0.5em blue;
+}
+
+.lbl{
+    margin-left: 50px ;
+    font-size: 28px;
+    color: whitesmoke;
+    font-weight: bold;
+    font-family: "Microsoft Tai Le";
+    text-shadow: 3px 3px lightslategrey;
+}
+
+#LoginButton{
+    margin-left: 220px;
+    size: 100px;
+}
+
+#emailInputId{
+    margin-left: 10px;
+    width: max-content;
+
+    border-radius: 25px;
+    border: 2px solid #609;
+    padding: 15px;
+    width: 200px;
+    height: 15px;
+}
+#passwordInputId {
+    margin-left: 18px;
+    width: max-content;
+
+    border-radius: 25px;
+    border: 2px solid #609;
+    padding: 15px;
+    width: 200px;
+    height: 15px;
+}
+
+#audio{
+    border-radius: 25px;
+    margin-left: 1000px;
+}

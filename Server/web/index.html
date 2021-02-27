@@ -3,20 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Boat House Application</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="signin.css" rel="stylesheet">
 </head>
     <body>
     <h1>Welcome To Eitan & Nadav Boat Managment System Application</h1>
-    <h3>Login to the system first</h3>
-    <form method="post" action="login">
-        <div class="container">
-            <label> UserName </label>
-            <input type="text" name="username" placeholder="Enter Username" id="emailInputId" autofocus/>
+    <div class="diving">
+        <audio id="myAudio">
+            <source src="D\music.mp3" type="audio/mpg3">
+        </audio>
 
-            <label> Password </label>
-            <input type="password" name="password" placeholder="Enter Password" id="passwordInputId"/>
-        </div>
-    </form>
-    <button type="submit" id="LoginButton"> Login </button>
-    <script src="login.js"></script>
+        <h3>Login To System First</h3>
+<!--            <div id="audio">-->
+<!--                <button onclick="playAudio()" type="button">Play Audio</button>-->
+<!--                <button onclick="pauseAudio()" type="button">Pause Audio</button>-->
+<!--            </div>-->
+        <br>
+        <form method="post" action="login">
+            <label class="lbl"> UserName </label>
+            <input type="text" name="username"  placeholder="Email" id="emailInputId" autofocus/>
+            <br>
+            <label class="lbl"> Password </label>
+            <input type="password" name="password" placeholder="Password" id="passwordInputId" autofocus/>
+        </form><br>
+        <button class="btn btn-primary" type="submit" id="LoginButton"> Login </button>
+        <script src="login.js"></script>
+
+    </div>
     </body>
 </html>
