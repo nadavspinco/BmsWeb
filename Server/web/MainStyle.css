@@ -12,11 +12,25 @@ h1{
     text-align:center;
     text-shadow: 5px 5px 5px gray, 0 0 1em blue, 0 0 0.5em blue;
 }
+.mainTitle{
+    font-size: 50px;
+}
 
 div{
     width: max-content;
+    /*background-color: white;*/
+}
+
+.whiteBackground{
     background-color: white;
 }
+
+.movLeft{
+    margin-top: 100px;
+    margin-left: 650px;
+    position: fixed;
+}
+
 h2,h3{
     color: deepskyblue;
 }
@@ -39,6 +53,19 @@ td {
 }
 
 .personal-change{
-    margin-left: 0px;
+    margin-left: 100px;
     width: auto;
+}
+
+.lbl_white{
+    color: white;
+    font-weight: bold;
+    font-size: 17px;
+    text-shadow: 1px 1px 1px gray, 0 0 1em blue, 0 0 0.5em black;
+}
+
+.import{
+    color: coral;
+    font-size: 40px;
+    text-shadow: 1px 1px 1px gray, 0 0 1em blue, 0 0 0.5em black;
 }

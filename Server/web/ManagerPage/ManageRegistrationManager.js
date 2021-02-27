@@ -29,8 +29,8 @@ const reservationToAdd = {
 }
 
 function showAddRegistrationForm(){
-    pageContentManagerEl.innerHTML = ' <label for="registrationDate">Select Wanted date:</label>'
-        +'<input type="date" id="registrationDate" > '
+    pageContentManagerEl.innerHTML = ' <label class="lbl_white" for="registrationDate">Select Wanted date:</label>'
+        +'<input style="margin-left: 20px" type="date" id="registrationDate" > '
         + '<br>'+'<button type="button" class="btn btn-primary" onclick="setDate()">Next</button>'
 }
 
@@ -198,19 +198,19 @@ function showFinalDetails(){
     html+='<button type="button" class="btn btn-primary" onclick="sendRegistration()">Submit! </button>'
     pageContentManagerEl.innerHTML = html;
 }
-
+// HERE
 function getRegistrationDetailsHtml(reservation){
     //return the html for the Registration Details
-    let html = '<h2> Registration Info: </h2>'
-        +'<h3>' +makeWindowRegistrationString(reservation.windowRegistration) + '</h3>'
-        + '<h3> RequestBoatTypes : </h3>'
+    let html = '<h2 class="import"> Registration Info: </h2>'
+        +'<h3 style="color: white">' +makeWindowRegistrationString(reservation.windowRegistration) + '</h3>'
+        + '<h3 style="color: white"> RequestBoatTypes : </h3>'
     for(let boatType of reservation.boatTypes){
-        html+= '<h4>' + boatType + '</h4>'
+        html+= '<h4 style="color: white">' + boatType + '</h4>'
     }
-    html+= '<h3>Members: </h3>'
-    if(reservation.members!= null && reservation.members.length !==0) {
-        for (let member of reservation.members) {
-            html += '<h4>' + member.nameMember + '  ' + member.email + '</h4>'
+    html+= '<h3 style="color: white"> Members: </h3>'
+    if(reservation.rowersListInBoat != null && reservation.rowersListInBoat.length !==0) {
+        for (let member of reservation.rowersListInBoat) {
+            html += '<h4 style="color: white">' + member.nameMember + '  ' + member.email + '</h4>'
         }
     }
     return html;
@@ -227,11 +227,11 @@ async function sendRegistration(){
     let html='';
     if(responseObj.errorCode ===0){
         html= getRegistrationDetailsHtml(reservationToAdd);
-        html += '<h3> Registration Added successfully</h3> '
+        html += '<h3 class="lbl_white"> Registration Added successfully</h3> '
         pageContentManagerEl.innerHTML= html;
     }
     else {
-        html += '<h3> there is a rower who is part of other registration / assignment in this time</h3> '
+        html += '<h3 class="lbl_white"> there is a rower who is part of other registration / assignment in this time</h3> '
         pageContentManagerEl.innerHTML= html;
     }
 }
@@ -413,8 +413,8 @@ function editRegistrationForm(event){
     indexRegiGlobal = wantedRegistration();
 
     clearPageContent();
-    let htmlToInsert ='<h3>Edit Registration Page </h3>'+
-        '<label style="font-weight: bold">choose the wanted option</label><br><br>'+
+    let htmlToInsert ='<h3 class="import">Edit Registration Page </h3>'+
+        '<label class="lbl_white">choose the wanted option</label><br><br>'+
         '<button type="submit" class="btn btn-primary" id="removeRegistrationButton" onclick="AddRowerToRegistration()" style="margin-right: 10px">Add Rower To Registration</button>'+
         '<button type="submit" class="btn btn-primary" id="removeRegistrationButton" onclick="removeRowerToRegistration()" style="margin-right: 10px">Delete Rower From Registration</button>'+
         '<button type="submit" class="btn btn-primary" id="removeRegistrationButton" onclick="addBoatTypeToRegistration()" style="margin-right: 10px">Add Boat Type To Registration</button>'+
@@ -635,42 +635,42 @@ function showBoatTypeToAdd(flag) {
 
     let html = '<table class="table">' +
         '<thead><tr>' +
-        '<th scope="col">#</th>' +
-        '<th scope="col">Boat Type</th>' +
-        '<th scope="col">Capacity</th>' +
+        '<th class="lbl_white" scope="col">#</th>' +
+        '<th class="lbl_white" scope="col">Boat Type</th>' +
+        '<th class="lbl_white" scope="col">Capacity Of Rower</th>' +
         '</tr></thead>' +
         '<tbody>'
 
     html += '<tr><th scope="row"><div class="form-check"><input class="form-check-input" type="radio" name="flexRadioDefault" id = "flexRadioDefault">'+
-        '</div></th><td> SingleBoat </td><td>' + 1 + '</td></tr>';
+        '</div></th><td class="lbl_white"> SingleBoat </td><td class="lbl_white">' + 1 + '</td></tr>';
     html += '<tr><th scope="row"><div class="form-check"><input class="form-check-input" type="radio" name="flexRadioDefault" id = "flexRadioDefault">'+
-        '</div></th><td> DoubleBoat </td><td>' + 2 + '</td></tr>';
+        '</div></th><td class="lbl_white"> DoubleBoat </td><td class="lbl_white">' + 2 + '</td></tr>';
     html += '<tr><th scope="row"><div class="form-check"><input class="form-check-input" type="radio" name="flexRadioDefault" id = "flexRadioDefault">'+
-        '</div></th><td> DoubleBoatPaddle </td><td>' + 2 + '</td></tr>';
+        '</div></th><td class="lbl_white"> DoubleBoatPaddle </td><td class="lbl_white">' + 2 + '</td></tr>';
     html += '<tr><th scope="row"><div class="form-check"><input class="form-check-input" type="radio" name="flexRadioDefault" id = "flexRadioDefault">'+
-        '</div></th><td> DoubleCoxed </td><td>' + 2 + '</td></tr>';
+        '</div></th><td class="lbl_white"> DoubleCoxed </td><td class="lbl_white">' + 2 + '</td></tr>';
     html += '<tr><th scope="row"><div class="form-check"><input class="form-check-input" type="radio" name="flexRadioDefault" id = "flexRadioDefault">'+
-        '</div></th><td> DoublePaddleCoxed </td><td>' + 2 + '</td></tr>';
+        '</div></th><td class="lbl_white"> DoublePaddleCoxed </td><td class="lbl_white">' + 2 + '</td></tr>';
     html += '<tr><th scope="row"><div class="form-check"><input class="form-check-input" type="radio" name="flexRadioDefault" id = "flexRadioDefault">'+
-        '</div></th><td> QuartetBoat </td><td>' + 4 + '</td></tr>';
+        '</div></th><td class="lbl_white"> QuartetBoat </td><td class="lbl_white">' + 4 + '</td></tr>';
     html += '<tr><th scope="row"><div class="form-check"><input class="form-check-input" type="radio" name="flexRadioDefault" id = "flexRadioDefault">'+
-        '</div></th><td> QuartetBoatPaddle </td><td>' + 4 + '</td></tr>';
+        '</div></th><td class="lbl_white"> QuartetBoatPaddle </td><td class="lbl_white">' + 4 + '</td></tr>';
     html += '<tr><th scope="row"><div class="form-check"><input class="form-check-input" type="radio" name="flexRadioDefault" id = "flexRadioDefault">'+
-        '</div></th><td> QuartetBoatCoxed </td><td>' + 4 + '</td></tr>';
+        '</div></th><td class="lbl_white"> QuartetBoatCoxed </td><td class="lbl_white">' + 4 + '</td></tr>';
     html += '<tr><th scope="row"><div class="form-check"><input class="form-check-input" type="radio" name="flexRadioDefault" id = "flexRadioDefault">'+
-        '</div></th><td> QuartetBoatPaddleCoxed </td><td>' + 4 + '</td></tr>';
+        '</div></th><td class="lbl_white"> QuartetBoatPaddleCoxed </td><td class="lbl_white">' + 4 + '</td></tr>';
     html += '<tr><th scope="row"><div class="form-check"><input class="form-check-input" type="radio" name="flexRadioDefault" id = "flexRadioDefault">'+
-        '</div></th><td> OctetBoatCoxed </td><td>' + 8 + '</td></tr>';
+        '</div></th><td class="lbl_white"> OctetBoatCoxed </td><td class="lbl_white">' + 8 + '</td></tr>';
     html += '<tr><th scope="row"><div class="form-check"><input class="form-check-input" type="radio" name="flexRadioDefault" id = "flexRadioDefault">'+
-        '</div></th><td> OctetBoatCoxedPaddle </td><td>' + 8 + '</td></tr>';
+        '</div></th><td class="lbl_white"> OctetBoatCoxedPaddle </td><td class="lbl_white">' + 8 + '</td></tr>';
 
     if (flag === "addBoatType") {
-        html += '<label style="color: firebrick">There are the BoatType chosen in the Registration request, dont choose them again!!.</label><br><br></tbody></table>'
-        html += '<button type="button" class="btn btn-danger" onClick="addBoatType()">Add Boat Type</button>'
+        html += '<label class="lbl_white">There are the BoatType chosen in the Registration request, dont choose them again!!.</label><br><br></tbody></table>'
+        html += '<button type="button" class="btn btn-primary" onClick="addBoatType()">Add Boat Type</button>'
     }
     else { // flag === removeBoatType
-        html += '<label style="color: firebrick">Choose the BoatTypes which are part from the registration only!!.</label><br><br></tbody></table>'
-        html+= '<button type="button" class="btn btn-danger" onClick="removeBoatType()">Remove Boat Type</button>'
+        html += '<label class="lbl_white">Choose the BoatTypes which are part from the registration only!!.</label><br><br></tbody></table>'
+        html+= '<button type="button" class="btn btn-primary" onClick="removeBoatType()">Remove Boat Type</button>'
     }
     pageContentManagerEl.innerHTML = html;
 }

@@ -70,11 +70,11 @@ function addBoatForm(){
     clearPageContent();
     let htmlToInsert = '<form class="row g-3">'+
         '<div class="col-md-4">'+
-        '<label for="boatNameLabel" class="form-label">Boat Name</label>'+
+        '<label for="boatNameLabel" class="lbl_white" class="form-label">Boat Name</label>'+
         '<input type="text" class="form-control" id="boatNameInput">'+
         '</div>'+
         '<div class="col-md-4">'+
-        '<label for="boatSerialLabel" class="form-label">Serial Number</label>'+
+        '<label for="boatSerialLabel" class="lbl_white">Serial Number</label>'+
         '<input type="text" class="form-control" id="boatSerialInput">'+
         '</div>'+
         '<div class="col-12">'+
@@ -99,7 +99,7 @@ function addBoatForm(){
         '<div class="col-12">'+
         '<div class="form-check">'+
         '<input class="form-check-input" type="checkbox" id="coastalCheckBox">'+
-        '<label class="form-check-label" for="coastalCheckBoxLabel">'+
+        '<label class="lbl_white" for="coastalCheckBoxLabel">'+
         'Coastal Boat'+
         '</label>'+
         '</div>'+
@@ -107,7 +107,7 @@ function addBoatForm(){
         '<div class="col-12">'+
         '<div class="form-check">'+
         '<input class="form-check-input" type="checkbox" id="wideCheckBox">'+
-        '<label class="form-check-label" for="wideCheckBoxLabel">'+
+        '<label class="lbl_white" for="wideCheckBoxLabel">'+
         'Wide Boat'+
         '</label>'+
         '</div>'+
@@ -213,7 +213,7 @@ function editBoatForm(event){
 
     clearPageContent();
     let htmlToInsert = '<h2>Edit Boat Page</h2>'+
-        '<label style="font-weight: bold"> Fill the wanted categories you want to change</label><br/><br/>'+
+        '<div class="lbl_white"><label style="font-weight: bold"> Fill the wanted categories you want to change</label><br/><br/>'+
         '<form class="row g-3">'+
             '<div class="col-md-3">'+
                 '<input class="form-check-input" type="checkbox" id="editBoatNameCheckBox" style="margin-right: 10px">'+
@@ -235,7 +235,7 @@ function editBoatForm(event){
             '<div class="col-12">'+
                 '<button type="submit" class="btn btn-primary" onclick="fixBoatFunc()">Fix Boat</button><br/><br/>'+
                 '<button type="submit" class="btn btn-primary" onclick="editBoat()" style="margin-left: 700px">Confirm</button>'+
-            '</div>'+
+            '</div></div>'+
         '</form>'
     pageContentManagerEl.innerHTML = htmlToInsert;
 }
