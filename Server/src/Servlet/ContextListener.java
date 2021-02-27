@@ -2,10 +2,7 @@ package Servlet;
 
 
 
-import Objects.Notification;
-import Objects.NotificationManager;
-import Objects.SystemManagement;
-import Objects.XmlManagement;
+import Objects.*;
 import Utils.Constants;
 
 import javax.servlet.ServletContext;
@@ -19,7 +16,13 @@ public class ContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent servletContextEvent){
         createEngine(servletContextEvent.getServletContext());
         createNotificationManager(servletContextEvent.getServletContext());
+        createChatManager(servletContextEvent.getServletContext());
         System.out.println("The app is on");
+    }
+
+    private void createChatManager(ServletContext servletContext) {
+        ChatManager chatManager = new ChatManager();
+        servletContext.setAttribute(Constants.ChatManager,chatManager);
     }
 
     @Override

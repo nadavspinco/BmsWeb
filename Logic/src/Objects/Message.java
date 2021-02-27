@@ -10,7 +10,7 @@ public class Message {
     private String content;
     private LocalDateTime createdTime = LocalDateTime.now();
 
-    protected Message(){} //deafult  ctor for xml
+    protected Message(){} //default ctor for xml
 
 
     public Message(String header, String content) {

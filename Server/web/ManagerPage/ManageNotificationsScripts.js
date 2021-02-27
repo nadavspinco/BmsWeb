@@ -58,7 +58,12 @@ async function sendNotificationToServlet(header,content){
 function showAllNonPrivateNotifications(){
     pageContentManagerEl.innerHTML = ''
     let html = getHtmlForNotificationTable()
-    notificationsObject.showNotifications =notificationsObject.notifications;
+    notificationsObject.showNotifications =[]
+    notificationsObject.notifications.forEach(notification=> {
+        if(notification.isPrivate === false){
+            notificationsObject.showNotifications.push(notification);
+        }
+    });
     notificationsObject.showNotifications.forEach(notification=> html+=getHtmlForNotificationRow(notification))
     html+= '</tbody>' + '</table>'
     html+= '<button type="button" class="btn btn-danger" onclick="deleteChosenNotification()">Delete</button>'
