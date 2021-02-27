@@ -21,7 +21,15 @@ public class ContextListener implements ServletContextListener {
     }
 
     private void createChatManager(ServletContext servletContext) {
-        ChatManager chatManager = new ChatManager();
+        ChatManager chatManager;
+        try {
+            System.out.println("chat is good");
+            chatManager = XmlManagement.importChatManagerDetails();
+
+        } catch (Exception e) {
+            chatManager =  new ChatManager();
+            System.out.println("chat is bad");
+        }
         servletContext.setAttribute(Constants.ChatManager,chatManager);
     }
 
@@ -29,8 +37,10 @@ public class ContextListener implements ServletContextListener {
     public void contextDestroyed(ServletContextEvent servletContextEvent){
         SystemManagement systemManagement = (SystemManagement) servletContextEvent.getServletContext().getAttribute(Constants.SystemManagment);
         NotificationManager notificationManager = (NotificationManager) servletContextEvent.getServletContext().getAttribute(Constants.NotificationManager);
+        ChatManager chatManager = (ChatManager) servletContextEvent.getServletContext().getAttribute(Constants.ChatManager);
         XmlManagement.exportSystemManagementDetails(systemManagement);
         XmlManagement.exportNotificationManagerDetails(notificationManager);
+        XmlManagement.exportChatManagerDetails(chatManager);
         System.out.println("The app is down");
     }
 
