@@ -44,7 +44,9 @@ public class NotificationManager {
     @XmlElement(name = "PrivateNotifications")
     public void setPrivateNotifications(PrivateNotificationsAdapter PrivateNotifications){
        List<Notification> notificationList = PrivateNotifications.getRegistrationList();
-        notificationList.forEach(notification -> addPrivateNotification(notification.getMember(),notification.getHeader(),notification.getContent()));
+       if(notificationList != null) {
+           notificationList.forEach(notification -> addPrivateNotification(notification.getMember(), notification.getHeader(), notification.getContent()));
+       }
     }
 
 

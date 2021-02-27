@@ -10,9 +10,8 @@ public class Notification extends Message {
     @XmlAttribute
     private boolean isPrivate;
     private Member member;
-    private Notification(){
+    private Notification(){ //For Xml
         super();
-
     }
     Notification(String header, String content,boolean isPrivate,Member member) {
         super(header,content);

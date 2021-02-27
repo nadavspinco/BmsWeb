@@ -28,7 +28,6 @@ public class NotificationsServlet extends HttpServlet {
     }
 
     private void writeNonPrivateNotifications(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
         NotificationManager notificationManager = (NotificationManager) getServletContext().getAttribute(Constants.NotificationManager);
         NotificationsResponse response = new NotificationsResponse();
         response.notifications = notificationManager.getNotifications(null);
