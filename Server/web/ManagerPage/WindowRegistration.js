@@ -8,13 +8,13 @@ let globalIndexWindow;
 
 function addRegistrationWindowForm() {
     clearPageContent();
-    let html = '<label for="startTimeActivity">Start time:</label>'+
-        '<input type="time" id ="startTimeActivity">'+
-        '<label for="endTimeActivity"> End time:</label>'+
-        '<input type="time" id="endTimeActivity">'+
+    let html = '<label class="lbl_white" for="startTimeActivity">Start time:</label>'+
+        '<input style="margin-left: 10px" type="time" id ="startTimeActivity">'+
+        '<label style="margin-left: 20px" class="lbl_white" for="endTimeActivity"> End time:</label>'+
+        '<input style="margin-left: 10px" type="time" id="endTimeActivity">'+
         '<br><br>'+
         '<div class="col-12">'+
-        '<div class="col-2">'+
+        '<div class="col-12">'+
         '<select class="form-select" aria-label="Select Window Registration" id="boatTypeSelectWindow">'+
             '<option selected disabled value ="0"> Select Window Registration</option>'+
             '<option value="0">None</option>'+
@@ -181,25 +181,25 @@ function editWindowForm(event){
     globalIndexWindow = wantedWindow();
 
     clearPageContent();
-    let htmlToInsert = '<h2>Edit Window Registration Page</h2>'+
-    '<label style="font-weight: bold"> Fill / Choose the wanted categories you want to change</label><br/><br/>'+
-    '<form class="row g-3">'+
-        '<div class="col-md-3">'+
+    let htmlToInsert = '<h3 class="import">Edit Window Registration Page</h3>'+
+    '<label class="lbl_white"> Fill / Choose the wanted categories you want to change</label><br/><br/>'+
+    '<form class="row g-27">'+
+        '<div class="col-md-37">'+
             '<input class="form-check-input" type="checkbox" id="editActivityCheckBox" style="margin-right: 10px">'+
-                '<label for="editActivityCheckBox" class="form-label">Change Activity of the Window Registration</label>'+
+                '<label for="editActivityCheckBox" class="lbl_white">Change Activity of the Window Registration</label><br>'+
         '</div>'+
-        '<div>'+
-            '<input class="form-check-input" type="checkbox" id="editWindowTimeCheckBox" style="margin-right: 10px">'+
-                '<label for="editStartTimeActivity">New Start time:</label>'+
+        '<div >'+
+            '<br><input class="form-check-input" type="checkbox" id="editWindowTimeCheckBox" style="margin-right: 10px">'+
+                '<label class="lbl_white" for="editStartTimeActivity">New Start time:</label>'+
                 '<input type="time" id ="editStartTimeActivity">'+
-                    '<label for="editEndTimeActivity">New End time:</label>'+
+                    '<label class="lbl_white" for="editEndTimeActivity" style="margin-left: 25px">New End time:</label>'+
                     '<input type="time" id="editEndTimeActivity">'+
         '</div>'+
         '<div class="col-12">'+
             '<div>'+
-                '<input class="form-check-input" type="checkbox" id="editBoatTypeCheckBox" style="margin-right: 10px">'+
-                    '<label for="editBoatTypeCheckBox" class="form-label">Add new Boat Type to Activitiy</label>'+
-                    '<div class="col-2">'+
+                '<br><input class="form-check-input" type="checkbox" id="editBoatTypeCheckBox" style="margin-right: 10px">'+
+                    '<label for="editBoatTypeCheckBox" class="lbl_white">Add new Boat Type to Activitiy</label>'+
+                    '<div class="col-12">'+
                     '<select class="form-select" aria-label="Select Window Registration" id="editBoatTypeSelected">'+
                         '<option selected disabled value ="0"> Select Window Registration</option>'+
                         '<option value="1">Single</option>'+

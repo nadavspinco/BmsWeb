@@ -119,32 +119,32 @@ function addMemberForm(){
     clearPageContent();
     let htmlToInsert = '<form class="row g-3">'+
     '<div class="col-md-4">'+
-        '<label for="memberEmailInput" class="form-label">Email</label>'+
+        '<label for="memberEmailInput" class="lbl_white">Email</label>'+
         '<input type="text" class="form-control" id="memberEmailInput">'+
     '</div>'+
     '<div class="col-md-4">'+
-        '<label for="memberPasswordInput" class="form-label">Password</label>'+
+        '<label for="memberPasswordInput" class="lbl_white">Password</label>'+
         '<input type="password" class="form-control" id="memberPasswordInput">'+
     '</div>'+
     '<div>'+
         '<div class="col-md-4">'+
-            '<label for="memberNameInput" class="form-label">Rower Name</label>'+
+            '<label for="memberNameInput" class="lbl_white">Rower Name</label>'+
             '<input type="text" class="form-control" id="memberNameInput">'+
         '</div>'+
         '<div class="col-md-4">'+
-            '<label for="memberSerialInput" class="form-label">Rower Serial</label>'+
+            '<label for="memberSerialInput" class="lbl_white">Rower Serial</label>'+
             '<input type="text" class="form-control" id="memberSerialInput">'+
         '</div>'+
         '<div class="col-md-12">'+
-            '<label for="memberCommentInput" class="form-label">Comment</label>'+
+            '<label for="memberCommentInput" class="lbl_white">Comment</label>'+
             '<input type="text" class="form-control" id="memberCommentInput">'+
         '</div>'+
         '<div class="col-md-12">'+
-            '<label for="memberPhoneInput" class="form-label">Phone Number</label>'+
+            '<label for="memberPhoneInput" class="lbl_white">Phone Number</label>'+
             '<input type="text" class="form-control" id="memberPhoneInput">'+
         '</div>'+
         '<div>'+
-            '<label for="memberAgeInput">Age (13-99):</label><br>'+
+            '<label class="lbl_white"> Age (13-99):</label><br>'+
             '<input type="number" id="memberAgeInput" name="Age" min="13" max="100">'+
         '</div>'+
     '</div>'+
@@ -162,7 +162,7 @@ function addMemberForm(){
     '<div class="col-12">'+
         '<div class="form-check">'+
             '<input class="form-check-input" type="checkbox" id="managerCheckBox">'+
-                '<label class="form-check-label" for="managerCheckBox">'+
+                '<label class="lbl_white" for="managerCheckBox">'+
                     'Manager Position'+
                 '</label>'+
         '</div>'+
@@ -274,7 +274,7 @@ function EditMemberForm(event){
 
     clearPageContent();
     let htmlToInsert = '<h2>Edit Rower Page</h2>'+
-        '<label style="font-weight: bold"> Fill the wanted categories you want to change</label><br/><br/>'+
+        '<div class="lbl_white"><label class="lbl" style="font-weight: bold"> Fill the wanted categories you want to change</label><br/><br/>'+
     '<form class="row g-3">'+
     '<div class="col-md-3">'+
         '<input class="form-check-input" type="checkbox" id="editNameCheckBox" style="margin-right: 10px">'+
@@ -297,18 +297,19 @@ function EditMemberForm(event){
         '<input type="number" id="editMemberAgeInput" name="Age" min="13" max="100">'+
     '</div>'+
 '</div>'+
+'</div>'+
     '<div class="col-8">'+
         '<div class="col-2">'+
             '<label class="visually-hidden" for="editRowerLevel">Preference</label>'+
             '<select class="form-select" id="editRowerLevel">'+
-                '<option selected disabled value="0"> Edit New Rower Level</option>'+
+                '<option selected disabled value="0">Rower Level</option>'+
                 '<option value="0">None</option>'+
                 '<option value="1">Beginner</option>'+
                 '<option value="2">Intermediate</option>'+
                 '<option value="3">Advanced</option>'+
             '</select>'+
         '</div>'+
-    '</div>'+
+    '</div><br>'+
     '<div class="col-12">'+
         '<button type="submit" class="btn btn-primary" onclick="addPrivateBoat()">Add Private Boat</button>'+
         '<button type="submit" class="btn btn-primary" onclick="cancelPrivateBoat()" style="margin-left: 20px">Cancel Private Boat</button><br/><br/>'+

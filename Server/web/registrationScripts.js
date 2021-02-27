@@ -25,9 +25,9 @@ const reservationToAdd = {
 }
 
 function showAddRegistrationForm(){
-    pageContentEl.innerHTML = ' <label for="registrationDate">Select Wanted date:</label>'
-+'<input type="date" id="registrationDate" > '
-    + '<br>'+'<button type="button" class="btn btn-primary" onclick="setDate()">Next</button>'
+    pageContentEl.innerHTML = ' <label class="lbl_white" for="registrationDate">Select Wanted date:</label>'
+        +'<input style="margin-left: 20px" type="date" id="registrationDate" > '
+        + '<br>'+'<button type="button" class="btn btn-primary" onclick="setDate()">Next</button>'
 
 }
 
@@ -200,16 +200,16 @@ function showFinalDetails(){
 }
 function getRegistrationDetailsHtml(reservation){
     //return the html for the Registration Details
-    let html = '<h2> Registration Info: </h2>'
-        +'<h3>' +makeWindowRegistrationString(reservation.windowRegistration) + '</h3>'
-        + '<h3> RequestBoatTypes : </h3>'
+    let html = '<h2 class="import"> Registration Info: </h2>'
+        +'<h3 style="color: white">' +makeWindowRegistrationString(reservation.windowRegistration) + '</h3>'
+        + '<h3 style="color: white"> RequestBoatTypes : </h3>'
     for(let boatType of reservation.boatTypes){
-        html+= '<h4>' + boatType + '</h4>'
+        html+= '<h4 style="color: white">' + boatType + '</h4>'
     }
-    html+= '<h3>Members: </h3>'
-    if(reservation.members!= null && reservation.members.length !==0) {
-        for (let member of reservation.members) {
-            html += '<h4>' + member.nameMember + '  ' + member.email + '</h4>'
+    html+= '<h3 style="color: white"> Members: </h3>'
+    if(reservation.rowersListInBoat != null && reservation.rowersListInBoat.length !==0) {
+        for (let member of reservation.rowersListInBoat) {
+            html += '<h4 style="color: white">' + member.nameMember + '  ' + member.email + '</h4>'
         }
     }
     return html;
@@ -226,7 +226,7 @@ async function sendRegistration(){
     let html='';
     if(responseObj.errorCode ===0){
         html= getRegistrationDetailsHtml(reservationToAdd);
-        html += '<h3> Registration Added successfully</h3> '
+        html += '<h3 class="lbl_white"> Registration Added successfully</h3> '
         pageContentEl.innerHTML= html;
     }
     else {

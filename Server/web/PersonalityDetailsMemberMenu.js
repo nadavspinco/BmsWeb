@@ -146,39 +146,39 @@ function clearPageContent(){
 
 function showChangePasswordContent(){
     clearPageContent();
-    let htmlToInsert = '<div class="personal-change"><label class="lbl"> Enter your new password </label><br><br>' +
+    let htmlToInsert = '<div class="movLeft"><div class="whiteBackground"><label class="lbl"> Enter your new password </label><br><br>' +
         '<input class= "password-field" type="password" id="newPasswordInput"  autofocus/>' +
         '<br><br>'+ // represent a new line
         '<button type="button" class="btn btn-primary" onclick="changePasswordFunc()">Save The Changes</button>' +
-        '</div>'
+        '</div></div>'
 
     pageContentEl.innerHTML = htmlToInsert;
 }
 
 function showChangePhoneContent(){
     clearPageContent();
-    let htmlToInsert = '<div class="personal-change"> <label class="lbl"> Enter your new phone number </label><br><br>' +
+    let htmlToInsert = '<div class="movLeft"><div class="whiteBackground"> <label class="lbl"> Enter your new phone number </label><br><br>' +
         '<input class= "inpt" type="text" id="newPhoneInput"  autofocus/>' +
         '<br><br>'+ // represent a new line
-        '<button type="button" class="btn btn-primary" onclick="changePhoneFunc()"> Save The Changes</button></div>'
+        '<button type="button" class="btn btn-primary" onclick="changePhoneFunc()"> Save The Changes</button></div></div>'
     pageContentEl.innerHTML = htmlToInsert;
 }
 
 function showChangeNameContent(){
     clearPageContent();
-    let htmlToInsert = '<div class="personal-change"><label class="lbl"> Enter your new name </label><br><br>' +
+    let htmlToInsert = '<div class="movLeft"><div class="whiteBackground"><label class="lbl"> Enter your new name </label><br><br>' +
         '<input class= "inpt" type="text" id="newNameInput"  autofocus/>' +
         '<br><br>'+
-        '<button type="button" class="btn btn-primary" onclick="changeNameFunc()"> Save The Changes</button></div>'
+        '<button type="button" class="btn btn-primary" onclick="changeNameFunc()"> Save The Changes</button></div></div>'
     pageContentEl.innerHTML = htmlToInsert;
 }
 
 function showEmailNameContent(){
     clearPageContent();
-    let htmlToInsert = '<div class="personal-change"><label class="lbl"> Enter your new email </label><br><br>' +
+    let htmlToInsert = '<div class="movLeft"><div class="whiteBackground"><label class="lbl"> Enter your new email </label><br><br>' +
         '<input class= "inpt" type="text" id="newEmailInput"  autofocus/>' +
         '<br><br>'+
-        '<button type="button" class="btn btn-primary" onclick="changeEmailFunc()"> Save The Changes</button></div>'
+        '<button type="button" class="btn btn-primary" onclick="changeEmailFunc()"> Save The Changes</button></div></div>'
     pageContentEl.innerHTML = htmlToInsert;
 }
 

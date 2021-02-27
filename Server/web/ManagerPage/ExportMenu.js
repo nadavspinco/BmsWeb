@@ -4,8 +4,8 @@ exportButtonEl.addEventListener('click', showMainExportForm);
 
 function showMainExportForm(){
     clearPageContent();
-    let html =  '<h3>Export Station</h3>'+
-                '<label style="font-weight: bold"> Click on the wanted data</label><br/><br/>'+
+    let html =  '<h3 class="import">Export Station</h3>'+
+                '<label class="lbl_white"> Click on the wanted data</label><br/><br/>'+
                 '<button type="button" class="btn btn-primary" id="exportRower" onclick="downloadRowers()" style="margin-right: 15px">Download Rower</button>'+
                 '<button type="button" class="btn btn-primary" id="exportBoat" onclick="downloadBoats()" style="margin-right: 15px">Download Boats</button>'+
                 '<button type="button" class="btn btn-primary" id="exportActivity" onclick="downloadActivity()" style="margin-right: 15px">Download Activities</button>';

@@ -4,7 +4,7 @@ importButtonEl.addEventListener('click', showMainImportFrm);
 
 function showMainImportFrm(){
     clearPageContent();
-    let html = '<label>Choose What Type of data do you want to import</label>'+
+    let html = '<h3 class="import">Import Station</h3><br><label class="lbl_white">Choose What Type of data do you want to import</label>'+
     '<div class="col-8">'+
     '<select class="form-select" id="DataTypeSelect">'+
     '<option selected disabled >Choose Data?</option>'+
@@ -37,9 +37,9 @@ function switcherForm(){
 function showImportRowerForm(whatToAdd){
     clearPageContent();
     let html = '<form action="../importRower" enctype="multipart/form-data" method="POST">'+
-        '<h3>Select ' + whatToAdd + ' File:</h3>'+
-        '<div class="col-md-4">'+
-        '<div class="col-8">'+
+        '<h3 class="import" >Select ' + whatToAdd + ' File:</h3>'+
+        '<div class="col-md-12">'+
+        '<div class="col-12">'+
             '<select class="form-select" id="deleteSelect">'+
                 '<option selected disabled> Delete all existed data?</option>'+
                 '<option value="1">Yes</option>'+
