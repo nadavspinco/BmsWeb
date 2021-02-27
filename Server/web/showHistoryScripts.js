@@ -11,12 +11,12 @@ async function showHistoryAssignmentForm() {
     let htmlToInsert = '<table class="table">'+
         '<thead>'+
         '<tr>'+
-        '<th scope="col">#</th>'+
-        '<th scope="col">Main Rower</th>'+
-        '<th scope="col">Activity Date</th>'+
-        '<th scope="col">Activity Details</th>'+
-        '<th scope="col">Rower List</th>'+
-        '<th scope="col">Boat Type List</th>'+
+        '<th class="table-title" scope="col">#</th>'+
+        '<th class="table-title" scope="col">Main Rower</th>'+
+        '<th class="table-title" scope="col">Activity Date</th>'+
+        '<th class="table-title" scope="col">Activity Details</th>'+
+        '<th class="table-title" scope="col">Rower List</th>'+
+        '<th class="table-title" scope="col">Boat Type List</th>'+
         '</tr>'+
         '</thead>'+
         '<tbody>'
@@ -37,11 +37,11 @@ function createElementAssignment(regi){
         '<input class="form-check-input" type="radio" name="flexRadioDefault" id = "flexRadioDefaultRegi">'+
         '</div>'+
         '</th>'+
-        '<td>' + regi.rowerOfRegistration.nameMember + '</td>'+
-        '<td>' + localDateTimeToString(regi.activityDate) + '</td>'+
-        '<td>' + createWindowDetails(regi.windowRegistration) + '</td>'+
-        '<td>' + createRowerListName(regi.rowersListInBoat) + '</td>'+
-        '<td>' + createBoatTypeList(regi.boatTypes) + '</td>'+
+        '<td class="table-row">' + regi.rowerOfRegistration.nameMember + '</td>'+
+        '<td class="table-row">' + localDateTimeToString(regi.activityDate) + '</td>'+
+        '<td class="table-row">' + createWindowDetails(regi.windowRegistration) + '</td>'+
+        '<td class="table-row">' + createRowerListName(regi.rowersListInBoat) + '</td>'+
+        '<td class="table-row">' + createBoatTypeList(regi.boatTypes) + '</td>'+
         '</tr>';
     return htmlAssignment;
 }

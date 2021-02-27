@@ -160,16 +160,16 @@ async function showRowerToAdd(flag) {
     let html = '<table class="table">' +
         '<thead>' +
         '<tr>' +
-        '<th scope="col">#</th>' +
-        '<th scope="col">Rower Name</th>' +
-        '<th scope="col">Email</th>' +
-        '<th scope="col">ID</th>' +
-        '<th scope="col">is Manager</th>' +
-        '<th scope="col">Has Private Boat</th>' +
-        '<th scope="col">Level</th>' +
-        '<th scope="col">Phone Number</th>' +
-        '<th scope="col">Age</th>' +
-        '<th scope="col">Comment</th>' +
+        '<th class="lbl_white" scope="col">#</th>'+
+        '<th class="table-title" scope="col">Rower Name</th>'+
+        '<th class="table-title" scope="col">Email</th>'+
+        '<th class="table-title" scope="col">ID</th>'+
+        '<th class="table-title" scope="col">is Manager</th>'+
+        '<th class="table-title" scope="col">Has Private Boat</th>'+
+        '<th class="table-title" scope="col">Level</th>'+
+        '<th class="table-title" scope="col">Phone Number</th>'+
+        '<th class="table-title" scope="col">Age</th>'+
+        '<th class="table-title" scope="col">Comment</th>'+
         '</tr>' +
         '</thead>' +
         '<tbody>'
@@ -179,11 +179,11 @@ async function showRowerToAdd(flag) {
         html += createElementMember(rowerList[i])
 
     if (flag === "addRower") {
-        html += '<label style="color: firebrick">There are the rowers in the Registration request, dont choose them again!!.</label><br><br></tbody></table>'
+        html += '<label class="lbl_white">There are the rowers in the Registration request, dont choose them again!!.</label><br><br></tbody></table>'
         html += '<button type="button" class="btn btn-danger" onClick="addRower()">Add Rower</button>'
     }
     else { // flag === removeRower
-        html += '<label style="color: firebrick">Choose the rowers who are part from the registration only!!.</label><br><br></tbody></table>'
+        html += '<label class="lbl_white">Choose the rowers who are part from the registration only!!.</label><br><br></tbody></table>'
         html+= '<button type="button" class="btn btn-danger" onClick="removeRower()">Remove Rower</button>'
     }
     pageContentEl.innerHTML = html;
@@ -209,15 +209,15 @@ function createElementMember(member){
         '<input class="form-check-input" type="radio" name="flexRadioDefault" id = "flexRadioDefault">'+
         '</div>'+
         '</th>'+
-        '<td>' + member.nameMember + '</td>'+
-        '<td>' + member.email + '</td>'+
-        '<td>' + member.memberSerial + '</td>'+
-        '<td>' + member.isManager + '</td>'+
-        '<td>' + member.hasPrivateBoat + '</td>'+
-        '<td>' + member.level + '</td>'+
-        '<td>' + member.phoneNumber + '</td>'+
-        '<td>' + member.age + '</td>'+
-        '<td>' + member.additionalDetails + '</td>'+
+        '<td class="table-row">' + member.nameMember + '</td>'+
+        '<td class="table-row">' + member.email + '</td>'+
+        '<td class="table-row">' + member.memberSerial + '</td>'+
+        '<td class="table-row">' + member.isManager + '</td>'+
+        '<td class="table-row">' + member.hasPrivateBoat + '</td>'+
+        '<td class="table-row">' + member.level + '</td>'+
+        '<td class="table-row">' + member.phoneNumber + '</td>'+
+        '<td class="table-row">' + member.age + '</td>'+
+        '<td class="table-row">' + member.additionalDetails + '</td>'+
         '</tr>';
     return htmlMember;
 }

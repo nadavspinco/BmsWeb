@@ -32,8 +32,6 @@ function showSendNotificationContent(){
          headerEl.value = ''
          contentEl.value = ''
      }
-
-
 }
 
 async function sendNotificationToServlet(header,content){
@@ -91,8 +89,8 @@ function getHtmlForNotificationRow(notification){
         '<input class="form-check-input" type="radio" name="flexRadioDefault" id = "flexRadioDefault">'+
         '</div>'+
         '</th>'+
-        '<td>' + notification.header+ '</td>'
-        +'<td>' +notification.content +'</td>'
+        '<td class="table-row">' + notification.header+ '</td>'
+        +'<td class="table-row">' +notification.content +'</td>'
         +'</tr>'
 }
 
@@ -100,9 +98,9 @@ function getHtmlForNotificationTable(){
     return '<table class="table">'
         +'<thead>'
          +'<tr>'
-          +'<th scope="col">#</th>'
-           +'<th scope="col">Header</th>'
-           +'<th scope="col">Content</th>'
+          +'<th class="lbl_white" scope="col">#</th>'
+           +'<th class="table-title" scope="col">Header</th>'
+           +'<th class="table-title" scope="col">Content</th>'
             +'</tr>'
         +'</thead>'
         +'<tbody>'

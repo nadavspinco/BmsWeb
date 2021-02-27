@@ -127,21 +127,21 @@ async function showAllBoat(){
     let htmlToInsert = '<table class="table">'+
         '<thead>'+
             '<tr>'+
-                '<th scope="col">#</th>'+
-                '<th scope="col">Boat Name</th>'+
-                '<th scope="col">Serial</th>'+
-                '<th scope="col">Boat Type</th>'+
-                '<th scope="col">is Wide</th>'+
-                '<th scope="col">is Coastal</th>'+
-                '<th scope="col">is Private</th>'+
-                '<th scope="col">Able To Sail</th>'+
+                '<th class="lbl_white" scope="col">#</th>'+
+                '<th class="table-title" scope="col">Boat Name</th>'+
+                '<th class="table-title" scope="col">Serial</th>'+
+                '<th class="table-title" scope="col">Boat Type</th>'+
+                '<th class="table-title" scope="col">is Wide</th>'+
+                '<th class="table-title" scope="col">is Coastal</th>'+
+                '<th class="table-title" scope="col">is Private</th>'+
+                '<th class="table-title" scope="col">Able To Sail</th>'+
             '</tr>'+
         '</thead>'+
         '<tbody>'
     boatList.forEach(boat => {htmlToInsert += createElementBoat(boat)});
     htmlToInsert += '</tbody></table>'+
     '<td>'+
-        '<button type="submit" class="btn btn-primary" id="removeBoatButton" onclick="removeBoat()">Remove Boat</button>'+
+        '<button style="margin-left: 470px" type="submit" class="btn btn-primary" id="removeBoatButton" onclick="removeBoat()">Remove Boat</button>'+
     '</td> <td></td><td></td>'+
     '<td>'+
         '<button type="submit" class="btn btn-primary" id="editBoatButton" onclick="editBoatForm()">Edit Boat</button>'+
@@ -172,13 +172,13 @@ function createElementBoat(boat){
                             '<input class="form-check-input" type="radio" name="flexRadioDefault" id = "flexRadioDefaultBoat">'+
                         '</div>'+
                      '</th>'+
-                     '<td>' + boat.boatName + '</td>'+
-                     '<td>' + boat.serialBoatNumber + '</td>'+
-                     '<td>' + boat.boatType + '</td>'+
-                     '<td>' + boat.isWide + '</td>'+
-                     '<td>' + boat.isCoastalBoat + '</td>'+
-                     '<td>' + boat.isPrivate + '</td>'+
-                     '<td>' + boat.isAvailable + '</td>'+
+                     '<td class="table-row">' + boat.boatName + '</td>'+
+                     '<td class="table-row">' + boat.serialBoatNumber + '</td>'+
+                     '<td class="table-row">' + boat.boatType + '</td>'+
+                     '<td class="table-row">' + boat.isWide + '</td>'+
+                     '<td class="table-row">' + boat.isCoastalBoat + '</td>'+
+                     '<td class="table-row">' + boat.isPrivate + '</td>'+
+                     '<td class="table-row">' + boat.isAvailable + '</td>'+
                    '</tr>';
     return htmlBoat;
 }
