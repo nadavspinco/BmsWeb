@@ -68,16 +68,16 @@ function removeRowerFromAssignment(){
     let html ='<table class="table">'+
     '<thead>'+
     '<tr>'+
-    '<th scope="col">#</th>'+
-    '<th scope="col">Rower Name</th>'+
-    '<th scope="col">Email</th>'+
-    '<th scope="col">ID</th>'+
-    '<th scope="col">is Manager</th>'+
-    '<th scope="col">Has Private Boat</th>'+
-    '<th scope="col">Level</th>'+
-    '<th scope="col">Phone Number</th>'+
-    '<th scope="col">Age</th>'+
-    '<th scope="col">Comment</th>'+
+        '<th class="lbl_white" scope="col">#</th>'+
+        '<th class="table-title" scope="col">Rower Name</th>'+
+        '<th class="table-title" scope="col">Email</th>'+
+        '<th class="table-title" scope="col">ID</th>'+
+        '<th class="table-title" scope="col">is Manager</th>'+
+        '<th class="table-title" scope="col">Has Private Boat</th>'+
+        '<th class="table-title" scope="col">Level</th>'+
+        '<th class="table-title" scope="col">Phone Number</th>'+
+        '<th class="table-title" scope="col">Age</th>'+
+        '<th class="table-title" scope="col">Comment</th>'+
     '</tr>'+
     '</thead>'+
     '<tbody>'
@@ -242,14 +242,14 @@ function getHtmlForAssignmentsForm(){
     return '<table class="table">'+
         '<thead>'+
         '<tr>'+
-        '<th scope="col">#</th>'+
-        '<th scope="col">StartTime </th>'+
-        '<th scope="col">End Time</th>'+
-        '<th scope="col">Boat Types</th>'+
-        '<th scope="col">Rowers</th>'+
-        '<th scope="col">Boat Id</th>'+
-        '<th scope="col">Boat name</th>'+
-        '<th scope="col">Boat Type</th>'+
+        '<th class="lbl_white" scope="col">#</th>'+
+        '<th class="table-title" scope="col">StartTime </th>'+
+        '<th class="table-title" scope="col">End Time</th>'+
+        '<th class="table-title" scope="col">Boat Types</th>'+
+        '<th class="table-title" scope="col">Rowers</th>'+
+        '<th class="table-title" scope="col">Boat Id</th>'+
+        '<th class="table-title" scope="col">Boat name</th>'+
+        '<th class="table-title" scope="col">Boat Type</th>'+
         '</tr>'+
         '</thead>'+
         '<tbody>'
@@ -262,13 +262,13 @@ function createHtmlForAssignmentRow(assignment){
         '<input class="form-check-input" type="radio" name="flexRadioDefault" id = "flexRadioDefault">'+
         '</div>'+
         '</th>'+
-        '<td>' + localDateTimeToString(assignment.registration.activityDate) + '</td>'+
-        '<td>' + localDateTimeToString(assignment.registration.endTime) + '</td>'+
-        '<td>' + createStringForBoatTypes(assignment.registration) + '</td>'+
-        '<td>' + creatStringForMembersInRegistration(assignment.registration) + '</td>'+
-        '<td>' + assignment.boat.serialBoatNumber + '</td>'+
-        '<td>' + assignment.boat.boatName + '</td>'+
-        '<td>' + assignment.boat.boatType + '</td>'+
+        '<td class="table-row">' + localDateTimeToString(assignment.registration.activityDate) + '</td>'+
+        '<td class="table-row">' + localDateTimeToString(assignment.registration.endTime) + '</td>'+
+        '<td class="table-row">' + createStringForBoatTypes(assignment.registration) + '</td>'+
+        '<td class="table-row">' + creatStringForMembersInRegistration(assignment.registration) + '</td>'+
+        '<td class="table-row">' + assignment.boat.serialBoatNumber + '</td>'+
+        '<td class="table-row">' + assignment.boat.boatName + '</td>'+
+        '<td class="table-row">' + assignment.boat.boatType + '</td>'+
         '</tr>';
 
 }
@@ -299,25 +299,18 @@ async function showAssignBoat() {
             html+= '<button type="button" class="btn btn-primary" onclick="selectRegistraion()">Next</button>'
         }
     }
-
-
-
-
-    else {
-
-    }
     pageContentManagerEl.innerHTML = html
-
 }
+
 function getHtmlForRegistraionTbale(){
     return '<table class="table">'+
         '<thead>'+
             '<tr>'+
-                '<th scope="col">#</th>'+
-                '<th scope="col">StartTime </th>'+
-                '<th scope="col">End Time</th>'+
-                '<th scope="col">Boat Types</th>'+
-                '<th scope="col">Rowers</th>'+
+                '<th class="table-row" scope="col">#</th>'+
+                '<th class="table-row" scope="col">StartTime </th>'+
+                '<th class="table-row" scope="col">End Time</th>'+
+                '<th class="table-row" scope="col">Boat Types</th>'+
+                '<th class="table-row" scope="col">Rowers</th>'+
                 '</tr>'+
             '</thead>'+
         '<tbody>'
@@ -343,14 +336,14 @@ async function makeSelectBoatForRegisration() {
             html = '<table class="table">'+
                 '<thead>'+
                 '<tr>'+
-                '<th scope="col">#</th>'+
-                '<th scope="col">Boat Name</th>'+
-                '<th scope="col">Serial</th>'+
-                '<th scope="col">Boat Type</th>'+
-                '<th scope="col">is Wide</th>'+
-                '<th scope="col">is Coastal</th>'+
-                '<th scope="col">is Private</th>'+
-                '<th scope="col">is Available</th>'+
+                '<th class="lbl_white" scope="col">#</th>'+
+                '<th class="table-title" scope="col">Boat Name</th>'+
+                '<th class="table-title" scope="col">Serial</th>'+
+                '<th class="table-title" scope="col">Boat Type</th>'+
+                '<th class="table-title" scope="col">is Wide</th>'+
+                '<th class="table-title" scope="col">is Coastal</th>'+
+                '<th class="table-title" scope="col">is Private</th>'+
+                '<th class="table-title" scope="col">Able To Sail</th>'+
                 '</tr>'+
                 '</thead>'+
                 '<tbody>'
@@ -408,11 +401,11 @@ async function assignBoat(registraion, boat) {
 function getHtmlForBoatDetails (boat){
     let html = '<h3>Boat Details</h3>'
     html+=
-        '<h4 scope="col">'+boat.boatName+'</h4>'+
-        '<h4 scope="col">'+boat.serialBoatNumber+'</h4>'+
-        '<h4 scope="col">'+boat.boatType+'</h4>'+
-        '<h4 scope="col">'+wideOrNot(boat)+'</h4>'+
-        '<h4 scope="col">'+costalOrNot(boat)+'</h4>'
+        '<h4 class="table-row" scope="col">'+boat.boatName+'</h4>'+
+        '<h4 class="table-row" scope="col">'+boat.serialBoatNumber+'</h4>'+
+        '<h4 class="table-row" scope="col">'+boat.boatType+'</h4>'+
+        '<h4 class="table-row" scope="col">'+wideOrNot(boat)+'</h4>'+
+        '<h4 class="table-row" scope="col">'+costalOrNot(boat)+'</h4>'
     return html;
 }
 function costalOrNot(boat){
@@ -465,10 +458,10 @@ function createHtmlForRegistrationRow(registration){
     '<input class="form-check-input" type="radio" name="flexRadioDefault" id = "flexRadioDefault">'+
     '</div>'+
     '</th>'+
-    '<td>' + localDateTimeToString(registration.activityDate) + '</td>'+
-    '<td>' + localDateTimeToString(registration.endTime) + '</td>'+
-    '<td>' + createStringForBoatTypes(registration) + '</td>'+
-    '<td>' + creatStringForMembersInRegistration(registration) + '</td>'+
+    '<td class="table-row">' + localDateTimeToString(registration.activityDate) + '</td>'+
+    '<td class="table-row">' + localDateTimeToString(registration.endTime) + '</td>'+
+    '<td class="table-row">' + createStringForBoatTypes(registration) + '</td>'+
+    '<td class="table-row">' + creatStringForMembersInRegistration(registration) + '</td>'+
     '</tr>';
     return html;
 }
@@ -487,8 +480,6 @@ function createStringForBoatTypes(registration){
     return string;
 }
 
-
-//TODO: move to another file
 function localDateTimeToString(localDateTime){
     return LocalDateToString(localDateTime.date)+ ' ' + localTimeToString(localDateTime.time)
 }

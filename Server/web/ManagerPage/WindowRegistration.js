@@ -97,11 +97,11 @@ async function showAllWindowsRegistration(){
     let htmlToInsert = '<table class="table">'+
         '<thead>'+
         '<tr>'+
-        '<th scope="col">#</th>'+
-        '<th scope="col">Activity</th>'+
-        '<th scope="col">Start Time</th>'+
-        '<th scope="col">End Time</th>'+
-        '<th scope="col">Boat Type</th>'+
+        '<th class="lbl_white" scope="col">#</th>'+
+        '<th class="table-title" scope="col">Activity</th>'+
+        '<th class="table-title" cope="col">Start Time</th>'+
+        '<th class="table-title" scope="col">End Time</th>'+
+        '<th class="table-title" scope="col">Boat Type</th>'+
         '</tr>'+
         '</thead>'+
         '<tbody>'
@@ -109,7 +109,7 @@ async function showAllWindowsRegistration(){
     windowsList.forEach(window => {htmlToInsert += createElementWindow(window)});
     htmlToInsert += '</tbody></table>'+
         '<td>'+
-        '<button type="submit" class="btn btn-primary" id="removeWindowButton" onclick="removeWindow()">Remove Window Registration</button>'+
+        '<button style="margin-left: 470px" type="submit" class="btn btn-primary" id="removeWindowButton" onclick="removeWindow()">Remove Window Registration</button>'+
         '</td> <td></td><td></td>'+
         '<td>'+
         '<button type="submit" class="btn btn-primary" id="editWindowButton" onclick="editWindowForm()">Edit Window Regiistration</button>'+
@@ -133,10 +133,10 @@ function createElementWindow(window){
         '<input class="form-check-input" type="radio" name="flexRadioDefaultWindow" id = "flexRadioDefaultWindow">'+
         '</div>'+
         '</th>'+
-        '<td>' + window.activityType + '</td>'+
-        '<td>' + window.startTime + '</td>'+
-        '<td>' + window.endTime + '</td>'+
-        '<td>' + boatType + '</td>'+
+        '<td class="table-row">' + window.activityType + '</td>'+
+        '<td class="table-row">' + window.startTime + '</td>'+
+        '<td class="table-row">' + window.endTime + '</td>'+
+        '<td class="table-row">' + boatType + '</td>'+
         '</tr>';
     return htmlBoat;
 }
