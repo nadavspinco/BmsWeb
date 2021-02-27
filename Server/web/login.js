@@ -62,3 +62,12 @@ function ValidInputArgs(email, password) {
     return true;
 }
 
+// var x = document.getElementById("myAudio");
+// function playAudio() {
+//     x.play();
+// }
+//
+// function pauseAudio() {
+//     x.pause();
+// }
+
