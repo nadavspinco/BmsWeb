@@ -25,21 +25,18 @@ private Gson gson = new Gson();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("in LastUpdatedNotifications");
         getLastUpdated(req,resp);
     }
 
     private void getLastUpdated(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession();
         if (session == null) {
-            // TODO MAKE TO REDIRECT TO HOME PAGE
             return;
         }
 
         String memberID = SessionUtils.getUserId(req);
         if (memberID == null || memberID.isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            // TODO MAKE TO REDIRECT TO HOME PAGE
             return;
         }
         SystemManagement systemManagement = ServletUtils.getSystemManagment(req.getServletContext());
@@ -50,7 +47,6 @@ private Gson gson = new Gson();
         }
         LocalDateTime lastUpdated = gson.fromJson(localDateTimeString,LocalDateTime.class);
 
-        System.out.println("here!!!");
         NotificationManager notificationManager = (NotificationManager) getServletContext().getAttribute(Constants.NotificationManager);
         NotificationsServlet.Response response = new NotificationsServlet.Response();
         response.isUpdated = notificationManager.isUpdated(member,lastUpdated);

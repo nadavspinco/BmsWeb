@@ -73,7 +73,7 @@ public class AssignmentsServlet extends HttpServlet {
             e.printStackTrace();
         }
         catch (InvalidAssignmentException e){
-            response.errorCode = 2;//TODO: constans
+            response.errorCode = 2;
             response.errorDetails = "InvalidAssignmentException";
         }
         finally {
@@ -110,7 +110,6 @@ public class AssignmentsServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("on doPut");
         unionAssinmentAndRegistration(req,resp);
     }
 
@@ -120,7 +119,6 @@ public class AssignmentsServlet extends HttpServlet {
         Response response = new Response();
         try(BufferedReader reader = req.getReader()){
             String jsonString = reader.lines().collect(Collectors.joining());
-            System.out.println(jsonString);
             unionAssignmentRequest request = gson.fromJson(jsonString, unionAssignmentRequest.class);
 
             systemManagement.unionRequestToAssignment(request.assignment, request.registration);
@@ -130,12 +128,9 @@ public class AssignmentsServlet extends HttpServlet {
                             (member,NotificationMessages.getNewAssignmentHeader(request.registration),
                                     NotificationMessages.getAssignmentMessage(request.registration,request.assignment.getBoat())));
 
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-        catch (JsonSyntaxException e)
-        {
-            System.out.println("failed gson on unionAssinmentAndRegistration");
+        catch (JsonSyntaxException | IOException e) {
+            e.printStackTrace();
         }
 
         finally {

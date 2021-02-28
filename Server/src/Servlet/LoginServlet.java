@@ -28,7 +28,6 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("in do delete");
         logoutCurrentUser(req,resp);
     }
 

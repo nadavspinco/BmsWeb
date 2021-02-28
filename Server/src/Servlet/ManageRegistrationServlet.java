@@ -78,7 +78,7 @@ public class ManageRegistrationServlet extends HttpServlet {
 
             resp.setStatus(HttpServletResponse.SC_OK);
             systemManagement.removeRegistrationRequestByMember(registration);
-            String redirectUrlPage = mainMember.getIsManager() ? Constants.ManagerPage : Constants.Member_Page;
+            String redirectUrlPage = mainMember.getIsManager() ? Constants.ManagerPage : Constants.MemberPage;
             out.print(redirectUrlPage);
         }
         catch (IOException e) {

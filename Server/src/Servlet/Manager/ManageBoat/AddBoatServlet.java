@@ -29,7 +29,7 @@ public class AddBoatServlet extends HttpServlet {
             SystemManagement systemManagement = ServletUtils.getSystemManagment(getServletContext());
             HttpSession session = req.getSession();
             if (session == null) {
-                out.print(Constants.Error);// TODO MAKE TO REDIRECT TO HOME PAGE
+                out.print(Constants.Error);
                 return;
             }
 
@@ -44,7 +44,7 @@ public class AddBoatServlet extends HttpServlet {
 
             if(systemManagement.isBoatExistBySerial(serial)){
                 resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                out.print(Constants.Existed_Serial);// TODO MAKE TO REDIRECT TO HOME PAGE
+                out.print(Constants.Existed_Serial);
                 return;
             }
 

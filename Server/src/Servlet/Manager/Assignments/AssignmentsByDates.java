@@ -33,7 +33,6 @@ public class AssignmentsByDates extends HttpServlet {
         try(PrintWriter out = resp.getWriter()){
             out.print(responseString);
             out.flush();
-            System.out.println(responseString);
         } catch (IOException e) {
             e.printStackTrace();
         }

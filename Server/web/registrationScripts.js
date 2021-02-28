@@ -70,7 +70,7 @@ async function makeWindowRegistrationSelection(){
     if (responseObj != null && responseObj != undefined) {
         setWindowRegistrations(responseObj)
     } else {
-        //TODO: no connection!
+        alert("connection lost")
     }
 }
 

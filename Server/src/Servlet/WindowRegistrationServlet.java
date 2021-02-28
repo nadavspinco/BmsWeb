@@ -29,7 +29,6 @@ public class WindowRegistrationServlet extends HttpServlet {
             Response response = new Response();
             response.windowRegistrations =windowRegistrations;
             String responseString = gson.toJson(response,Response.class);
-            System.out.println(responseString);
             out.write(responseString);
         }
     }

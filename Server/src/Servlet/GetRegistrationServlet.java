@@ -30,7 +30,7 @@ public class GetRegistrationServlet extends HttpServlet {
             String jsonString = bufferedReader.lines().collect(Collectors.joining());
             Request request = gson.fromJson(jsonString,Request.class);
             if(request.amountOfDays <=0){
-                response.errorCode = 2;//TODO:
+                response.errorCode = 2;
             }
             else {
                SystemManagement systemManagement= (SystemManagement) getServletContext().getAttribute(Constants.SystemManagment);

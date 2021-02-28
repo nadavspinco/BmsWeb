@@ -30,7 +30,6 @@ public class RemoveMemberFromAssignment extends HttpServlet {
         Response response = new Response();
         try (BufferedReader reader = req.getReader()) {
             String jsonString = reader.lines().collect(Collectors.joining());
-            System.out.println(jsonString);
             Request request = gson.fromJson(jsonString, Request.class);
             systemManagement.removeMemberFromAssigment(request.assignment, request.member,request.toSplitRegistration );
             NotificationManager notificationManager = (NotificationManager) getServletContext().getAttribute(Constants.NotificationManager);

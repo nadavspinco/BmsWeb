@@ -83,7 +83,6 @@ public class ValidateMembersServlet extends HttpServlet {
         finally {
             try (PrintWriter out = resp.getWriter()){
                 String responseString = gson.toJson(response);
-                System.out.println(responseString);
                 out.write(responseString);
                 out.flush();
             } catch (IOException e) {
