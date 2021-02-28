@@ -253,6 +253,10 @@ async function sendRegistration(){
         html += '<h3 class="lbl_white"> Registration Added successfully</h3> '
         pageContentManagerEl.innerHTML= html;
     }
+    else if(responseObj.errorCode === 2){
+        html += '<h3 class="lbl_white"> The max capacity of the boatType you had choosed is smaller than the number of the rowers in the registration </h3> '
+        pageContentEl.innerHTML= html;
+    }
     else {
         html += '<h3 class="lbl_white"> there is a rower who is part of other registration / assignment in this time</h3> '
         pageContentManagerEl.innerHTML= html;
@@ -397,12 +401,16 @@ function createBoatTypeList(boatTypes){
 }
 
 function createWindowDetails(window){
-    let toSend = window.activityType.toString();
-    toSend += "at: ";
-    toSend += localTimeToString(window.startTime);
-    toSend += "-";
-    toSend += localTimeToString(window.endTime);
-    return toSend;
+        let toSend;
+        if (window.activityType.toString() === null)
+            toSend = "-";
+        else
+            toSend = window.activityType.toString();
+        toSend += " at: ";
+        toSend += localTimeToString(window.startTime);
+        toSend += "-";
+        toSend += localTimeToString(window.endTime);
+        return toSend;
 }
 
 function wantedRegistration() {

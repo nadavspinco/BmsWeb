@@ -71,6 +71,12 @@ private Gson gson = new Gson();
 
                 Set<BoatTypeEnum > boatTypeEnumSet = new HashSet<BoatTypeEnum>();
                 RegistrationInput.boatTypes.forEach(boatTypeEnum -> boatTypeEnumSet.add(boatTypeEnum));
+                int maxCapacity = BoatTypeEnum.biggestBoatSize(boatTypeEnumSet);
+                if (maxCapacity < memberList.size()){
+                    response.errorCode = Constants.InvalidCapacityRegistration;
+                    return;
+                }
+
                 WindowRegistration windowRegistration;
                 if(RegistrationInput.fromWindowRegistration == false){
                      windowRegistration = new WindowRegistration(LocalTime.parse(RegistrationInput.startTime),LocalTime.parse(RegistrationInput.endTime));
@@ -86,7 +92,8 @@ private Gson gson = new Gson();
             else {
                 System.out.println("bad");
             }
-        } catch (JsonSyntaxException e)
+        }
+        catch (JsonSyntaxException e)
         {
             System.out.println("failed gson");
         }

@@ -333,7 +333,7 @@ async function editMember(event){
         newName = null;
 
     const editPhoneCheckBoxEl = document.querySelector('#editPhoneCheckBox')
-    const editPhoneEl = document.querySelector('#editMemberName')
+    const editPhoneEl = document.querySelector('#editMemberPhoneInput')
     let newPhone = editPhoneEl.value;
     if (editPhoneCheckBoxEl.checked){
         if (!(/^[0-9]+$/.test(newPhone))) {

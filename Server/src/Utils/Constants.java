@@ -18,6 +18,8 @@ public class Constants {
     public static final String Existed_Email = "errorEmail";
     public static final String Existed_Serial = "errorSerial";
     public static final int InvalidRegistration = 1;
+    public static final int InvalidCapacityRegistration = 2;
+
 
     public static final String ChatManager = "ChatManager";
     public static final int InvalidRegistrationForMembers = 3;
