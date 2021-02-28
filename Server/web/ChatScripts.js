@@ -63,19 +63,22 @@ async function fetchChatMessages() {
 }
 
 async function checkForNewMessages() {
- const resonse = await fetch ('lastUpdateChat',
-     {
-         method: 'POST',
-         headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
-         body: JSON.stringify(lestUpdateChat)
-     })
-    const responseObj = await resonse.json();
- if(responseObj.errorCode === 0){
-     if(responseObj.isUpdated === false){
-         fetchChatMessages()
+    try {
+        const resonse = await fetch('lastUpdateChat',
+            {
+                method: 'POST',
+                headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
+                body: JSON.stringify(lestUpdateChat)
+            })
+        const responseObj = await resonse.json();
+        if (responseObj.errorCode === 0) {
+            if (responseObj.isUpdated === false) {
+                fetchChatMessages()
 
-     }
- }
+            }
+        }
+    }
+    catch (e){}
 
     setTimeout(checkForNewMessages,updateTime);
 }

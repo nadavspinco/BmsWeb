@@ -106,7 +106,10 @@ function createBoatTypeList(boatTypes){
 }
 
 function createWindowDetails(window){
-    let toSend = window.activityType.toString();
+    let toSend = "";
+    if(window.activityType!= null){
+        toSend = window.activityType.toString();
+    }
     toSend += "at: ";
     toSend += localTimeToString(window.startTime);
     toSend += "-";
