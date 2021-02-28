@@ -9,16 +9,18 @@ window.addEventListener('load',()=>{
     }
 )
 async function updateNotifications(){
-    const isUpdatedResponse = await fetch('../lastUpdatedNotifications',
-        {
-            method: 'POST',
-            headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
-            body: JSON.stringify(notificationsObject.lastUpdated)
-        })
-    const isUpdatedResponseObj = await  isUpdatedResponse.json();
-    if(isUpdatedResponseObj.isUpdated === false){
-        fetchNotifications()
-    }
+    try {
+        const isUpdatedResponse = await fetch('../lastUpdatedNotifications',
+            {
+                method: 'POST',
+                headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
+                body: JSON.stringify(notificationsObject.lastUpdated)
+            })
+        const isUpdatedResponseObj = await isUpdatedResponse.json();
+        if (isUpdatedResponseObj.isUpdated === false) {
+            fetchNotifications()
+        }
+    }catch (e){}
     setTimeout(updateNotifications,refreshNotificationsTime);
 }
 

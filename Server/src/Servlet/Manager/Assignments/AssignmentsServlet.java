@@ -26,7 +26,6 @@ public class AssignmentsServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("on AssignmentsServlet delete");
         deleteAssignment(req, resp);
     }
 
@@ -36,8 +35,12 @@ public class AssignmentsServlet extends HttpServlet {
         try(BufferedReader reader = req.getReader()){
             String jsonString = reader.lines().collect(Collectors.joining());
             DeleteAssignmentRequest request = gson.fromJson(jsonString, DeleteAssignmentRequest.class);
-            System.out.println("after gson - delete option");
             systemManagement.removeAssignment(request.assignment,request.toDeleteRegistration);
+            NotificationManager notificationManager = (NotificationManager) getServletContext().getAttribute(Constants.NotificationManager);
+            request.assignment.getRegistration().getRowersListInBoat().forEach(member ->
+                    notificationManager.addPrivateNotification
+                            (member,NotificationMessages.getNewAssignmentHeader(request.assignment.getRegistration()),
+                                    NotificationMessages.getAssignmentMessage(request.assignment.getRegistration(),request.assignment.getBoat())));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -62,7 +65,9 @@ public class AssignmentsServlet extends HttpServlet {
             systemManagement.assignBoat(request.registration,request.boat);
             NotificationManager notificationManager = (NotificationManager) getServletContext().getAttribute(Constants.NotificationManager);
             request.registration.getRowersListInBoat().forEach(member ->
-                    notificationManager.addPrivateNotification(member,getAssignmentHeader(request.registration),getAssignmentMessage(request.registration,request.boat)));
+                    notificationManager.addPrivateNotification
+                            (member,NotificationMessages.getNewAssignmentHeader(request.registration),
+                                    NotificationMessages.getAssignmentMessage(request.registration,request.boat)));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -82,23 +87,7 @@ public class AssignmentsServlet extends HttpServlet {
         }
     }
 
-    private String getAssignmentHeader(Registration registration){
-        return "new Assignment on " +registration.getActivityDate().toLocalDate();
-    }
 
-    private String getAssignmentMessage(Registration registration,Boat boat){
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("rowers:\n");
-        registration.getRowersListInBoat().forEach(member -> {
-            stringBuilder.append(member.getNameMember());
-            stringBuilder.append("\n");
-        });
-        stringBuilder.append(boat.getBoatName());
-        stringBuilder.append(" ");
-        stringBuilder.append(boat.getBoatType());
-        stringBuilder.append("\n");
-        return stringBuilder.toString();
-    }
 
     static class DeleteAssignmentRequest{
         Assignment assignment;
@@ -127,14 +116,20 @@ public class AssignmentsServlet extends HttpServlet {
 
     private void unionAssinmentAndRegistration(HttpServletRequest req, HttpServletResponse resp) {
         SystemManagement systemManagement = (SystemManagement) getServletContext().getAttribute(Constants.SystemManagment);
-        System.out.println("in unionAssinmentAndRegistration");
+
         Response response = new Response();
         try(BufferedReader reader = req.getReader()){
             String jsonString = reader.lines().collect(Collectors.joining());
             System.out.println(jsonString);
             unionAssignmentRequest request = gson.fromJson(jsonString, unionAssignmentRequest.class);
-            System.out.println("gson worked");
+
             systemManagement.unionRequestToAssignment(request.assignment, request.registration);
+            NotificationManager notificationManager = (NotificationManager) getServletContext().getAttribute(Constants.NotificationManager);
+            request.registration.getRowersListInBoat().forEach(member ->
+                    notificationManager.addPrivateNotification
+                            (member,NotificationMessages.getNewAssignmentHeader(request.registration),
+                                    NotificationMessages.getAssignmentMessage(request.registration,request.assignment.getBoat())));
+
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -71,9 +71,9 @@ public interface EngineInterface {
 
     boolean isEmailAlreadyExist(String email);
 
-    boolean isMemberAlreadyLoggedIn(String emailInput);
+   // boolean isMemberAlreadyLoggedIn(String emailInput);
 
-    void logout(Member member);
+ //   void logout(Member member);
 
     void addWindowRegistration(WindowRegistration windowRegistration);
 
