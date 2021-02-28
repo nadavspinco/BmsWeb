@@ -12,9 +12,17 @@ function showMainImportFrm(){
     '<option value="2">Boats</option>'+
     '<option value="3">Activities</option>'+
     '</select><br>'+
-    '</div>'
+    '</div>'+
+    '<select class="form-select" id="deleteSelect">'+
+    '<option selected disabled> Delete all existed data?</option>'+
+    '<option value="1">Yes</option>'+
+    '<option value="2">No</option>'+
+    '</select><br>'
+
+    html += '<input class="lbl_white" type="file" id="importRowerrr" accept=".xml">';
+    html += '<input type="Submit" id="clickImport" class="btn btn-primary" onclick=" switcherForm()" value="Submit"><br>'
+
     pageContentManagerEl.innerHTML = html;
-    pageContentManagerEl.innerHTML += '<input type="Submit" class="btn btn-primary" onclick=" switcherForm()" value="Submit"><br>'
 }
 
 function switcherForm(){
@@ -22,76 +30,85 @@ function switcherForm(){
     const whatToImport = dataTypeSelectButtonEl.value;
     switch (whatToImport){
         case "1":
-            showImportRowerForm("Rower's");
+            importRower();
             break;
         case "2":
-            showImportBoatForm("Boats's");
+            importBoats();
             break;
         case "3":
-            showImportActivityForm("Activity's");
+            importActivity();
             break;
         default:
             break;
     }
 }
-function showImportRowerForm(whatToAdd){
-    clearPageContent();
-    let html = '<form action="../importRower" enctype="multipart/form-data" method="POST">'+
-        '<h3 class="import" >Select ' + whatToAdd + ' File:</h3>'+
-        '<div class="col-md-12">'+
-        '<div class="col-12">'+
-            '<select class="form-select" id="deleteSelect">'+
-                '<option selected disabled> Delete all existed data?</option>'+
-                '<option value="1">Yes</option>'+
-                '<option value="2">No</option>'+
-            '</select><br>'+
-        '</div>'+
-        '<input type="file" class="btn btn-primary" name="file1" accept=".xml"><br><br>'+
-        '<input type="Submit" class="btn btn-primary" onclick="ifDeleteRower()" value="Upload File"><br>'+
-        '</div>'+
-        '</form>'
-    pageContentManagerEl.innerHTML = html;
+async function importRower(){
+    ifDeleteRower();
+
+    let inputEl = document.querySelector('#importRowerrr');
+    let data = new FormData();
+    data.append('file', inputEl.files[0])
+
+    fetch('../importRower',{
+        method: 'post',
+        body: data,
+    }).then(async function(response){
+        let resAsJson = await response.text();
+
+        if (resAsJson === null || resAsJson === "" || resAsJson === "null")
+            pageContentManagerEl.innerHTML = '<label class="lbl_white"> The Rowers data has been imported successfully without any data error while importing </label>' ;
+        else {
+            let html = '<label class="lbl_white"> The Rowers data has been imported successfully </label><br><br>' ;
+            html += '<label class="lbl_white">' + resAsJson + '</label>'
+            pageContentManagerEl.innerHTML = html;
+        }
+    })
 }
 
-function showImportBoatForm(){
-    clearPageContent();
-    let html = '<form action="../importBoat" enctype="multipart/form-data" method="POST">'+
-        '<h3>Select a File:</h3>'+
-        '<div class="col-md-4">'+
-        '<div class="col-8">'+
-        '<select class="form-select" id="deleteSelect">'+
-        '<option selected disabled>Delete all existed data?</option>'+
-        '<option value="1">Yes</option>'+
-        '<option value="2">No</option>'+
-        '</select><br>'+
-        '</div>'+
-        '<input type="file" class="btn btn-primary" name="file1" accept=".xml"><br><br>'+
-        '<input type="Submit" class="btn btn-primary" onclick="ifDeleteBoat()" value="Upload File"><br>'+
+async function importBoats(){
+    ifDeleteBoat();
 
-        '</div>'+
-        '</form>'
-    pageContentManagerEl.innerHTML = html;
+    let inputEl = document.querySelector('#importRowerrr');
+    let data = new FormData();
+    data.append('file', inputEl.files[0])
+
+    fetch('../importBoat',{
+        method: 'post',
+        body: data,
+    }).then(async function(response){
+        let resAsJson = await response.text();
+
+        if (resAsJson === null || resAsJson === "" || resAsJson === "null")
+            pageContentManagerEl.innerHTML = '<label class="lbl_white"> The Boats data has been imported successfully without any data error while importing </label>' ;
+        else {
+            let html = '<label class="lbl_white"> The Boats data has been imported successfully </label><br><br>' ;
+            html += '<label class="lbl_white">' + resAsJson + '</label>'
+            pageContentManagerEl.innerHTML = html;
+        }
+    })
 }
 
+async function importActivity(){
+    ifDeleteActivity();
 
-function showImportActivityForm(){
-    clearPageContent();
-    let html = '<form action="../importActivity" enctype="multipart/form-data" method="POST">'+
-        '<h3>Select a File:</h3>'+
-        '<div class="col-md-4">'+
-        '<div class="col-8">'+
-        '<select class="form-select" id="deleteSelect">'+
-        '<option selected disabled>Delete all existed data?</option>'+
-        '<option value="1">Yes</option>'+
-        '<option value="2">No</option>'+
-        '</select><br>'+
-        '</div>'+
-        '<input type="file" class="btn btn-primary" name="file1" accept=".xml"><br><br>'+
-        '<input type="Submit" class="btn btn-primary" onclick="ifDeleteActivity()"value="Upload File"><br>'+
+    let inputEl = document.querySelector('#importRowerrr');
+    let data = new FormData();
+    data.append('file', inputEl.files[0])
 
-        '</div>'+
-        '</form>'
-    pageContentManagerEl.innerHTML = html;
+    fetch('../importActivity',{
+        method: 'post',
+        body: data,
+    }).then(async function(response){
+        let resAsJson = await response.text();
+
+        if (resAsJson === null || resAsJson === "" || resAsJson === "null")
+            pageContentManagerEl.innerHTML = '<label class="lbl_white"> The Activities data has been imported successfully without any data error while importing </label>' ;
+        else {
+            let html = '<label class="lbl_white"> The Activities data has been imported successfully </label><br><br>' ;
+            html += '<label class="lbl_white">' + resAsJson + '</label>'
+            pageContentManagerEl.innerHTML = html;
+        }
+    })
 }
 
 async function ifDeleteRower(){

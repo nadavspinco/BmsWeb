@@ -1230,12 +1230,12 @@ public class SystemManagement implements EngineInterface {
                         if (!xmlManagement.checkMemberLAlreadyExist(memberL))        // check member is not already exist
                             xmlManagement.createMemberFromImport(memberL);           // create the generate member to the system
                         else
-                            wrongDetails.add(memberL.getName() + " with existed email");
+                            wrongDetails.add(memberL.getName() + " with existed email, ");
                     }
                     else
-                        wrongDetails.add(memberL.getName() + " with invalid email email");
+                        wrongDetails.add(memberL.getName() + " with invalid email email, ");
                 } else
-                      wrongDetails.add(memberL.getName() + " with empty email / name");
+                      wrongDetails.add(memberL.getName() + " with empty email / name, ");
             }
             linkBoatsToMembersAfterImport();
             return wrongDetails.toArray(new String[0]);

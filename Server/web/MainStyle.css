@@ -88,4 +88,10 @@ td {
     margin-left: 150px;
     margin-top: 20px;
     background-color: antiquewhite;
+    max-height: 500px;
 }
+
+/*.nav-link dropdown-toggle{*/
+/*    color: coral;*/
+/*    font-weight: bold;*/
+/*}*/
