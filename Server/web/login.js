@@ -25,6 +25,10 @@ async function memberDetailsIn(event) {
         });
 
         const result = await response.text();
+        if(result === "Incorrect email or password, try again"){
+            alert(result);
+            return;
+        }
         window.location.replace(result)
     }
 }

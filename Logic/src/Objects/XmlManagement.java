@@ -282,6 +282,42 @@ public class XmlManagement {
         }
     }
 
+    public static ChatManager importChatManagerDetails() throws Exception {
+        try {
+            InputStream inputStream = new FileInputStream(new File("c:\\temp\\ChatManager.xml"));
+            // file location by Liron
+            JAXBContext jxb = JAXBContext.newInstance(ChatManager.class);
+            Unmarshaller unmarshaller = jxb.createUnmarshaller();
+            ChatManager chatManager = (ChatManager) unmarshaller.unmarshal(inputStream);
+            return chatManager;
+        }
+        catch (JAXBException e) {
+            throw new Exception("Load xml was failed",e);
+        }
+        catch (FileNotFoundException e) {
+            throw new Exception("Filed not found",e);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            throw new Exception("Load xml was failed",e);
+        }
+    }
+
+    public static void exportChatManagerDetails(ChatManager chatManager){
+        try {
+            File file = new File("c:\\temp\\ChatManager.xml");
+            // file location by Liron
+            JAXBContext jaxbContext = JAXBContext.newInstance(ChatManager.class);
+            Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            jaxbMarshaller.marshal(chatManager, file);
+        }
+        catch (JAXBException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public static SystemManagement importSystemManagementDetails() throws Exception {
         try {
             InputStream inputStream = new FileInputStream(new File("c:\\temp\\SystemManagement.xml"));

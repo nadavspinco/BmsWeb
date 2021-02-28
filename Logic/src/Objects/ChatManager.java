@@ -1,5 +1,6 @@
 package Objects;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
@@ -13,8 +14,15 @@ public class ChatManager {
         messages.add(new ChatMessage(header,content,member));
         lastUpdate = LocalDateTime.now();
     }
+    @XmlElement(name = "Messages")
     public ChatMessage [] getMessages(){
        return messages.toArray(new ChatMessage[0]);
+    }
+
+    private void setMessages(ChatMessage [] messages){
+        for(ChatMessage message : messages){
+            this.messages.add(message);
+        }
     }
 
     public boolean isUpdated(LocalDateTime localDateTime){
@@ -26,4 +34,12 @@ public class ChatManager {
     public LocalDateTime getLastUpdate(){
         return this.lastUpdate;
     }
+    @XmlElement(name = "LastUpdateString")
+    private String  getLastUpdateString() {return lastUpdate.toString();}
+
+    private void setLastUpdateString(String lastUpdateString){
+        this.lastUpdate = LocalDateTime.parse(lastUpdateString);
+    }
+
+
 }

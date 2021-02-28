@@ -49,9 +49,7 @@ async function sendNotificationToServlet(header,content){
     if(response.errorCode === 0){
         pageContentManagerEl.innerHTML = '<h2>notification added successfully </h2>'
     }
-    else {
-        //TODO: make a note
-    }
+
 }
 function showAllNonPrivateNotifications(){
     pageContentManagerEl.innerHTML = ''
