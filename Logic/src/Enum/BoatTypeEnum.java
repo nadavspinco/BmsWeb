@@ -19,12 +19,12 @@ public enum BoatTypeEnum
         switch (number)        {
             case 1: { return SingleBoat; }
             case 2: { return DoubleBoat; }
-            case 3: { return DoubleBoatPaddle;}
-            case 4: { return DoubleCoxed; }
+            case 4: { return DoubleBoatPaddle;}
+            case 3: { return DoubleCoxed; }
             case 5: { return DoublePaddleCoxed; }
             case 6: { return QuartetBoat; }
-            case 7: { return QuartetBoatPaddle; }
-            case 8: { return QuartetBoatCoxed; }
+            case 8: { return QuartetBoatPaddle; }
+            case 7: { return QuartetBoatCoxed; }
             case 9: { return QuartetBoatPaddleCoxed; }
             case 10: { return OctetBoatCoxed; }
             case 11: { return OctetBoatCoxedPaddle; }
