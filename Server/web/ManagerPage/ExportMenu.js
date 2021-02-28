@@ -15,8 +15,8 @@ function showMainExportForm(){
 
 
 async function downloadRowers(){
-    response = await fetch('../exportRower', {method: 'get'});
-    var answer = await response.text();
+   let  response = await fetch('../exportRower', {method: 'get'});
+    let answer = await response.text();
     document.getElementById("exportRower").addEventListener('click',function () {
         download("rowers.xml",answer);});
     // alert("The Rower export has been done successfully")
