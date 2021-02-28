@@ -34,7 +34,7 @@ public class AssigmentHistoryServlet extends HttpServlet {
             HttpSession session = req.getSession();
             if (session == null) {
                 return; //
-            }// TODO MAYBE SOMTHING ELSE
+            }
             String memberID = (String) session.getAttribute(Constants.USERID);
             Response response = new Response();
 
@@ -56,7 +56,6 @@ public class AssigmentHistoryServlet extends HttpServlet {
             List<Registration>  registrationList =systemManagement.getRegiListConfirmedAccordingMember(member);
             response.registrationList = registrationList.toArray(new Registration[0]);
             String jsonString = gson.toJson(response,Response.class);
-            System.out.println(jsonString);
             out.println(jsonString);
             out.flush();
     } catch (IOException e) {

@@ -22,7 +22,6 @@ public class BoatSuggestionServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("BoatSuggestionServlet");
         getBoatSuggestion(req,resp);
     }
 
@@ -31,18 +30,11 @@ public class BoatSuggestionServlet extends HttpServlet {
         Response response = new Response();
         try(BufferedReader reader = req.getReader()){
             String jsonString = reader.lines().collect(Collectors.joining());
-            System.out.println(jsonString);
             Request request = gson.fromJson(jsonString,Request.class);
             if(request != null)
             {
-                System.out.println("not null");
                 Boat []  boats=systemManagement.getArrayOfValidBoats(request.registration);
-                System.out.println("after getArrayOfValidBoats");
                 response.boats = boats;
-                System.out.println("after getArrayOfValidBoats");
-            }
-            else {
-                System.out.println("gson gave us null");
             }
         } catch (IOException e) {
             e.printStackTrace();

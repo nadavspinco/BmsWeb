@@ -43,21 +43,17 @@ public class ChatServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         addMessage(req,resp);
-
     }
-
 
     private void addMessage(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession();
         if (session == null) {
-            // TODO MAKE TO REDIRECT TO HOME PAGE
             return;
         }
 
         String memberID = SessionUtils.getUserId(req);
         if (memberID == null || memberID.isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            // TODO MAKE TO REDIRECT TO HOME PAGE
             return;
         }
         SystemManagement systemManagement = ServletUtils.getSystemManagment(req.getServletContext());

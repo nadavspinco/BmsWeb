@@ -41,11 +41,9 @@ public class AlreadyLoggedInServlet extends HttpServlet {
         if(member != null){
             if(member.getIsManager()){
                resp.sendRedirect(Constants.Manager_Page);
-                System.out.println("redirect to Manager_Page");
             }
             else {
                 resp.sendRedirect(Constants.Member_Page);
-                System.out.println("redirect to Member_Page");
             }
         }
 

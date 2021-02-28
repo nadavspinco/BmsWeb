@@ -127,9 +127,6 @@ async function removeTheChosenMember(){
         alert("remove member succeeded");
         showAssignmentsByDate(assignmentsScriptsObj.chosenDate);
     }
-    else {
-        //TODO: error message
-    }
 }
 
 function getHtmlForMemberDetails(member){

@@ -17,18 +17,15 @@ public class ContextListener implements ServletContextListener {
         createEngine(servletContextEvent.getServletContext());
         createNotificationManager(servletContextEvent.getServletContext());
         createChatManager(servletContextEvent.getServletContext());
-        System.out.println("The app is on");
     }
 
     private void createChatManager(ServletContext servletContext) {
         ChatManager chatManager;
         try {
-            System.out.println("chat is good");
             chatManager = XmlManagement.importChatManagerDetails();
 
         } catch (Exception e) {
             chatManager =  new ChatManager();
-            System.out.println("chat is bad");
         }
         servletContext.setAttribute(Constants.ChatManager,chatManager);
     }
@@ -41,17 +38,14 @@ public class ContextListener implements ServletContextListener {
         XmlManagement.exportSystemManagementDetails(systemManagement);
         XmlManagement.exportNotificationManagerDetails(notificationManager);
         XmlManagement.exportChatManagerDetails(chatManager);
-        System.out.println("The app is down");
     }
 
     private void createEngine(ServletContext servletContext){
         SystemManagement systemManagement = null;
         try {
             systemManagement = XmlManagement.importSystemManagementDetails();
-            System.out.println("import good!!");
         } catch (Exception e) {
            systemManagement = new SystemManagement();
-            System.out.println("import bad!!");
         }
 
         servletContext.setAttribute(Constants.SystemManagment, systemManagement);
@@ -61,10 +55,8 @@ public class ContextListener implements ServletContextListener {
         NotificationManager manager ;
         try {
             manager = XmlManagement.importNotificationManagerDetails() ;
-            System.out.println("notification GOOD!");
 
         } catch (Exception e) {
-            System.out.println("notification failed");
             manager = new NotificationManager();
         }
         servletContext.setAttribute(Constants.NotificationManager, manager);

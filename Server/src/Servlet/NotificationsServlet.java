@@ -52,14 +52,12 @@ public class NotificationsServlet extends HttpServlet {
     private void deleteNotification(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession();
         if (session == null) {
-            // TODO MAKE TO REDIRECT TO HOME PAGE
             return;
         }
 
         String memberID = SessionUtils.getUserId(req);
         if (memberID == null || memberID.isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            // TODO MAKE TO REDIRECT TO HOME PAGE
             return;
         }
         String notificationString;
@@ -68,16 +66,13 @@ public class NotificationsServlet extends HttpServlet {
         try(BufferedReader bufferedReader = req.getReader()) {
             notificationString = bufferedReader.lines().collect(Collectors.joining());
         }
-        System.out.println(notificationString);
         Notification notification = gson.fromJson(notificationString,Notification.class);
         NotificationManager notificationManager = (NotificationManager) getServletContext().getAttribute(Constants.NotificationManager);
        if(notification.isPrivate() == true){
            notificationManager.deletePrivateNotification(member,notification);
-           System.out.println("private delete");
        }
        else {
            notificationManager.deleteGeneralNotification(notification);
-           System.out.println("private general");
        }
         Response response = new Response();
         String responseString = gson.toJson(response);
@@ -112,14 +107,12 @@ public class NotificationsServlet extends HttpServlet {
     private void getNotifications(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession();
         if (session == null) {
-            // TODO MAKE TO REDIRECT TO HOME PAGE
             return;
         }
 
         String memberID = SessionUtils.getUserId(req);
         if (memberID == null || memberID.isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            // TODO MAKE TO REDIRECT TO HOME PAGE
             return;
         }
         SystemManagement systemManagement = ServletUtils.getSystemManagment(req.getServletContext());

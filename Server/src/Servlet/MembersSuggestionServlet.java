@@ -22,7 +22,6 @@ public class MembersSuggestionServlet extends HttpServlet {
     private Gson gson = new Gson();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("in MembersSuggestionServlet");
         makeMembersSuggestion(req,resp);
     }
 
@@ -32,30 +31,21 @@ public class MembersSuggestionServlet extends HttpServlet {
         if(session == null){
             return;
         }
-        System.out.println("after session check");
         String memberId = (String) session.getAttribute(Constants.USERID);
         if(memberId == null || memberId.isEmpty()){
             return;
         }
-        System.out.println("after if check");
         Member member = systemManagement.getMemberByID(memberId);
         if(member == null){
             return;
         }
-        System.out.println("after getMember check");
         Response response = new Response();
         List<Member> memberList = systemManagement.memberPartnersSuggestion(member);
-        System.out.println("after systemManagement check");
-        System.out.println(memberList);
         try {
             response.members = memberList;
-            System.out.println("inside try");
             String stringResponse = gson.toJson(response,Response.class);
-            System.out.println("after json check");
-            System.out.println(stringResponse);
             try (PrintWriter writer = resp.getWriter()) {
                 writer.write(stringResponse);
-
             }
 
             catch (Exception e)
@@ -65,10 +55,6 @@ public class MembersSuggestionServlet extends HttpServlet {
         }catch (Exception e){
             e.printStackTrace();
         }
-        finally {
-            System.out.println("end!");
-        }
-
     }
     static class Response{
         int errorCode;

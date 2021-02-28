@@ -41,29 +41,21 @@ private Gson gson = new Gson();
         Response response = new Response();
         HttpSession session = req.getSession();
         if (session == null) {
-            // TODO MAKE TO REDIRECT TO HOME PAGE
             return;
         }
 
         String memberID = SessionUtils.getUserId(req);
         if (memberID == null || memberID.isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            // TODO MAKE TO REDIRECT TO HOME PAGE
             return;
         }
         SystemManagement systemManagement = ServletUtils.getSystemManagment(req.getServletContext());
         Member member = systemManagement.getMemberByID(memberID);
         try(BufferedReader reader = req.getReader()){
             String objString = reader.lines().collect(Collectors.joining());
-            System.out.println(objString);
             RegistrationInput RegistrationInput = gson.fromJson(objString, RegistrationInput.class);
-            System.out.println(objString);
-            //  LocalDate localDate  = LocalDate.parse(date);
 
-
-            // System.out.println("loacal date: " + localDate);
             if(RegistrationInput != null){
-                System.out.println("gson worked!");
                 LocalDate localDate  = LocalDate.parse(RegistrationInput.date);
                 List<Member> memberList = new LinkedList<Member>();
                 memberList.add(member);
@@ -89,17 +81,8 @@ private Gson gson = new Gson();
                 systemManagement.addRegistration(registrationToAdd,true);
 
             }
-            else {
-                System.out.println("bad");
-            }
         }
-        catch (JsonSyntaxException e)
-        {
-            System.out.println("failed gson");
-        }
-        catch (InvalidRegistrationException e){
-            //TODO:
-            System.out.println("InvalidRegistrationException ");
+        catch (InvalidRegistrationException | JsonSyntaxException e){
             response.errorCode = Constants.InvalidRegistration;
 
         } catch (IOException e) {
@@ -108,7 +91,6 @@ private Gson gson = new Gson();
         finally {
             try (PrintWriter out = resp.getWriter()){
                 String responseString = gson.toJson(response);
-                System.out.println(responseString);
                 out.write(responseString);
                 out.flush();
             } catch (IOException e) {
