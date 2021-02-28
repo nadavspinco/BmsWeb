@@ -284,7 +284,7 @@ public class XmlManagement {
 
     public static ChatManager importChatManagerDetails() throws Exception {
         try {
-            InputStream inputStream = new FileInputStream(new File("c:\\temp\\ChatManager.xml"));
+            InputStream inputStream = new FileInputStream(new File(getFileLocation()+"ChatManager.xml"));
             // file location by Liron
             JAXBContext jxb = JAXBContext.newInstance(ChatManager.class);
             Unmarshaller unmarshaller = jxb.createUnmarshaller();
@@ -305,7 +305,7 @@ public class XmlManagement {
 
     public static void exportChatManagerDetails(ChatManager chatManager){
         try {
-            File file = new File("c:\\temp\\ChatManager.xml");
+            File file = new File(getFileLocation()+"ChatManager.xml");
             // file location by Liron
             JAXBContext jaxbContext = JAXBContext.newInstance(ChatManager.class);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
@@ -320,7 +320,7 @@ public class XmlManagement {
 
     public static SystemManagement importSystemManagementDetails() throws Exception {
         try {
-            InputStream inputStream = new FileInputStream(new File("c:\\temp\\SystemManagement.xml"));
+            InputStream inputStream = new FileInputStream(new File(getFileLocation()+"SystemManagement.xml"));
             // file location by Liron
             JAXBContext jxb = JAXBContext.newInstance(SystemManagement.class);
             Unmarshaller unmarshaller = jxb.createUnmarshaller();
@@ -342,7 +342,7 @@ public class XmlManagement {
 
     public static NotificationManager importNotificationManagerDetails() throws Exception {
         try {
-            InputStream inputStream = new FileInputStream(new File("c:\\temp\\NotificationManager.xml"));
+            InputStream inputStream = new FileInputStream(new File(getFileLocation()+"NotificationManager.xml"));
             // file location by Liron
             JAXBContext jxb = JAXBContext.newInstance(NotificationManager.class);
             Unmarshaller unmarshaller = jxb.createUnmarshaller();
@@ -363,7 +363,7 @@ public class XmlManagement {
 
     public static void exportSystemManagementDetails(SystemManagement systemManagement){
         try {
-            File file = new File("c:\\temp\\SystemManagement.xml");
+            File file = new File(getFileLocation()+"SystemManagement.xml");
             // file location by Liron
             JAXBContext jaxbContext = JAXBContext.newInstance(SystemManagement.class);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
@@ -377,7 +377,7 @@ public class XmlManagement {
 
     public static void exportNotificationManagerDetails(NotificationManager notificationManager){
         try {
-            File file = new File("c:\\temp\\NotificationManager.xml");
+            File file = new File(getFileLocation()+"NotificationManager.xml");
             // file location by Liron
             JAXBContext jaxbContext = JAXBContext.newInstance(NotificationManager.class);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
@@ -447,5 +447,17 @@ public class XmlManagement {
         catch (Exception e){
             throw new Exception("Load xml was failed",e);
         }
+    }
+
+    public static String getFileLocation(){
+        if(isOperationSystemSWindows()){
+            return "c:\\temp\\";
+        }
+        return "webapps\\";
+
+    }
+
+    public static boolean isOperationSystemSWindows(){
+            return (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0);
     }
 }
