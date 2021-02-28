@@ -1,8 +1,14 @@
+
+// Immediately Invoked function to check if the user already logged in
+
+
 const LoginButtonEl = document.querySelector('#LoginButton')
 const emailInputEl = document.querySelector('#emailInputId')
 const passwordInputEl = document.querySelector('#passwordInputId')
 
+
 LoginButtonEl.addEventListener ('click', memberDetailsIn);
+
 
 async function memberDetailsIn(event) {
     const email = emailInputEl.value;
@@ -75,3 +81,12 @@ function ValidInputArgs(email, password) {
 //     x.pause();
 // }
 
+(async function checkIfAlreadyLoggedIn(){
+    const response = await fetch('alreadyLoggedIn');
+    if(response.redirected === true) {
+            window.location.replace(response.url);
+    }
+}())
+
+
+// Immediately Invoked function to check if the user already logged in

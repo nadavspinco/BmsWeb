@@ -10,17 +10,37 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.stream.Collectors;
 
 import Utils.ServletUtils;
+import Utils.SessionUtils;
 import com.google.gson.Gson;
 
 @WebServlet(name = "LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
+
+
  private Gson gson = new Gson();
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("in do delete");
+        logoutCurrentUser(req,resp);
+    }
+
+    private void logoutCurrentUser(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        HttpSession session = req.getSession();
+        if (session == null) {
+            return;
+        }
+        session.removeAttribute(Constants.USERID);
+        resp.sendRedirect(Constants.Start_Page);
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp){
        processLoginRequest(req, resp);
