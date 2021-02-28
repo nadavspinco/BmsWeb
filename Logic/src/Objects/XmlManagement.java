@@ -454,7 +454,7 @@ public class XmlManagement {
             return "c:\\temp\\";
         }
 
-        return System.getProperty("user.dir")+ "\\webapps\\";
+        return System.getProperty("user.dir")+ "/webapps/";
 
     }
 
