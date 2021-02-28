@@ -179,14 +179,38 @@ async function makeMembersSelection(){
     html+= '</select>' + '<button type="button" class="btn btn-primary" onclick="pickMembers()">next</button>'
     pageContentEl.innerHTML = html;
 }
+async function validateMembers() {
 
-function pickMembers(){
+    //send the Registration to the servlet and show the result
+
+    const response = await fetch("../validateMembers", {
+        method: 'POST',
+        headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
+        body: JSON.stringify(reservationToAdd)})
+    const responseObj = await response.json();
+    let html='';
+    if(responseObj.errorCode ===0){
+        return true;
+    }
+    else {
+        alert(responseObj.errorDetails)
+        return false;
+    }
+    return false;
+
+}
+
+async function pickMembers(){
     // add to the Object all the chosen Members and call to showFinalDetails
     reservationToAdd.members =[] //reset
     const selectedEl = document.querySelectorAll('#membersSelect option:checked')
     const membersIndexValues = Array.from(selectedEl).map(el => el.value);
     for(let value of membersIndexValues){
         reservationToAdd.members.push(members[value])
+    }
+    const isValidMembers = await validateMembers();
+    if( isValidMembers === false) {
+        return;
     }
     showFinalDetails();
 }
@@ -230,8 +254,8 @@ async function sendRegistration(){
         pageContentEl.innerHTML= html;
     }
     else {
-        //TODO: specify details
-        html += '<h3> there is a rower who is part of other registration / assignment in this time</h3> '
+
+        html += '<h3> assignment Rejected, you or other rowar already have lapping time registration/assignments</h3> '
         pageContentEl.innerHTML= html;
     }
 }
@@ -242,6 +266,10 @@ function setBoatTypes() {
     const selectedEl = document.querySelectorAll('#boatTypeSelect option:checked')
     const values = Array.from(selectedEl).map(el => el.textContent);
     reservationToAdd.boatTypes = [] //reset
+    if(values.length === 0){
+        alert("you must chose at least one boat type")
+        return ;
+    }
     for (let value of values) {
         reservationToAdd.boatTypes.push(value)
     }

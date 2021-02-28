@@ -35,6 +35,7 @@ function showAddRegistrationForm(){
 }
 
 function clearTimeOffsetOnDate(date){
+
     date.setHours(0,0,0,0)
 }
 
@@ -44,13 +45,13 @@ function setDate (){
     if(dateEl!=null) {
         let date = dateEl.valueAsDate;
         let currentDate = new Date(Date.now());
-        clearTimeOffsetOnDate(date)
-        clearTimeOffsetOnDate(currentDate)
         if(date == null){
             alert("please chose a date ")
             return;
         }
-        else if(date < currentDate)
+        clearTimeOffsetOnDate(date)
+        clearTimeOffsetOnDate(currentDate)
+         if(date < currentDate)
         {
             console.log(date)
             console.log(new Date(Date.now()))
@@ -180,13 +181,35 @@ async function makeMembersSelection(){
     pageContentManagerEl.innerHTML = html;
 }
 
-function pickMembers(){
+async function validateMembers() {
+
+    const response = await fetch("../validateMembers", {
+        method: 'POST',
+        headers: new Headers({'Content-Type': 'application/json;charset=utf-8'}),
+        body: JSON.stringify(reservationToAdd)})
+    const responseObj = await response.json();
+    let html='';
+    if(responseObj.errorCode ===0){
+        return true;
+    }
+    else {
+        alert(responseObj.errorDetails);
+        return false;
+    }
+
+}
+
+async function pickMembers(){
     // add to the Object all the chosen Members and call to showFinalDetails
     reservationToAdd.members =[] //reset
     const selectedEl = document.querySelectorAll('#membersSelect option:checked')
     const membersIndexValues = Array.from(selectedEl).map(el => el.value);
     for(let value of membersIndexValues){
         reservationToAdd.members.push(members[value])
+    }
+    const isValidMembers = await validateMembers();
+    if( isValidMembers === false) {
+        return;
     }
     showFinalDetails();
 }
@@ -241,6 +264,10 @@ function setBoatTypes() {
     const selectedEl = document.querySelectorAll('#boatTypeSelect option:checked')
     const values = Array.from(selectedEl).map(el => el.textContent);
     reservationToAdd.boatTypes = [] //reset
+    if(values.length === 0){
+        alert("you must chose at least one boat type")
+        return ;
+    }
     for (let value of values) {
         reservationToAdd.boatTypes.push(value)
     }
