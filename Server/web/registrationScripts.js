@@ -248,14 +248,17 @@ async function sendRegistration(){
     body: JSON.stringify(reservationToAdd)})
     const responseObj = await response.json();
     let html='';
-    if(responseObj.errorCode ===0){
+    if(responseObj.errorCode === 0){
         html= getRegistrationDetailsHtml(reservationToAdd);
         html += '<h3 class="lbl_white"> Registration Added successfully</h3> '
         pageContentEl.innerHTML= html;
     }
+    else if(responseObj.errorCode === 2){
+        html += '<h3 class="lbl_white"> The max capacity of the boatType you had choosed is smaller than the number of the rowers in the registration </h3> '
+        pageContentEl.innerHTML= html;
+    }
     else {
-
-        html += '<h3> assignment Rejected, you or other rowar already have lapping time registration/assignments</h3> '
+        html += '<h3> assignment Rejected, you or other rower already have lapping time registration/assignments</h3> '
         pageContentEl.innerHTML= html;
     }
 }

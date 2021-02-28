@@ -253,6 +253,10 @@ async function sendRegistration(){
         html += '<h3 class="lbl_white"> Registration Added successfully</h3> '
         pageContentManagerEl.innerHTML= html;
     }
+    else if(responseObj.errorCode === 2){
+        html += '<h3 class="lbl_white"> The max capacity of the boatType you had choosed is smaller than the number of the rowers in the registration </h3> '
+        pageContentEl.innerHTML= html;
+    }
     else {
         html += '<h3 class="lbl_white"> there is a rower who is part of other registration / assignment in this time</h3> '
         pageContentManagerEl.innerHTML= html;
