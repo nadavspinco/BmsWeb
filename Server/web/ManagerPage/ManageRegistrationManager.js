@@ -370,12 +370,16 @@ function createBoatTypeList(boatTypes){
 }
 
 function createWindowDetails(window){
-    let toSend = window.activityType.toString();
-    toSend += "at: ";
-    toSend += localTimeToString(window.startTime);
-    toSend += "-";
-    toSend += localTimeToString(window.endTime);
-    return toSend;
+        let toSend;
+        if (window.activityType.toString() === null)
+            toSend = "-";
+        else
+            toSend = window.activityType.toString();
+        toSend += " at: ";
+        toSend += localTimeToString(window.startTime);
+        toSend += "-";
+        toSend += localTimeToString(window.endTime);
+        return toSend;
 }
 
 function wantedRegistration() {
