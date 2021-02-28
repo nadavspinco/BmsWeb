@@ -77,7 +77,7 @@ async function deleteChosenNotification() {
         alert("notification Deleted");
         pageContentManagerEl.innerHTML = ''
     } else {
-        //TODO://
+        alert("actions failed")
     }
 }
 

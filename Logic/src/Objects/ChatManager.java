@@ -8,6 +8,8 @@ import java.util.List;
 
 @XmlRootElement
 public class ChatManager {
+    //bonus:
+    //Chat Manager for the chat in our app.
     private List<ChatMessage> messages = new LinkedList<ChatMessage>();
     private LocalDateTime lastUpdate = LocalDateTime.now();
     public void addMessage(String header,String content,Member member){

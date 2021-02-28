@@ -20,4 +20,5 @@ public class Constants {
     public static final int InvalidRegistration = 1;
 
     public static final String ChatManager = "ChatManager";
+    public static final int InvalidRegistrationForMembers = 3;
 }
