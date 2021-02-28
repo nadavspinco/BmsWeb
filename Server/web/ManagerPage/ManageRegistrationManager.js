@@ -4,6 +4,7 @@ showRegistrationButtonEl = document.querySelector('#showRegistrationManager');
 showRegistrationButtonEl.addEventListener('click', showAllRegistrationForm)
 addRegistrationEl.addEventListener('click', showAddRegistrationForm)
 let regiListObj;
+let regiListSelectedToRemove;
 let members = [];
 let windowRegistrations={}
 
@@ -438,7 +439,6 @@ function LocalDateToString(localDate){
 }
 
 //                      -------------------------------------------EDIT REGISTRATION-----------------------------------
-
 function editRegistrationForm(event){
     const regiCheckedEl = document.querySelector('#flexRadioDefaultRegi:checked')
     if(regiCheckedEl === null){
@@ -461,10 +461,42 @@ function editRegistrationForm(event){
 
 function AddRowerToRegistration(){
     clearPageContent();
-    showRowerToAdd("addRower");
+    showRowerToAdd();
 }
 
-async function showRowerToAdd(flag) {
+async function showRowerToRemove() {
+    chosenRegiGlobal = regiListObj[indexRegiGlobal]
+    let rowerList = chosenRegiGlobal.rowersListInBoat;
+    regiListSelectedToRemove = rowerList;
+
+    let html = '<table class="table">' +
+        '<thead>' +
+        '<tr>' +
+        '<th class="lbl_white" scope="col">#</th>'+
+        '<th class="table-title" scope="col">Rower Name</th>'+
+        '<th class="table-title" scope="col">Email</th>'+
+        '<th class="table-title" scope="col">ID</th>'+
+        '<th class="table-title" scope="col">is Manager</th>'+
+        '<th class="table-title" scope="col">Has Private Boat</th>'+
+        '<th class="table-title" scope="col">Level</th>'+
+        '<th class="table-title" scope="col">Phone Number</th>'+
+        '<th class="table-title" scope="col">Age</th>'+
+        '<th class="table-title" scope="col">Comment</th>'+
+        '</tr>' +
+        '</thead>' +
+        '<tbody>'
+
+    var i;
+    for (i = 0; i < rowerList.length; i++)
+        html += createElementMember(rowerList[i])
+
+    html += '<label class="lbl_white">Choose the rowers who are part from the registration only!!.</label><br><br></tbody></table>'
+    html+= '<button type="button" class="btn btn-danger" onClick="removeRower()">Remove Rower</button>'
+    pageContentManagerEl.innerHTML = html;
+}
+
+
+async function showRowerToAdd() {
     chosenRegiGlobal = regiListObj[indexRegiGlobal]
     const response = await fetch('../editRegistration', {method: 'get'});
     const rowerList = await response.json();
@@ -491,14 +523,9 @@ async function showRowerToAdd(flag) {
     for (i = 0; i < rowerList.length; i++)
         html += createElementMember(rowerList[i])
 
-    if (flag === "addRower") {
-        html += '<label class="lbl_white">>There are the rowers in the Registration request, dont choose them again!!.</label><br><br></tbody></table>'
-        html += '<button type="button" class="btn btn-danger" onClick="addRower()">Add Rower</button>'
-    }
-    else { // flag === removeRower
-        html += '<label class="lbl_white">Choose the rowers who are part from the registration only!!.</label><br><br></tbody></table>'
-        html+= '<button type="button" class="btn btn-danger" onClick="removeRower()">Remove Rower</button>'
-    }
+    html += '<label class="lbl_white">>There are the rowers in the Registration request, dont choose them again!!.</label><br><br></tbody></table>'
+    html += '<button type="button" class="btn btn-danger" onClick="addRower()">Add Rower</button>'
+
     pageContentManagerEl.innerHTML = html;
 }
 
@@ -569,7 +596,7 @@ async function addRower(){
 
 function removeRowerToRegistration(){
     clearPageContent();
-    showRowerToAdd("removeRower");
+    showRowerToRemove("removeRower");
 }
 
 async function removeRower() {
@@ -577,7 +604,7 @@ async function removeRower() {
 
     const RegiAndRowerArgs = {
         registration: chosenRegiGlobal,
-        rower: mainRowerListGlobal[indexRowerToAdd]
+        rower: regiListSelectedToRemove[indexRowerToAdd]
     }
 
     let keepTheChanges = confirm("are you sure to remove this rower?");
