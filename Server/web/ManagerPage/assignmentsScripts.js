@@ -4,7 +4,7 @@ addAssignmentEl.addEventListener('click',showAssignBoat)
 const  showAssignmentsByDateEl = document.querySelector('#ShowAssigmentByDate')
 showAssignmentsByDateEl.addEventListener('click',showAssignmentsByDateOption)
 function showAssignmentsByDateOption() {
-    pageContentManagerEl.innerHTML=' <label for="dateForAssignments">Select Wanted date:</label>'
+    pageContentManagerEl.innerHTML=' <label class="lbl_white" for="dateForAssignments">Select Wanted date:</label>'
         +'<input type="date" id="dateForAssignments" > '
         + '<br>'+'<button type="button" class="btn btn-primary" onclick="getAssignmentsByDate()">Select</button>';
 }
@@ -60,7 +60,7 @@ function removeRowerFromAssignment(){
     }
     const toUnionAssignment = assignmentsScriptsObj.assignmentsByDate[selectdIndex];
     if(toUnionAssignment.registration.rowersListInBoat.length < 2){
-        alert("no option to delete assignement with one Rowar")
+        alert("no option to delete assignment with one Rower")
         return;
     }
     assignmentsScriptsObj.choseAssignmentToChange= toUnionAssignment;

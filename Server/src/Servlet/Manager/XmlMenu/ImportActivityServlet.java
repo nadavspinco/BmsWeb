@@ -50,7 +50,18 @@ public class ImportActivityServlet extends HttpServlet {
                 fileContent.append(readFromInputStream(part.getInputStream()));
 
             String[] wrongDetails = systemManagement.convertWindowsFromXml(fileContent.toString());
-            out.print(wrongDetails);
+            StringBuilder stringBuilder = new StringBuilder();
+            if (wrongDetails.length == 0)
+                stringBuilder = null;
+            else {
+                stringBuilder.append("The wrong details in the imported data are:");
+                stringBuilder.append(System.getProperty("line.separator"));
+                for (int i = 0; i < wrongDetails.length; i++) {
+                    stringBuilder.append(wrongDetails[i]);
+                    stringBuilder.append(System.getProperty("line.separator"));
+                }
+            }
+            out.print(stringBuilder);
         }
         catch (Exception e) {
             e.getStackTrace();
