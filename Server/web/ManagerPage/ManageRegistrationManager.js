@@ -231,8 +231,8 @@ function getRegistrationDetailsHtml(reservation){
         html+= '<h4 style="color: white">' + boatType + '</h4>'
     }
     html+= '<h3 style="color: white"> Members: </h3>'
-    if(reservation.rowersListInBoat != null && reservation.rowersListInBoat.length !==0) {
-        for (let member of reservation.rowersListInBoat) {
+    if(reservation.members != null && reservation.members.length !==0) {
+        for (let member of reservation.members) {
             html += '<h4 style="color: white">' + member.nameMember + '  ' + member.email + '</h4>'
         }
     }
