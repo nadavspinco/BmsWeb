@@ -1,8 +1,8 @@
-
 const addAssignmentEl = document.querySelector('#assignBoat')
 addAssignmentEl.addEventListener('click',showAssignBoat)
 const  showAssignmentsByDateEl = document.querySelector('#ShowAssigmentByDate')
 showAssignmentsByDateEl.addEventListener('click',showAssignmentsByDateOption)
+
 function showAssignmentsByDateOption() {
     pageContentManagerEl.innerHTML=' <label class="lbl_white" for="dateForAssignments">Select Wanted date:</label>'
         +'<input type="date" id="dateForAssignments" > '
@@ -270,9 +270,7 @@ function createHtmlForAssignmentRow(assignment){
 
 }
 
-
 // assignBoat code:
-
 const assignmentsScriptsObj ={}
 async function showAssignBoat() {
     pageContentManagerEl.innerHTML=''
@@ -386,7 +384,7 @@ async function assignBoat(registraion, boat) {
     if(responseObj.errorCode ===0){
          html = getRegistrationDetailsHtml(assignmentsScriptsObj.selectRegistraion);
         html+= getHtmlForBoatDetails(assignmentsScriptsObj.selectBoat)
-        html+= '<h3>Assignment approved!</h3>'
+        html+= '<h3 class="lbl_white">Assignment approved!</h3>'
     }
     else {
         html = '<h3>Error<h3>'
@@ -398,11 +396,11 @@ async function assignBoat(registraion, boat) {
 function getHtmlForBoatDetails (boat){
     let html = '<h3>Boat Details</h3>'
     html+=
-        '<h4 class="table-row" scope="col">'+boat.boatName+'</h4>'+
-        '<h4 class="table-row" scope="col">'+boat.serialBoatNumber+'</h4>'+
-        '<h4 class="table-row" scope="col">'+boat.boatType+'</h4>'+
-        '<h4 class="table-row" scope="col">'+wideOrNot(boat)+'</h4>'+
-        '<h4 class="table-row" scope="col">'+costalOrNot(boat)+'</h4>'
+        '<h4 class="lbl_white" scope="col">'+boat.boatName+'</h4>'+
+        '<h4 class="lbl_white" scope="col">'+boat.serialBoatNumber+'</h4>'+
+        '<h4 class="lbl_white" scope="col">'+boat.boatType+'</h4>'+
+        '<h4 class="lbl_white" scope="col">'+wideOrNot(boat)+'</h4>'+
+        '<h4 class="lbl_white" scope="col">'+costalOrNot(boat)+'</h4>'
     return html;
 }
 function costalOrNot(boat){
