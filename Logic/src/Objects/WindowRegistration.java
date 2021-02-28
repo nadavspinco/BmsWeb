@@ -26,11 +26,11 @@ public class WindowRegistration implements Serializable {
     }
 
     public WindowRegistration(LocalTime StartTimeInput, LocalTime EndTimeInput, DayOfWeek day) {
-        this(null, null, StartTimeInput, EndTimeInput);
+        this(ActivityTypeEnum.Sailing, null, StartTimeInput, EndTimeInput);
     }
 
     public WindowRegistration(LocalTime StartTimeInput, LocalTime EndTimeInput){
-        this(null,null,StartTimeInput , EndTimeInput);
+        this(ActivityTypeEnum.Sailing,null,StartTimeInput , EndTimeInput);
     }
 
     @Override

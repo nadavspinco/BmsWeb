@@ -84,11 +84,11 @@ function setWindowRegistrations(responseObj)
         if(responseObj.windowRegistrations.length ===0){
             //no window registrations exists, so we let the user pick the time
             html =  '<div>'
-                +'<label for="startTime">Select Wanted start time:</label>'
+                +'<label class="lbl_white" for="startTime">Select Wanted start time:</label>'
                + '<input type="time" id="startTime">'
             +'</div>'
             +'<div>'
-               +'<label for="endTime">Select Wanted end time: </label>'
+               +'<label class="lbl_white" for="endTime">Select Wanted end time: </label>'
                + '<input type="time" id="endTime">'
             +'</div>'
                 +'<br>'
