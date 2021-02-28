@@ -453,7 +453,8 @@ public class XmlManagement {
         if(isOperationSystemSWindows()){
             return "c:\\temp\\";
         }
-        return "webapps\\";
+
+        return System.getProperty("user.dir")+ "\\webapps\\";
 
     }
 
